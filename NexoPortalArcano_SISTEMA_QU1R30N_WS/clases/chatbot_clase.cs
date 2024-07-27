@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -82,7 +83,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         string[,] G_productos = new string[10, 3];
 
-        string ia_ws_es_esta_maquina = "ws";
+        
 
         public void configuracion_de_inicio()
         {
@@ -219,7 +220,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         else
                         {
 
-                            datos_a_procesar_y_borrar(manejadores, esperar, ia_ws_es_esta_maquina);
+                            datos_a_procesar_y_borrar(manejadores, esperar, "ws");
 
 
                             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
@@ -255,7 +256,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             string lineas_joineadas = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(lineas_del_mensaje, "  ");
 
-            datos_enviar(nombre_Del_que_envio_el_mensage, lineas_joineadas, ia_ws_es_esta_maquina);
+            datos_enviar(nombre_Del_que_envio_el_mensage, lineas_joineadas);
 
 
 
@@ -553,44 +554,43 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         }
 
 
-        public void datos_enviar(string contacto, string mensage, string ia_ws)
+        public void datos_enviar(string contacto, string mensage)
         {
             // en entrada son los mismos por que todos llegan a CLASE_QU1R30N 
 
             //E_1_4_ws
-            if (ia_ws == "ws")//agrega a archivos pregunta de la ia
+
+            int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(1);//esta es de la ia
+            int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(4);//este es del ws
+
+            string contacto_solo_los_ultimos_digitos = "";
+            for (int i = 0; i < 4 && i < contacto.Length; i++)
             {
-                int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(1);//esta es de la ia
-                int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(4);//este es del ws
-
-                string contacto_solo_los_ultimos_digitos = "";
-                for (int i = 0; i < 4 && i < contacto.Length; i++)
-                {
-                    contacto_solo_los_ultimos_digitos = contacto_solo_los_ultimos_digitos + contacto[i];
-                }
-
-
-
-                if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1] || id_atras_actual_adelante_ws_2[0] == id_atras_actual_adelante_ia_1[1])
-                {
-
-                    //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "        cliente: hola soy: " + contacto_solo_los_ultimos_digitos + " " + mensage);
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + "soy " + contacto_solo_los_ultimos_digitos + ": " + mensage + G_caracter_separacion_funciones_espesificas[1] + ia_ws);
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 4, (id_atras_actual_adelante_ws_2[2]) + "");
-                }
-                else
-                {
-                    //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage);
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage + G_caracter_separacion_funciones_espesificas[1] + ia_ws);
-                }
-
-
+                contacto_solo_los_ultimos_digitos = contacto_solo_los_ultimos_digitos + contacto[i];
             }
 
 
 
+            if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1] || id_atras_actual_adelante_ws_2[0] == id_atras_actual_adelante_ia_1[1])
+            {
 
+                //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "        cliente: hola soy: " + contacto_solo_los_ultimos_digitos + " " + mensage);
+                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + "soy " + contacto_solo_los_ultimos_digitos + ": " + mensage + G_caracter_separacion_funciones_espesificas[1] + "ws");
+                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 4, (id_atras_actual_adelante_ws_2[2]) + "");
+            }
+            else
+            {
+                //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage);
+                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage + G_caracter_separacion_funciones_espesificas[1] + "ws");
+            }
         }
+
+            
+
+
+
+
+        
         public void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar, string ia_ws )
         {
             //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
@@ -644,11 +644,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
 
         }
-
-
-
-        
-
 
     }
 }

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|c:\\users\\qu1r30n\\documents\\github\\nexoportalarcano_sistema_qu1r30n_ws\\nexoportalarcano_sistema_qu1r30n_ws\\clases\\chatbot_clase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|solutionrelative:nexoportalarcano_sistema_qu1r30n_ws\\clases\\chatbot_clase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "chatbot_clase.cs",
+              "DocumentMoniker": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
+              "RelativeDocumentMoniker": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
+              "ToolTip": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
+              "RelativeToolTip": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
+              "ViewState": "AQIAALkBAAAAAAAAAAAAALkBAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T22:49:09.225Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
