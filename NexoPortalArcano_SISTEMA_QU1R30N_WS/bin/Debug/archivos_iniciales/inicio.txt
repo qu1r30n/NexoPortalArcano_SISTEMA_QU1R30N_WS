@@ -1,0 +1,17 @@
+direccion_de_las_bases_de_datos~fila_inicial~arreglo_de_filas_separado_por_§//posdata_solo_ir_agregando_archivos_asta_abajo_por_que_las_filas_ya_son_ocupadas_por_el_programa_y_no_borrar
+config\chatbot\info_para_comandos_chatbot\00_paginaweb.txt~info_para_comandos~http://web.whatsapp.com/
+config\chatbot\info_para_comandos_chatbot\01_ya_entrado_en_la_mensajeria.txt~info_para_comandos~side
+config\chatbot\info_para_comandos_chatbot\02_chequeo_no_leidos.txt~info_para_comandos~//span[contains(@aria-label, 'No leídos') or contains(@aria-label, '4 mensaje no leído') or contains(@aria-label, '3 mensaje no leído') or contains(@aria-label, '2 mensaje no leído') or contains(@aria-label, '1 mensaje no leído')]
+config\chatbot\info_para_comandos_chatbot\03_clickeo.txt~info_para_comandos~//ancestor::div[@class='_8nE1Y']
+config\chatbot\info_para_comandos_chatbot\04_lectura_del_mensage.txt~info_para_comandos~//div[contains(@class, 'message-in')]//span[contains(@class, '_11JPr')]
+config\chatbot\info_para_comandos_chatbot\05_reconocer_textbox_de_envio.txt~info_para_comandos~//*[@id='main']/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]
+config\chatbot\info_para_comandos_chatbot\06_buscar_nombre.txt~info_para_comandos~//span[contains(@title, '
+config\chatbot\info_para_comandos_chatbot\07_nombre_del_clikeado.txt~info_para_comandos~//header[@class='AmmtE']//div[@class='Mk0Bp _30scZ']§//*[@id='main']/header/div[2]/div[1]/div/span
+config\chatbot\05_encargados.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Encargados
+config\chatbot\06_supervisores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Supervisores
+config\chatbot\07_contadores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Contadores
+config\chatbot\08_vendedores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Prueba
+config\chatbot\09_repartidores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Repartidores
+config\chatbot\10_reg_mensaje.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap_y_envia_todos_los_mensajes_recibidos~Reg_mensaje
+config\chatbot\configuracion_programador.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap_y_este_para_funciones_especificas_echas_por_el_programador~
+config\chatbot\14_tesoreros.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Tesoreros
