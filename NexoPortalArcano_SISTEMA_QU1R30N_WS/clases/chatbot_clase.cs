@@ -22,7 +22,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         operaciones_textos op_tex = new operaciones_textos();
         var_fun_GG var_GG = new var_fun_GG();
         Tex_base bas = new Tex_base();
-        
+
 
         string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
@@ -42,7 +42,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         };
 
-        
+
         string[,] G_contactos_lista_para_mandar_informacion =
         {
             /*0*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[9, 0],"encargados" },
@@ -53,7 +53,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             /*5*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[14, 0],"reg_mensage" },
             /*6*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[16, 0],"tesoreros" },
             /*7*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[15, 0],"programador" },
-            
+
         };
 
         public string[] G_dir_arch_transferencia =
@@ -72,7 +72,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             /*11*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\11.txt",//agregar respuesta para_watsap desde el watsap o lectura del chatbot depende la bandera
             /*12*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\12.txt",//agregar pedidos  para_chatbot desde el watsap o lectura del chatbot depende la bandera
         };
-        
+
 
 
 
@@ -83,7 +83,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         string[,] G_productos = new string[10, 3];
 
-        
+
 
         public void configuracion_de_inicio()
         {
@@ -167,14 +167,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                                 string[] textosDelMensaje = leer_mensages_recibidos_del_mensage_clickeado(manejadores, esperar);
                                 string nom_del_click = nombre_del_clickeado(manejadores, esperar);
 
-                                string[] usuarios_no_actuara1 = bas.Leer_inicial(G_contactos_lista_para_mandar_informacion[3,0], iniciar_desde_que_fila: 1);
-                                string[] usuarios_no_actuara2 = bas.Leer_inicial(G_contactos_lista_para_mandar_informacion[5,0], iniciar_desde_que_fila: 1);
+                                string[] usuarios_no_actuara1 = bas.Leer_inicial(G_contactos_lista_para_mandar_informacion[3, 0], iniciar_desde_que_fila: 1);
+                                string[] usuarios_no_actuara2 = bas.Leer_inicial(G_contactos_lista_para_mandar_informacion[5, 0], iniciar_desde_que_fila: 1);
                                 string[] total_usuario_no_act = op_arr.juntar_dos_arreglos(usuarios_no_actuara1, usuarios_no_actuara2);
                                 bool ejecutar_comandos = true;
                                 //esto es por los registros y vendedores como dan un reporte evita estara en un ciclo infinito de mandar mensajes
                                 for (int i = 0; i < total_usuario_no_act.Length; i++)
                                 {
-                                    if (total_usuario_no_act[i] == nom_del_click) 
+                                    if (total_usuario_no_act[i] == nom_del_click)
                                     {
                                         ejecutar_comandos = false;
                                         break;
@@ -482,7 +482,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         }
         //------------------------------------------------------------------------------------------------
-        
+
         private string[][] extraer_info_de_archivos_de_configuracion_chatbot(string[] direcciones)
         {
 
@@ -585,13 +585,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             }
         }
 
-            
 
 
 
 
-        
-        public void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar, string ia_ws )
+
+
+        public void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar, string ia_ws)
         {
             //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
             //S_2_5_ws
@@ -638,7 +638,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
 
             }
-            
+
 
 
 
