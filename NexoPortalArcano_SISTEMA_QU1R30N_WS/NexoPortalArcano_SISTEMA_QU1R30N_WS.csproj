@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clases\chatbot_clase.cs" />
+    <Compile Include="clases\herramientas\conmutador.cs" />
     <Compile Include="clases\herramientas\operaciones_arreglos.cs" />
     <Compile Include="clases\herramientas\operaciones_textos.cs" />
     <Compile Include="clases\herramientas\Tex_base.cs" />

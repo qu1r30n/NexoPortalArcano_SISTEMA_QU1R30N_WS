@@ -13,6 +13,8 @@ using OpenQA.Selenium.Interactions;
 
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Diagnostics.Contracts;
+using NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas;
 
 namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 {
@@ -22,7 +24,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         operaciones_textos op_tex = new operaciones_textos();
         var_fun_GG var_GG = new var_fun_GG();
         Tex_base bas = new Tex_base();
-
+        conmutador con = new conmutador();
 
         string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
@@ -73,17 +75,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             /*12*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\12.txt",//agregar pedidos  para_chatbot desde el watsap o lectura del chatbot depende la bandera
         };
 
-
+        
 
 
         string[][] G_info_de_configuracion_chatbot = null;
 
-        string G_direccion_negocio = Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[2, 0];//string G_direccion_negocio = "config\\sismul2\\negocio.txt";
-
-
-        string[,] G_productos = new string[10, 3];
-
-
+        string[,] G_dir_arch_conf_extra =
+        {
+            { Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[17, 0],"MENSAJE DE BIENVENIDA" },
+        };
 
         public void configuracion_de_inicio()
         {
@@ -130,7 +130,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             //estos son del no leido--------------------------------------------------------------------
             string elementos = G_info_de_configuracion_chatbot[2][1];
             string elementos_clase = elementos + G_info_de_configuracion_chatbot[3][1];
-            //-----------------------------------------------------------------------------------------
+            //extaer inventario-----------------------------------------------------------------------------------------
+            enviar("negocio", "extraer_inventario","preguntas_ws","");
 
             //------------------------------------------------------------------------------------------
 
@@ -184,25 +185,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                                 if (ejecutar_comandos)
                                 {
                                     //fin mensaje que resibio--------------------------------------------------------------
-                                    string[] bandera_ia = bas.Leer_inicial(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt");
-
-                                    do
-                                    {
 
 
-                                        if (bandera_ia[1] == "0")
-                                        {
-                                            bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", 1, "1");
-                                            modelo_para_mandar_mensage_archivo_ia(manejadores, esperar, nom_del_click, textosDelMensaje);
 
-                                        }
-                                        else
-                                        {
-                                            bandera_ia = bas.Leer_inicial(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt");
-                                        }
+                                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", 1, "1");
+                                    modelo_para_mandar_mensage_archivo_ia(manejadores, esperar, nom_del_click, textosDelMensaje);
 
-
-                                    } while (bandera_ia[1] == "1");
                                 }
 
 
@@ -217,10 +205,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                             return true;
                         }
+                        
                         else
                         {
 
-                            datos_a_procesar_y_borrar(manejadores, esperar, "ws");
+                            datos_a_procesar_y_borrar(manejadores, esperar);
 
 
                             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
@@ -248,15 +237,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         {
             mandar_mensage(esperar, "estas hablando con una ia puede que cometa errores y tambien tarda un poquito en responder estaremos mejorando el sistema no te desesperes\n si nesesitas ayuda manda un watsap a este numero 748 100 5674 con gusto te apoyare");
             string[] textos_recibidos_srting_arr = op_arr.convierte_objeto_a_arreglo(texto_recibidos_arreglo_objeto);
-            string ultimo_mensaje = textos_recibidos_srting_arr[textos_recibidos_srting_arr.Length - 1].ToLower();//ultimo mensaje lo pone en minusculas
+            string ultimo_mensaje = textos_recibidos_srting_arr[textos_recibidos_srting_arr.Length - 1].ToUpper();//ultimo mensaje lo pone en minusculas
 
             mandar_mensage_usuarios(manejadores, esperar, G_contactos_lista_para_mandar_informacion[5, 1], nombre_Del_que_envio_el_mensage + "\n" + ultimo_mensaje + "\n--------------------------------------------------------------------");
 
-            string[] lineas_del_mensaje = ultimo_mensaje.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 
-            string lineas_joineadas = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(lineas_del_mensaje, "  ");
 
-            datos_enviar(nombre_Del_que_envio_el_mensage, lineas_joineadas);
+            datos_enviar(manejadores, esperar, nombre_Del_que_envio_el_mensage, ultimo_mensaje);
 
 
 
@@ -373,7 +360,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string lugar_a_escribir = G_info_de_configuracion_chatbot[5][1];
             //var escribir_msg = G_esperar2.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
             var escribir_msg = esperar.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
-            string texto_enviar = string.Join("\n", texto_enviar_arreglo_string);
+            string texto_enviar = string.Join(Keys.Shift + Keys.Enter + Keys.Shift, texto_enviar_arreglo_string);
 
             escribir_msg.SendKeys(texto_enviar);
             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
@@ -496,7 +483,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return info_a_retornar;
         }
 
-        private void regresr_respuesta_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, string texto_recibidos_arreglo)
+        public void regresr_respuesta_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, string texto_recibidos_arreglo)
         {
 
             mandar_mensage_usuarios(manejadores, esperar, G_contactos_lista_para_mandar_informacion[5, 1], "ia_" + nombre_Del_que_envio_el_mensage + "\n" + texto_recibidos_arreglo + "\n--------------------------------------------------------------------");
@@ -554,91 +541,198 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         }
 
 
-        public void datos_enviar(string contacto, string mensage)
+        public void datos_enviar(IWebDriver manejadores, WebDriverWait esperar, string contacto, string mensage)
+        {
+            mensage = mensage.Replace(" ", "");
+            string[] lineas_del_mensaje = mensage.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+
+            for (int j = 0; j < lineas_del_mensaje.Length; j++)
+            {
+
+                /*
+                bool si_confirmo = confirmaciones_de_usuarios_confirmadores_o_funciones_extras(manejadores, esperar, nombre_Del_que_envio_el_mensage, lineas_del_mensaje, ":");
+                
+                //aqui si hay modificaciones en el mensage-----------------------------------------------------------
+
+                if (G_mod_cont != null)
+                {
+                    nombre_Del_que_envio_el_mensage = G_mod_cont;
+                    G_mod_cont = null;
+                }
+
+                if (G_mod_mens != null)
+                {
+                    lineas_del_mensaje = G_mod_mens;
+                    G_mod_mens = null;
+                }
+
+                */
+                //-------------------------------------------------------------------------------------------
+
+                //mensaje_de_productos_a_enviar = op_tex.concatenacion_filas_de_un_arreglo(Tex_base.GG_base_arreglo_de_arreglos[indice_productos], true, "\r\n");
+                //mensage_bienvenida_total = mensaje_de_bienvenida_a_enviar + "\r\n" + mensaje_de_productos_a_enviar + "\r\n" + mensaje_de_bienvenida_final_a_enviar;
+
+                string[] ultimo_mensaje_espliteado = lineas_del_mensaje[j].Split(':');
+                string contactos_a_enviar = "";
+
+                if (ultimo_mensaje_espliteado.Length > 1)
+                {
+                    string respuesta_a_mandar_mensage = "";
+                    switch (ultimo_mensaje_espliteado[0])
+                    {
+                        case "ubi":
+                            
+                            contactos_a_enviar = G_contactos_lista_para_mandar_informacion[1, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[4, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[5, 1];
+                            respuesta_a_mandar_mensage = contacto + "\r\nubicacion recibida: " + G_caracter_separacion[0] + "\r\n" + ultimo_mensaje_espliteado[1];
+                            string[] mensage_espliteado = respuesta_a_mandar_mensage.Split('\n');
+                            acumulador_de_mensajes(contactos_a_enviar, respuesta_a_mandar_mensage);
+                            
+                            break;
+
+                        case "ext":
+                            
+                            contactos_a_enviar = G_contactos_lista_para_mandar_informacion[0, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[1, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[4, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[5, 1];
+                            respuesta_a_mandar_mensage = contacto + "\r\ninformacion extra recibida: " + G_caracter_separacion_funciones_espesificas[0];
+
+                            acumulador_de_mensajes(contactos_a_enviar, respuesta_a_mandar_mensage);
+                            
+                            break;
+
+                        case "can":
+                            
+                            contactos_a_enviar = G_contactos_lista_para_mandar_informacion[0, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[1, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[2, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[4, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[5, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[6, 1];
+                            respuesta_a_mandar_mensage = contacto + "\r\ncancelacion recibida: " + G_caracter_separacion_funciones_espesificas[0];
+                            acumulador_de_mensajes(contactos_a_enviar, respuesta_a_mandar_mensage);
+
+                            //enviar();
+
+                            break;
+
+
+                        default:
+
+                            
+                            try
+                            {
+                                
+                                //el platillo : la cantidad del platillo
+                                string numero_de_platillo = ultimo_mensaje_espliteado[0];
+                                Double cantidad_de_platillos = Convert.ToDouble(ultimo_mensaje_espliteado[1]);
+                            
+                                //enviar();
+
+
+                            }
+                            catch (Exception)
+                            {
+                                int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_dir_arch_conf_extra[0, 0]));
+
+
+                                string mensage_bienvenida = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(Tex_base.GG_base_arreglo_de_arreglos[indice], Keys.Shift + Keys.Enter + Keys.Shift, 1, true);
+                                acumulador_de_mensajes(contacto, mensage_bienvenida);
+
+
+                                // error manda mensaje de bienvenvenida y mensage a registros
+                                contactos_a_enviar = G_contactos_lista_para_mandar_informacion[5, 1];
+                                respuesta_a_mandar_mensage = contacto + "\r\n" + mensage + "\r\n" + "------------------------------------------------------------------------";
+                                acumulador_de_mensajes(contactos_a_enviar, respuesta_a_mandar_mensage);
+
+                            }
+
+                            break;
+                    }
+                }
+                else
+                {
+
+                    int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_dir_arch_conf_extra[0, 0]));
+
+
+                    string mensage_bienvenida = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(Tex_base.GG_base_arreglo_de_arreglos[indice], Keys.Shift + Keys.Enter + Keys.Shift, 1, true);
+                    acumulador_de_mensajes(contacto, mensage_bienvenida);
+                       
+
+                    // error manda mensaje de bienvenvenida y mensage a registros
+                    contactos_a_enviar = G_contactos_lista_para_mandar_informacion[5, 1];
+                    string respuesta_a_mandar_mensage = contacto + "\r\n" + mensage + "\r\n" + "------------------------------------------------------------------------";
+                    acumulador_de_mensajes(contactos_a_enviar, respuesta_a_mandar_mensage);
+                    
+                }
+
+            }
+            mandar_mensages_acumulados(manejadores, esperar);
+
+        }
+
+        public void enviar(string modelo,string proceso,string folio_o_palbra_clave_a_del_que_lo_recibira,string info)
         {
             // en entrada son los mismos por que todos llegan a CLASE_QU1R30N 
-
             //E_1_4_ws
-
             int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(1);//esta es de la ia
             int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(4);//este es del ws
-
-            string contacto_solo_los_ultimos_digitos = "";
-            for (int i = 0; i < 4 && i < contacto.Length; i++)
-            {
-                contacto_solo_los_ultimos_digitos = contacto_solo_los_ultimos_digitos + contacto[i];
-            }
-
 
 
             if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1] || id_atras_actual_adelante_ws_2[0] == id_atras_actual_adelante_ia_1[1])
             {
 
                 //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "        cliente: hola soy: " + contacto_solo_los_ultimos_digitos + " " + mensage);
-                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + "soy " + contacto_solo_los_ultimos_digitos + ": " + mensage + G_caracter_separacion_funciones_espesificas[1] + "ws");
+                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], modelo + G_caracter_separacion_funciones_espesificas[1] + proceso + G_caracter_separacion_funciones_espesificas[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_separacion_funciones_espesificas[1] + info);
                 bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 4, (id_atras_actual_adelante_ws_2[2]) + "");
             }
             else
             {
                 //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage);
-                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage + G_caracter_separacion_funciones_espesificas[1] + "ws");
+                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], modelo + G_caracter_separacion_funciones_espesificas[1] + proceso + G_caracter_separacion_funciones_espesificas[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_separacion_funciones_espesificas[1] + info);
             }
         }
 
+        
 
-
-
-
-
-
-        public void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar, string ia_ws)
+        public void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar)
         {
             //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
             //S_2_5_ws
-            if (ia_ws == "ws")//envia info de archivos respuesta y elimina la informacion
+
+
+            int[] id_atras_actual_adelante_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(2);//esta es de la ia
+            int[] id_atras_actual_adelante_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(5);//este es del ws
+
+            string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]]);
+
+
+
+            if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1])
             {
-                int[] id_atras_actual_adelante_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(2);//esta es de la ia
-                int[] id_atras_actual_adelante_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(5);//este es del ws
 
-                string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]]);
 
-                if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1])
+                if (respuestas_ia.Length > 1)
                 {
 
 
-                    if (respuestas_ia.Length > 1)
+                    for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
                     {
-
-
-                        for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
-                        {
-                            string[] res_espliteada = respuestas_ia[i].Split(G_caracter_separacion_funciones_espesificas[1][0]);
-                            regresr_respuesta_ia(manejadores, esperar, res_espliteada[0], res_espliteada[1]);
-                        }
-
-                        bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
+                        
+                        con.conmutar_datos(manejadores, esperar, respuestas_ia[i]);
+                        
                     }
+
+                    bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
-                else
-                {
-
-                    if (respuestas_ia.Length > 1)
-                    {
-                        for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
-                        {
-                            string[] res_espliteada = respuestas_ia[i].Split(G_caracter_separacion_funciones_espesificas[1][0]);
-                            regresr_respuesta_ia(manejadores, esperar, res_espliteada[0], res_espliteada[1]);
-                        }
-
-                        bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
-                    }
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 5, id_atras_actual_adelante_2[2] + "");
-                }
-
-
-
             }
+            else
+            {
 
+                if (respuestas_ia.Length > 1)
+                {
+                    for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
+                    {
+                        con.conmutar_datos(manejadores, esperar, respuestas_ia[i]);
+                    }
+
+                    bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
+                }
+                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 5, id_atras_actual_adelante_2[2] + "");
+            }
 
 
 
