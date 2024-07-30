@@ -53,6 +53,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
 
                 /*17*/ "config\\chatbot\\15_mensaje_bienvenida.txt~mensaje_1§mensaje_2~hola§los productos los encntraras en esta pagina https://www.QU1R30N.com/§espero sea de tu agrado",
 
+                /*18*/ "config\\chatbot\\16_inventario.txt~ID|PRODUCTO|CONTENIDO|TIPO_MEDIDA|PRECIO_VENTA|COD_BARRAS|CANTIDAD|COSTO_COMP|PROVEDOR|GRUPO|CANT_X_PAQUET|ES_PAQUETE|CODBAR_PAQUETE|COD_BAR_INDIVIDUAL_ES_PAQ|LIGAR_PROD_SAB|IMPUESTOS|INGREDIENTES|CADUCIDAD|ULTIMO_MOV|SUCUR_VENT|CLAF_PROD|DIR_IMG_INTER|DIR_IMG_COMP|INFO_EXTRA|PROCESO_CREAR|DIR_VID_PROC_CREAR|NO_PONER_NADA~",
+
             };
 
            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo_de_direcciones_de_bd, fila_inicial, agregar_filas, caracter_separacion_fun_esp_objeto: G_separador_para_funciones_espesificas_[2]);

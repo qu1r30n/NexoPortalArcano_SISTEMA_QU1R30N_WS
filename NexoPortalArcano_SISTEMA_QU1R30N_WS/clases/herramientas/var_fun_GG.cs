@@ -12,9 +12,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         static public int GG_indice_donde_comensar = 1;
 
-        static public string[] GG_caracter_separacion = { "|", "°", "¬", "^" };
+        static public string[] GG_caracter_separacion = { "|", "°", "¬", "╦", "╝", "╔" };
 
-        static public string[] GG_caracter_separacion_funciones_espesificas = { "~", "§", "¶" };
+        static public string[] GG_caracter_separacion_funciones_espesificas = { "~", "§", "¶", "╬" };
+
+        static public string[] GG_caracter_para_confirmacion_o_error = { "╣", "╠" };
+
+        static public string[] GG_caracter_para_transferencia_entre_archivos = { "┴" };
+
 
         //funciones---------------------------------------------------------------------------------------------------------
 

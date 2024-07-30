@@ -28,6 +28,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
+        string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
 
         int G_donde_inicia_la_tabla = var_fun_GG.GG_indice_donde_comensar;
 
@@ -131,7 +132,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string elementos = G_info_de_configuracion_chatbot[2][1];
             string elementos_clase = elementos + G_info_de_configuracion_chatbot[3][1];
             //extaer inventario-----------------------------------------------------------------------------------------
-            enviar("negocio", "extraer_inventario","preguntas_ws","");
+            //enviar("NEGOCIO", "EXTRAER_INVENTARIO","PREGUNTAS_WS","");
 
             //------------------------------------------------------------------------------------------
 
@@ -188,7 +189,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
 
 
-                                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", 1, "1");
+                                    //bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", 1, "1");
                                     modelo_para_mandar_mensage_archivo_ia(manejadores, esperar, nom_del_click, textosDelMensaje);
 
                                 }
@@ -207,7 +208,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         }
                         
                         else
-                        {
+                        {   
 
                             datos_a_procesar_y_borrar(manejadores, esperar);
 
@@ -264,7 +265,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             //buscamos persona en el buscador de personas
             //aqui hacemos que reconosca la barra de texto y escriba
-
+            if (G_info_de_configuracion_chatbot == null)
+            {
+                G_info_de_configuracion_chatbot = extraer_info_de_archivos_de_configuracion_chatbot(G_dir_arch_conf_chatbot);
+            }
             string lugar_a_escribir = G_info_de_configuracion_chatbot[5][2];
             //var escribir_msg = G_esperar2.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
             var escribir_msg = esperar.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
@@ -619,7 +623,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                                 string numero_de_platillo = ultimo_mensaje_espliteado[0];
                                 Double cantidad_de_platillos = Convert.ToDouble(ultimo_mensaje_espliteado[1]);
                             
-                                //enviar();
+                                enviar("PUNTO_VENTA", "VENTA","WS", "MODELO_VENTAS~VENTA§COD_BAR¬1¬PLATAFORMA1",contacto);
 
 
                             }
@@ -664,7 +668,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         }
 
-        public void enviar(string modelo,string proceso,string folio_o_palbra_clave_a_del_que_lo_recibira,string info)
+        public void enviar(string modelo,string proceso,string folio_o_palbra_clave_a_del_que_lo_recibira,string info,string contacto="")
         {
             // en entrada son los mismos por que todos llegan a CLASE_QU1R30N 
             //E_1_4_ws
@@ -676,13 +680,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             {
 
                 //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "        cliente: hola soy: " + contacto_solo_los_ultimos_digitos + " " + mensage);
-                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], modelo + G_caracter_separacion_funciones_espesificas[1] + proceso + G_caracter_separacion_funciones_espesificas[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_separacion_funciones_espesificas[1] + info);
+                string info_a_env = modelo + G_caracter_para_transferencia_entre_archivos[0] + proceso + G_caracter_para_transferencia_entre_archivos[0] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[0] + info + G_caracter_para_transferencia_entre_archivos[0] + contacto;
+                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], info_a_env);
                 bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 4, (id_atras_actual_adelante_ws_2[2]) + "");
             }
             else
             {
                 //bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage1 + "      menu:" + mensage3 + "      " + mensage2 + "hola soy " + contacto_solo_los_ultimos_digitos + ": " + mensage);
-                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], modelo + G_caracter_separacion_funciones_espesificas[1] + proceso + G_caracter_separacion_funciones_espesificas[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_separacion_funciones_espesificas[1] + info);
+                string info_a_env = modelo + G_caracter_para_transferencia_entre_archivos[0] + proceso + G_caracter_para_transferencia_entre_archivos[0] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[0] + info + G_caracter_para_transferencia_entre_archivos[0] + contacto;
+                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], info_a_env);
             }
         }
 
