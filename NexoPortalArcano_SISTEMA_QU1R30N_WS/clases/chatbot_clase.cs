@@ -30,6 +30,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
         string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
 
+        
+
+
         int G_donde_inicia_la_tabla = var_fun_GG.GG_indice_donde_comensar;
 
         string[] G_dir_arch_conf_chatbot =
@@ -77,14 +80,22 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         };
 
         
-
-
         string[][] G_info_de_configuracion_chatbot = null;
 
         string[,] G_dir_arch_conf_extra =
         {
             { Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[17, 0],"MENSAJE DE BIENVENIDA" },
         };
+
+
+        public string[,] G_dir_para_registros_y_configuraciones =
+        {
+            /*0*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[25,0] ,"folios_a_procesar" },//"config\\chatbot\\registros\\folios_a_checar\\folio_ventas.txt,"
+            /*1*/{ "config\\chatbot\\registros\\" + Tex_base.GG_año_mes_dia_para_registros_ + "_reg.txt", "registro" },
+            /*2*/{ "config\\chatbot\\registros\\" + Tex_base.GG_año_mes_dia_para_registros_ + "_usuarios_reg.txt", "registro_usuario_venta_por_dia" },
+            /*3*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[24, 0], "chequeo_recarga_de_arreglos" }
+        };
+
 
         public void configuracion_de_inicio()
         {
@@ -230,8 +241,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             }
 
         }
-
-
 
 
         private void modelo_para_mandar_mensage_archivo_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, object texto_recibidos_arreglo_objeto)
@@ -692,8 +701,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             }
         }
 
-        
-
         public void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar)
         {
             //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
@@ -744,6 +751,174 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
 
         }
+
+
+
+        string G_mod_cont = null;
+        string[] G_mod_mens = null;
+        public bool confirmaciones_de_usuarios_confirmadores_o_funciones_extras(IWebDriver manejadores, WebDriverWait esperar, string nombre, string[] lineas_del_mensaje, object caraccaracter_de_separacion_objet_para_comando = null, string letra_mesa = "m", string letra_pagina_menu = "p")
+        {
+
+            string[] caracter_de_separacion_si_es_string = var_GG.GG_funcion_caracter_separacion(caraccaracter_de_separacion_objet_para_comando);
+
+            string[] grupos_en_los_que_esta = pociciones_en_los_que_se_encutra(nombre);
+            bool esta_en_confirmadores = false;
+            
+            if (grupos_en_los_que_esta != null)
+            {
+                for (int i = 0; i < grupos_en_los_que_esta.Length; i++)
+                {
+                    // area del grupo de tesoreros
+                    if (grupos_en_los_que_esta[i] == G_contactos_lista_para_mandar_informacion[6, 1])
+                    {
+                        for (int j = 0; j < lineas_del_mensaje.Length; j++)
+                        {
+                            string[] comando = lineas_del_mensaje[j].Split(':');
+                            //string[] comandos_espliteado = op_arr.convierte_objeto_a_arreglo(comando[j], caracter_de_separacion_si_es_string[0]);
+                            string[] comandos_espliteado = op_arr.convierte_objeto_a_arreglo(comando[j], ":");
+                            if (comandos_espliteado.Length < 1)
+                            {
+                                switch (comandos_espliteado[0])
+                                {
+                                    case "conf":
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            else
+                            {
+                                //aqui se checa los folios y si coinside y es vendedor se hacen las comiciones
+                                for (int k = G_donde_inicia_la_tabla; k < Tex_base.GG_base_arreglo_de_arreglos[25].Length; k++)
+                                {
+                                    string[] movimiento_a_confirmar = Tex_base.GG_base_arreglo_de_arreglos[25][k].Split(G_caracter_separacion[0][0]);
+                                    if (comandos_espliteado[j] == movimiento_a_confirmar[0])
+                                    {
+                                        if ("venta" == movimiento_a_confirmar[3])
+                                        {
+                                            if ("no_es_vendedor" != movimiento_a_confirmar[5])
+                                            {
+                                                //simul.entrada_dinero_simple_y_complejo(simul.G_direccion_negocio, movimiento_a_confirmar[5], movimiento_a_confirmar[2]);
+
+                                            }
+                                            bas.eliminar_fila(G_dir_para_registros_y_configuraciones[0, 0], 0, movimiento_a_confirmar[0]);
+                                        }
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                        esta_en_confirmadores = true;
+                        mandar_mensage_usuarios(manejadores, esperar, nombre, "comicion hecha");
+
+                        return esta_en_confirmadores;
+                    }
+
+                    // area del grupo de confirmadores
+                    else if (grupos_en_los_que_esta[i] == G_contactos_lista_para_mandar_informacion[9, 1])
+                    {
+                        for (int j = 0; j < lineas_del_mensaje.Length; j++)
+                        {
+                            string[] comando = lineas_del_mensaje[j].Split(':');
+                            string[] comandos_espliteado = op_arr.convierte_objeto_a_arreglo(comando[j], caracter_de_separacion_si_es_string[0]);
+                            if (comandos_espliteado.Length < 1)
+                            {
+                                switch (comandos_espliteado[0])
+                                {
+                                    case "conf":
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            else
+                            {
+                                bool encontro_folio = false;
+                                //aqui se checa los folios y si coinside y es vendedor se hacen las comiciones
+                                for (int k = G_donde_inicia_la_tabla; k < Tex_base.GG_base_arreglo_de_arreglos[25].Length; k++)
+                                {
+                                    string[] movimiento_a_confirmar = Tex_base.GG_base_arreglo_de_arreglos[25][k].Split(G_caracter_separacion[0][0]);
+                                    if (comandos_espliteado[j] == movimiento_a_confirmar[0])
+                                    {
+                                        encontro_folio = true;
+                                        if ("venta" == movimiento_a_confirmar[3])
+                                        {
+                                            mandar_mensage(esperar, "mensage enviado a la persona del pedido");
+                                            mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[6], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
+
+                                        }
+                                    }
+                                }
+                                if (encontro_folio == false)
+                                {
+                                    mandar_mensage(esperar, "no se encontro el folio");
+                                }
+
+                            }
+
+
+                        }
+
+                        esta_en_confirmadores = true;
+                        //mandar_mensage_usuarios(manejadores, esperar, "usuario_actual", "ok");
+
+                        return esta_en_confirmadores;
+                    }
+
+                    //area configuraciones del vendedores
+                    else if (grupos_en_los_que_esta[i] == G_contactos_lista_para_mandar_informacion[3, 1])
+                    {
+                        string[] prim_linea = lineas_del_mensaje[0].Split(G_caracter_separacion[0][0]);
+                        G_mod_cont = prim_linea[0];
+
+                        for (int j = 1; j < lineas_del_mensaje.Length-1; j++)
+                        {
+                            G_mod_mens = op_arr.agregar_registro_del_array(G_mod_mens, lineas_del_mensaje[j]);
+                        }
+
+                        return esta_en_confirmadores;
+                    }
+
+                    //area configuraciones del programador
+                    else if (grupos_en_los_que_esta[i] == G_contactos_lista_para_mandar_informacion[7, 1])
+                    {
+
+                    }
+
+
+                }
+            }
+
+            return esta_en_confirmadores;
+        }
+
+        public string[] pociciones_en_los_que_se_encutra(string nombre)
+        {
+            string[] grupos_en_los_que_esta = null;
+            int contactos_listas = G_contactos_lista_para_mandar_informacion.GetLength(0);
+            for (int i = 0; i < contactos_listas; i++)
+            {
+                int indice_dir_contactos = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_contactos_lista_para_mandar_informacion[i, 0]));
+                int contactos_listas2 = Tex_base.GG_base_arreglo_de_arreglos[indice_dir_contactos].Length;
+                for (int j = G_donde_inicia_la_tabla; j < contactos_listas2; j++)
+                {
+                    string temp = Tex_base.GG_base_arreglo_de_arreglos[indice_dir_contactos][j];
+                    if (temp == nombre)
+                    {
+                        grupos_en_los_que_esta = op_arr.agregar_registro_del_array(grupos_en_los_que_esta, G_contactos_lista_para_mandar_informacion[i, 1]);
+                        break;
+                    }
+                }
+
+
+            }
+            return grupos_en_los_que_esta;
+        }
+
 
     }
 }
