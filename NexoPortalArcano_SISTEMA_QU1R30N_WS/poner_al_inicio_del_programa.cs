@@ -48,12 +48,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
                 /*14*/ "config\\chatbot\\10_reg_mensaje.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap_y_envia_todos_los_mensajes_recibidos~Reg_mensaje",
                 
                 /*15*/ "config\\chatbot\\configuracion_programador.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap_y_este_para_funciones_especificas_echas_por_el_programador~",
-
                 /*16*/ "config\\chatbot\\14_tesoreros.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Tesoreros",
 
                 /*17*/ "config\\chatbot\\15_mensaje_bienvenida.txt~mensaje_1§mensaje_2~hola§los productos los encntraras en esta pagina https://www.QU1R30N.com/§espero sea de tu agrado",
 
                 /*18*/ "config\\chatbot\\16_inventario.txt~ID|PRODUCTO|CONTENIDO|TIPO_MEDIDA|PRECIO_VENTA|COD_BARRAS|CANTIDAD|COSTO_COMP|PROVEDOR|GRUPO|CANT_X_PAQUET|ES_PAQUETE|CODBAR_PAQUETE|COD_BAR_INDIVIDUAL_ES_PAQ|LIGAR_PROD_SAB|IMPUESTOS|INGREDIENTES|CADUCIDAD|ULTIMO_MOV|SUCUR_VENT|CLAF_PROD|DIR_IMG_INTER|DIR_IMG_COMP|INFO_EXTRA|PROCESO_CREAR|DIR_VID_PROC_CREAR|NO_PONER_NADA~",
+
+                /*19*/ "config\\chatbot\\registros\\folios_a_checar\\folio_ventas.txt~folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedido2¬precio2|vendedor|num_celular_vendedor|repartidor|datos_comprador°datos_comprador|datos_extra1°dato_extra2~",
+                /*20*/ "config\\chatbot\\12_confirmadores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Confirmadores",
+
+
 
             };
 

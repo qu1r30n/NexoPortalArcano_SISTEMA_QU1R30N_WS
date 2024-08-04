@@ -1,0 +1,8 @@
+folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedido2¬precio2|vendedor|num_celular_vendedor|repartidor|datos_comprador°datos_comprador|datos_extra1°dato_extra2
+161112240803161112|240803161112|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+0003017hs240804000301|240804000301|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+002458a0240804002458|240804002458|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+1056507k1240804105650|240804105650|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+110244j240804110244|240804110244|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+110620vw240804110620|240804110620|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+111736240804111736|240804111736|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
