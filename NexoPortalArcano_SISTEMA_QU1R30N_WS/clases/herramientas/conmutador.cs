@@ -10,6 +10,7 @@ using System.Threading;
 
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
@@ -21,6 +22,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
         string[] G_caracter_para_confirmacion_o_error = var_fun_GG.GG_caracter_para_confirmacion_o_error;
         string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
+        string[] G_caracter_usadas_por_usuario = var_fun_GG.GG_caracter_usadas_por_usuario;
 
         operaciones_arreglos op_arr = new operaciones_arreglos();
         operaciones_textos op_tex = new operaciones_textos();
@@ -169,7 +171,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 string pedido_a_registrar = "";
                 for (int i = 0; i < pedidos.Length; i++)
                 {
-                    string[] ultimo_mensaje_espliteado = pedidos[i].Split(':');
+                    string[] ultimo_mensaje_espliteado = pedidos[i].Split(G_caracter_usadas_por_usuario[0][0]);
 
 
 
@@ -190,7 +192,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                             {
                                 string[] produc_esp = res[1].Split(G_caracter_separacion[0][0]);
 
-                                pedido_a_registrar = op_tex.concatenacion_caracter_separacion(pedido_a_registrar, cod_bar_o_funcion + ":" + cantidad_de_platillos + ":" + res[2] + ":" + produc_esp[1] + " " + produc_esp[2] + "" + produc_esp[3], G_caracter_separacion[1]);
+                                pedido_a_registrar = op_tex.concatenacion_caracter_separacion(pedido_a_registrar, cod_bar_o_funcion + G_caracter_usadas_por_usuario[0] + cantidad_de_platillos + G_caracter_usadas_por_usuario[0] + res[2] + G_caracter_usadas_por_usuario[0] + produc_esp[1] + " " + produc_esp[2] + "" + produc_esp[3], G_caracter_separacion[1]);
 
                             }
 
@@ -568,6 +570,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         for (int k = G_donde_inicia_la_tabla; k < Tex_base.GG_base_arreglo_de_arreglos[indice].Length; k++)
                         {
                             string[] movimiento_a_confirmar = Tex_base.GG_base_arreglo_de_arreglos[indice][k].Split(G_caracter_separacion[0][0]);
+                            string contacto = movimiento_a_confirmar[4];
+                            string datos_comprador = movimiento_a_confirmar[6];
                             if (info_a_procesar == movimiento_a_confirmar[0])
                             {
                                 encontro_folio = true;
@@ -576,6 +580,78 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                     mandar_mensage(esperar, "mensaje enviado a la persona del pedido");
                                     mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[4], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
                                     string[] pedido_a_enviar_para_hacer = movimiento_a_confirmar[2].Split(G_caracter_separacion[1][0]);
+
+                                    string mensaje_encargados = "";
+                                    string mensaje_supervisores = "";
+                                    string mensaje_contador = "";
+                                    string mensaje_repartidor = "";
+                                    double acumulador_de_la_venta = 0;
+
+
+                                    for (int i = 0; i < pedido_a_enviar_para_hacer.Length; i++)
+                                    {
+                                        
+                                        string[] ped_split = pedido_a_enviar_para_hacer[i].Split(G_caracter_usadas_por_usuario[0][0]);
+                                        if (ped_split.Length > 2) 
+                                        {
+
+
+                                            string nom_produc = ped_split[3];
+                                            double cantidad = Convert.ToDouble(ped_split[1]);
+                                            string[] res_esp = buscar(G_direcciones[0], ped_split[0]).Split(G_caracter_separacion[0][0]);
+                                            double precio = Convert.ToDouble(res_esp[4]);
+
+                                            double total_producto = cantidad * precio;
+                                            acumulador_de_la_venta = acumulador_de_la_venta + total_producto;
+
+
+                                            mensaje_encargados = op_tex.concatenacion_caracter_separacion(mensaje_encargados, nom_produc + " cantidad:" + cantidad, "\n");
+                                            mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, nom_produc + " cantidad:" + cantidad + " $" + total_producto, "\n");
+                                            mensaje_contador = op_tex.concatenacion_caracter_separacion(mensaje_contador, nom_produc + " cantidad:" + cantidad + " $" + total_producto, "\n");
+                                            mensaje_repartidor = op_tex.concatenacion_caracter_separacion(mensaje_repartidor, nom_produc + " cantidad:" + cantidad, "\n");
+
+                                        }
+                                        else
+                                        {
+                                            switch (ped_split[0])
+                                            {
+                                                case "UBI":
+                                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, pedido_a_enviar_para_hacer[i], "\n");
+                                                    mensaje_repartidor = op_tex.concatenacion_caracter_separacion(mensaje_repartidor, pedido_a_enviar_para_hacer[i], "\n");
+                                                    break;
+                                                case "EXT":
+                                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, pedido_a_enviar_para_hacer[i], "\n");
+                                                    mensaje_encargados = op_tex.concatenacion_caracter_separacion(mensaje_encargados, pedido_a_enviar_para_hacer[i], "\n");
+                                                    break;
+                                                case "CAN":
+                                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, pedido_a_enviar_para_hacer[i], "\n");
+                                                    mensaje_repartidor = op_tex.concatenacion_caracter_separacion(mensaje_repartidor, pedido_a_enviar_para_hacer[i], "\n");
+                                                    mensaje_encargados = op_tex.concatenacion_caracter_separacion(mensaje_encargados, pedido_a_enviar_para_hacer[i], "\n");
+                                                    break;
+                                                default:
+                                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, pedido_a_enviar_para_hacer[i], "\n");
+                                                    break;
+                                            }
+                                            
+                                        }
+
+                                    }
+                                    mensaje_supervisores = contacto + "\n" + mensaje_supervisores + "\nTotal a pagar:" + acumulador_de_la_venta;
+                                    mensaje_contador = mensaje_contador + "\nTotal a pagar:" + acumulador_de_la_venta;
+                                    mensaje_repartidor = contacto + "\n" + mensaje_repartidor + "\nTotal a pagar:" + acumulador_de_la_venta;
+
+                                
+                                    mandar_mensage_usuarios(manejadores, esperar,
+                                        G_contactos_lista_para_mandar_informacion[0, 1] + G_caracter_separacion[0] +
+                                        G_contactos_lista_para_mandar_informacion[1, 1] + G_caracter_separacion[0] +
+                                        G_contactos_lista_para_mandar_informacion[2, 1] + G_caracter_separacion[0] +
+                                        G_contactos_lista_para_mandar_informacion[4, 1],
+                                        mensaje_encargados + G_caracter_separacion_funciones_espesificas[0] +
+                                        mensaje_supervisores + G_caracter_separacion_funciones_espesificas[0] +
+                                        mensaje_contador + G_caracter_separacion_funciones_espesificas[0] +
+                                        mensaje_repartidor
+                                        );
+
 
                                 }
                             }

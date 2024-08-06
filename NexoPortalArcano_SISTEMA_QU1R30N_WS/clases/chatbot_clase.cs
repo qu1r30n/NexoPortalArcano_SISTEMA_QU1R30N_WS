@@ -29,8 +29,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
         string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
+        string[] G_caracter_usadas_por_usuario = var_fun_GG.GG_caracter_usadas_por_usuario;
 
-        
 
 
         int G_donde_inicia_la_tabla = var_fun_GG.GG_indice_donde_comensar;
