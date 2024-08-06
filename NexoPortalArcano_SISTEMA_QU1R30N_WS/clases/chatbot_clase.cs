@@ -147,6 +147,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     {
                         
                         var cuantos_elementos = manej.FindElements(By.XPath(elementos));
+
                         if (cuantos_elementos.Count > 0)
                         {
                             

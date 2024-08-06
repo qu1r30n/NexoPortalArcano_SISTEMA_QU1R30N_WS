@@ -154,7 +154,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
              
             
             string añomesdiahoraminseg = DateTime.Now.ToString("yyMMddHHmmss");
-            string folio = generar_folio(añomesdiahoraminseg);
+            string folio = generar_folio(añomesdiahoraminseg).ToUpper();
 
             string contactos_a_enviar = "";
             //confirmador
@@ -162,7 +162,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //tesorero
             bool es_tesorero = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], info_a_procesar, "confirmar_comicion_para_vendedor");
 
-            if (es_confirmador == false || es_tesorero == false) 
+            if (es_confirmador == false && es_tesorero == false) 
             {
 
 
@@ -440,9 +440,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
             //G_esperar2 = esperar;
             //aqui hacemos que reconosca la barra de texto y escriba
+            if (G_info_de_configuracion_chatbot == null)
+            {
+                G_info_de_configuracion_chatbot = extraer_info_de_archivos_de_configuracion_chatbot(G_dir_arch_conf_chatbot);
+            }
 
             string lugar_a_escribir = G_info_de_configuracion_chatbot[5][1];
             //var escribir_msg = G_esperar2.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
+
             var escribir_msg = esperar.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
             string texto_enviar = string.Join(Keys.Shift + Keys.Enter + Keys.Shift, texto_enviar_arreglo_string);
 
@@ -568,8 +573,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                 encontro_folio = true;
                                 if ("venta" == movimiento_a_confirmar[3])
                                 {
-                                    mandar_mensage(esperar, "mensage enviado a la persona del pedido");
-                                    mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[6], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
+                                    mandar_mensage(esperar, "mensaje enviado a la persona del pedido");
+                                    mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[4], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
+                                    string[] pedido_a_enviar_para_hacer = movimiento_a_confirmar[2].Split(G_caracter_separacion[1][0]);
 
                                 }
                             }
