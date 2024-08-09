@@ -28,7 +28,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         operaciones_textos op_tex = new operaciones_textos();
         var_fun_GG vf_GG = new var_fun_GG();
         Tex_base bas = new Tex_base();
-        
+
 
 
         string[,] G_contactos_lista_para_mandar_informacion =
@@ -108,7 +108,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             {
                 preguntas_ws(manejadores, esperar, res_espliteada[1]);
             }
-            
+
             else if (res_espliteada[0] == "WS")
             {
                 mandar_ws(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
@@ -131,11 +131,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         private void preguntas_ws(IWebDriver manejadores, WebDriverWait esperar, string info_a_procesar)
         {
             string[] inf_esp = info_a_procesar.Split(G_caracter_separacion_funciones_espesificas[0][0]);
-            int indice=Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_direcciones[0]));
+            int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_direcciones[0]));
             Tex_base.GG_base_arreglo_de_arreglos[indice] = inf_esp;
         }
 
-        private void mandar_ws(IWebDriver manejadores, WebDriverWait esperar,string contacto, string info_a_procesar)
+        private void mandar_ws(IWebDriver manejadores, WebDriverWait esperar, string contacto, string info_a_procesar)
         {
             chatbot_clase ch_b = new chatbot_clase();
             string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
@@ -153,8 +153,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         private void mensajes(IWebDriver manejadores, WebDriverWait esperar, string contacto, string info_a_procesar)
         {
             string[] pedidos = info_a_procesar.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-             
-            
+
+
             string añomesdiahoraminseg = DateTime.Now.ToString("yyMMddHHmmss");
             string folio = generar_folio(añomesdiahoraminseg).ToUpper();
 
@@ -164,7 +164,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //tesorero
             bool es_tesorero = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], info_a_procesar, "confirmar_comicion_para_vendedor");
 
-            if (es_confirmador == false && es_tesorero == false) 
+            if (es_confirmador == false && es_tesorero == false)
             {
 
 
@@ -217,10 +217,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 }
 
-                
-                
 
-                string registro=registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
+
+
+                string registro = registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
 
                 string info_mandar = pedido_a_registrar.Replace(G_caracter_separacion[1], "\n");
                 info_mandar = info_mandar + "\n" + contacto + G_caracter_separacion_funciones_espesificas[0] + folio;
@@ -312,7 +312,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         //------------------------------------------------------------------------------------------------
 
 
-        public void enviar(string modelo,string proceso,string folio_o_palbra_clave_a_del_que_lo_recibira,string info,string contacto="")
+        public void enviar(string modelo, string proceso, string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto = "")
         {
             // en entrada son los mismos por que todos llegan a CLASE_QU1R30N 
             //E_1_4_ws
@@ -338,7 +338,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
 
 
-        
+
 
         private void buscar_nombre_y_dar_click(IWebDriver manejadores, WebDriverWait esperar, string nombre_o_numero)
         {
@@ -552,7 +552,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         }
 
 
-        private bool funciones_extra_por_grupo(IWebDriver manejadores, WebDriverWait esperar, string nombre, string grupos_que_tienen_el_permiso, string info_a_procesar,string funcion_a_hacer, object caracter_separacion_grupos = null)
+        private bool funciones_extra_por_grupo(IWebDriver manejadores, WebDriverWait esperar, string nombre, string grupos_que_tienen_el_permiso, string info_a_procesar, string funcion_a_hacer, object caracter_separacion_grupos = null)
         {
             bool si_tiene_permiso = permisos(nombre, grupos_que_tienen_el_permiso, caracter_separacion_grupos);
 
@@ -565,13 +565,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 {
                     case "confirmar_mensaje_para_cliente":
 
-                        
+
                         //aqui se checa los folios y si coinside y es vendedor se hacen las comiciones
                         for (int k = G_donde_inicia_la_tabla; k < Tex_base.GG_base_arreglo_de_arreglos[indice].Length; k++)
                         {
                             string[] movimiento_a_confirmar = Tex_base.GG_base_arreglo_de_arreglos[indice][k].Split(G_caracter_separacion[0][0]);
                             string contacto = movimiento_a_confirmar[4];
                             string datos_comprador = movimiento_a_confirmar[6];
+
                             if (info_a_procesar == movimiento_a_confirmar[0])
                             {
                                 encontro_folio = true;
@@ -590,9 +591,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                                     for (int i = 0; i < pedido_a_enviar_para_hacer.Length; i++)
                                     {
-                                        
+
                                         string[] ped_split = pedido_a_enviar_para_hacer[i].Split(G_caracter_usadas_por_usuario[0][0]);
-                                        if (ped_split.Length > 2) 
+                                        if (ped_split.Length > 2)
                                         {
 
 
@@ -632,7 +633,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                                     mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, pedido_a_enviar_para_hacer[i], "\n");
                                                     break;
                                             }
-                                            
+
                                         }
 
                                     }
@@ -640,7 +641,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                     mensaje_contador = mensaje_contador + "\nTotal a pagar:" + acumulador_de_la_venta;
                                     mensaje_repartidor = contacto + "\n" + mensaje_repartidor + "\nTotal a pagar:" + acumulador_de_la_venta;
 
-                                
+
                                     mandar_mensage_usuarios(manejadores, esperar,
                                         G_contactos_lista_para_mandar_informacion[0, 1] + G_caracter_separacion[0] +
                                         G_contactos_lista_para_mandar_informacion[1, 1] + G_caracter_separacion[0] +
@@ -665,23 +666,43 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                     case "confirmar_comicion_para_vendedor":
 
-                        
+
                         //aqui se checa los folios y si coinside y es vendedor se hacen las comiciones
                         for (int k = G_donde_inicia_la_tabla; k < Tex_base.GG_base_arreglo_de_arreglos[indice].Length; k++)
                         {
                             string[] movimiento_a_confirmar = Tex_base.GG_base_arreglo_de_arreglos[indice][k].Split(G_caracter_separacion[0][0]);
-                            if (info_a_procesar == movimiento_a_confirmar[0])
+                            string folio = movimiento_a_confirmar[0];
+                            if (info_a_procesar == folio)
                             {
                                 encontro_folio = true;
                                 if ("venta" == movimiento_a_confirmar[3])
                                 {
-                                    if ("no_es_vendedor" != movimiento_a_confirmar[5])
+                                    string[] pedido_a_enviar_para_hacer = movimiento_a_confirmar[2].Split(G_caracter_separacion[1][0]);
+                                    string pedido_PROCESAR = "";
+                                    for (int i = 0; i < pedido_a_enviar_para_hacer.Length; i++)
                                     {
+                                        string[] ped_split = pedido_a_enviar_para_hacer[i].Split(G_caracter_usadas_por_usuario[0][0]);
+                                        if (ped_split.Length > 2)
+                                        {
+                                            string cod_bar = ped_split[0];
+                                            string cantidad = ped_split[1];
+                                            string posicion_producto = ped_split[2];
+                                            pedido_PROCESAR = op_tex.concatenacion_caracter_separacion(pedido_PROCESAR, cod_bar + G_caracter_separacion[2] + cantidad + G_caracter_separacion[2] + posicion_producto + G_caracter_separacion[2] + "WS", G_caracter_separacion[1]);
+                                        }
+
+                                    }
+
+                                    //info_resultado = enl_princ.enlasador("MODELO_VENTAS~VENTA§COD_BAR¬1¬PLATAFORMA1╝4¬VENTAS°COD_BAR1¬1¬PLATAFORMA1╝4¬VENTAS°COD_BAR¬3¬PLATAFORMA1╝4¬VENTAS");
+                                    enviar("PUNTO_VENTA", "VENTA", "WS_VENTA", "MODELO_VENTAS" + G_caracter_separacion_funciones_espesificas[0] + "VENTA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR);
+
+                                    if ("no_es_vendedor" != movimiento_a_confirmar[4])
+                                    {
+
                                         //simul.entrada_dinero_simple_y_complejo(simul.G_direccion_negocio, movimiento_a_confirmar[5], movimiento_a_confirmar[2]);
 
                                     }
-                                    mandar_mensage(esperar, "mensage enviado a la persona del pedido");
-                                    mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[6], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
+                                    mandar_mensage(esperar, "pedido procesado");
+                                    mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[4], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
 
                                 }
 
@@ -693,16 +714,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         {
                             mandar_mensage(esperar, "no se encontro el folio");
                         }
-                        
+
 
                         break;
-                    
-                    
+
+
                     default:
                         break;
                 }
             }
-            
+
             else
             {
 
@@ -713,7 +734,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         private bool permisos(string nombre, string grupos_que_tienen_el_permiso, object caracter_separacion_grupos = null)
         {
-            
+
             bool esta_en_el_grupo = false;
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_grupos);
 
@@ -775,7 +796,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //agregar archivos registros
 
             int indice_folios = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_dir_arch_conf_extra[1, 0]));
-            
+
             string tem_info = folio + G_caracter_separacion[0] + añomesdiahoraminseg + G_caracter_separacion[0] + pedido_a_confirmar + G_caracter_separacion[0] + "venta" + G_caracter_separacion[0] + nom_mensage_clickeado + G_caracter_separacion[0] + "id_repartidor" + G_caracter_separacion[0] + "datos_comprador" + G_caracter_separacion[0] + "datos_extras";
             bas.Agregar(G_dir_arch_conf_extra[1, 0], tem_info);
 
@@ -899,4 +920,5 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         //fin de la clase-------------------------------------------------------------------------------
     }
+
 }
