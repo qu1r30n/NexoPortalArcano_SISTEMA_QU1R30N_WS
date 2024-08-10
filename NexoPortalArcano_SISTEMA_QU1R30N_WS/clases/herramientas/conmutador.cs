@@ -695,12 +695,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                     //info_resultado = enl_princ.enlasador("MODELO_VENTAS~VENTA§COD_BAR¬1¬PLATAFORMA1╝4¬VENTAS°COD_BAR1¬1¬PLATAFORMA1╝4¬VENTAS°COD_BAR¬3¬PLATAFORMA1╝4¬VENTAS");
                                     enviar("PUNTO_VENTA", "VENTA", "WS_VENTA", "MODELO_VENTAS" + G_caracter_separacion_funciones_espesificas[0] + "VENTA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR);
 
-                                    if ("no_es_vendedor" != movimiento_a_confirmar[4])
-                                    {
 
-                                        //simul.entrada_dinero_simple_y_complejo(simul.G_direccion_negocio, movimiento_a_confirmar[5], movimiento_a_confirmar[2]);
+                                    enviar("PUNTO_VENTA", "VENTA", "WS_VENTA", "MODELO_VENTAS" + G_caracter_separacion_funciones_espesificas[0] + "VENTA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR);
+                                    //simul.entrada_dinero_simple_y_complejo(simul.G_direccion_negocio, movimiento_a_confirmar[5], movimiento_a_confirmar[2]);
 
-                                    }
                                     mandar_mensage(esperar, "pedido procesado");
                                     mandar_mensage_usuarios(manejadores, esperar, movimiento_a_confirmar[4], "esta en proceso tu pedido\n" + movimiento_a_confirmar[0] + "\n------------------------------------------------");
 
