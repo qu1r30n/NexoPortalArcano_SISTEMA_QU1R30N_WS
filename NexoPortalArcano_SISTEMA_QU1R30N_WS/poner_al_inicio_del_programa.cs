@@ -61,7 +61,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
 
             };
 
-           bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo_de_direcciones_de_bd, fila_inicial, agregar_filas, caracter_separacion_fun_esp_objeto: G_separador_para_funciones_espesificas_[2]);
+            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo_de_direcciones_de_bd, fila_inicial, agregar_filas, caracter_separacion_fun_esp_objeto: G_separador_para_funciones_espesificas_[2]);
 
 
 
@@ -80,7 +80,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
             }
 
             chatbot_clase chatbot = new chatbot_clase();
-            
+
             bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", "0_puede_enviar_mensaje_1_espera_a_que_se_desocupe_ia", new string[] { "0" }, leer_y_agrega_al_arreglo: false);
 
             //entrada_salida_y_pedido

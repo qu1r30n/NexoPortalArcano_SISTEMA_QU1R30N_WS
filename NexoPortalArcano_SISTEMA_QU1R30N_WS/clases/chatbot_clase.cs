@@ -159,7 +159,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                                 string[] textosDelMensaje = leer_mensages_recibidos_del_mensage_clickeado(manejadores, esperar);
                                 string nom_del_click = nombre_del_clickeado(manejadores, esperar);
 
-                                //bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", 1, "1");
+                                //bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\espondiendo_a_una_pregunta.txt", 1, "1");
                                 modelo_para_mandar_mensage_archivo_ia(manejadores, esperar, nom_del_click, textosDelMensaje);
 
 
