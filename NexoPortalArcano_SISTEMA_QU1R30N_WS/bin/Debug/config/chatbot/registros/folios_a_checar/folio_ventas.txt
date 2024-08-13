@@ -2,3 +2,4 @@ folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedi
 135605XM240805135605|240805135605|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
 152400240810152400|240810152400||venta|Uso|id_repartidor|datos_comprador|datos_extras
 152634PIJ240810152634|240810152634|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras
+181524QKH240812181524|240812181524|COD_BAR:2:1:PRODUCTO 200ML°COD_BAR1:3:2:PRODUCTO 200ML°UBI:UBICACION|venta|Uso|id_repartidor|datos_comprador|datos_extras

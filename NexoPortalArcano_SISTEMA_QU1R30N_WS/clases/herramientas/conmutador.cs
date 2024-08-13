@@ -929,9 +929,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                     string[] total_a_pagar = resultado_de_folio[resultado_de_folio.Length - 1].Split(G_caracter_usadas_por_usuario[0][0]);
 
-                    mensaje_supervisores = contacto + "\n" + mensaje_supervisores + "\nTotal a pagar:" + total_a_pagar[1];
+                    mensaje_supervisores = contacto[1] + "\n" + mensaje_supervisores + "\nTotal a pagar:" + total_a_pagar[1];
                     mensaje_contador = mensaje_contador + "\nTotal a pagar:" + total_a_pagar[1];
-                    mensaje_repartidor = contacto + "\n" + mensaje_repartidor + "\nTotal a pagar:" + total_a_pagar[1];
+                    mensaje_repartidor = contacto[1] + "\n" + mensaje_repartidor + "\nTotal a pagar:" + total_a_pagar[1];
 
 
                     mandar_mensage_usuarios(manejadores, esperar,
@@ -974,11 +974,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 if (proceso[1] == "venta")
                 {
-                    string mensaje_encargados = "";
-                    string mensaje_supervisores = "";
-                    string mensaje_contadores = "";
-                    string mensaje_repartidores = "";
-
+                    
                     string pedido_PROCESAR = "";
                     double ventas_para_comicion = 0;
                     for (int i = 0; i < resultado_de_folio.Length - 3; i++)
@@ -1003,11 +999,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                 }
                             }
 
-                            mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, nom_produc + "\ncantidad: " + cantidad + " p/u:" + precio_unitario + "  $" + total_producto, "\n");
-                            mensaje_repartidores = op_tex.concatenacion_caracter_separacion(mensaje_repartidores, nom_produc + "\ncantidad: " + cantidad + " p/u:" + precio_unitario + "  $" + total_producto, "\n");
-                            mensaje_encargados = op_tex.concatenacion_caracter_separacion(mensaje_encargados, nom_produc + "\ncantidad: " + cantidad, "\n");
-                            mensaje_contadores = op_tex.concatenacion_caracter_separacion(mensaje_contadores, "comida \ncantidad: " + cantidad + " p/u:" + precio_unitario + "  $" + total_producto, "\n");
-
+                            
 
                             pedido_PROCESAR = op_tex.concatenacion_caracter_separacion(pedido_PROCESAR, cod_bar + G_caracter_separacion[2] + cantidad + G_caracter_separacion[2] + posicion_producto + G_caracter_separacion[2] + "WS" , G_caracter_separacion[1]);
                         }
@@ -1016,20 +1008,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                             switch (info_espliteada[0])
                             {
                                 case "UBI":
-                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, resultado_de_folio[i], "\n");
-                                    mensaje_repartidores = op_tex.concatenacion_caracter_separacion(mensaje_repartidores, resultado_de_folio[i], "\n");
+                                    
                                     break;
                                 case "EXT":
-                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, resultado_de_folio[i], "\n");
-                                    mensaje_encargados = op_tex.concatenacion_caracter_separacion(mensaje_encargados, resultado_de_folio[i], "\n");
+                                    
                                     break;
                                 case "CAN":
-                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, resultado_de_folio[i], "\n");
-                                    mensaje_repartidores = op_tex.concatenacion_caracter_separacion(mensaje_repartidores, resultado_de_folio[i], "\n");
-                                    mensaje_encargados = op_tex.concatenacion_caracter_separacion(mensaje_encargados, resultado_de_folio[i], "\n");
+                                    
                                     break;
                                 default:
-                                    mensaje_supervisores = op_tex.concatenacion_caracter_separacion(mensaje_supervisores, resultado_de_folio[i], "\n");
+                                    
                                     break;
                             }
 
@@ -1040,21 +1028,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                     string[] total_a_pagar = resultado_de_folio[resultado_de_folio.Length - 1].Split(G_caracter_usadas_por_usuario[0][0]);
 
-                    mensaje_supervisores = contacto[1] + "\n" + mensaje_supervisores + "\nTotal a pagar:" + total_a_pagar[1];
-                    mensaje_contadores = mensaje_contadores + "\nTotal a pagar:" + total_a_pagar[1];
-                    mensaje_repartidores = contacto[1] + "\n" + mensaje_repartidores + "\nTotal a pagar:" + total_a_pagar[1];
-
-
-                    mandar_mensage_usuarios(manejadores, esperar,
-                        G_contactos_lista_para_mandar_informacion[0, 1] + G_caracter_separacion[0] +
-                        G_contactos_lista_para_mandar_informacion[1, 1] + G_caracter_separacion[0] +
-                        G_contactos_lista_para_mandar_informacion[2, 1] + G_caracter_separacion[0] +
-                        G_contactos_lista_para_mandar_informacion[4, 1],
-                        mensaje_encargados + G_caracter_separacion_funciones_espesificas[0] +
-                        mensaje_supervisores + G_caracter_separacion_funciones_espesificas[0] +
-                        mensaje_contadores + G_caracter_separacion_funciones_espesificas[0] +
-                        mensaje_repartidores
-                        );
 
                     //procesar venta
                     enviar("PUNTO_VENTA", "VENTA", "WS", "MODELO_VENTAS" + G_caracter_separacion_funciones_espesificas[0] + "VENTA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto[1]);
