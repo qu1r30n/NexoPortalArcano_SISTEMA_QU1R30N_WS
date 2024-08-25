@@ -316,6 +316,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                     bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
+                //despues de leer
                 bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], posicion_lectura, id_atras_actual_adelante_2[2] + "");
             }
 
