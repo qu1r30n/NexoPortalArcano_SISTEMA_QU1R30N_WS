@@ -43,6 +43,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             /*6*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[16, 0],"tesoreros" },
             /*7*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[15, 0],"programador" },
             /*8*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[20, 0],"confirmadores" },
+            /*9*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[21, 0],"administradores" },
+            /*10*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[22, 0],"compradores" },
 
         };
 
@@ -115,6 +117,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 mandar_ws(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
             }
 
+            else if (res_espliteada[0] == "WS_RS")
+            {
+                mandar_ws_rs(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
+            }
+
+
             else if (res_espliteada[0] == "MENSAJE")
             {
                 mensajes(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
@@ -140,10 +148,26 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         {
             chatbot_clase ch_b = new chatbot_clase();
             string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
-            string a = "";
+            
             if (inf_esp[0] == "1")
             {
                 regresr_respuesta_ia(manejadores, esperar, contacto, "compra exitosa");
+            }
+            else
+            {
+                regresr_respuesta_ia(manejadores, esperar, contacto, "error");
+            }
+        }
+
+        private void mandar_ws_rs(IWebDriver manejadores, WebDriverWait esperar, string contacto, string info_a_procesar)
+        {
+            chatbot_clase ch_b = new chatbot_clase();
+            string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
+            
+            if (inf_esp[0] == "1")
+            {
+                inf_esp[1] = inf_esp[1].Replace(G_caracter_separacion_funciones_espesificas[0], "\n");
+                regresr_respuesta_ia(manejadores, esperar, contacto, inf_esp[1]);
             }
             else
             {
@@ -160,12 +184,37 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             string folio = generar_folio(añomesdiahoraminseg).ToUpper();
 
             string contactos_a_enviar = "";
+            bool[] grupos =
+            {
+                false, //confirmador
+                false, //tesorero
+                false, //administrador
+                false, //comprador
+            };
             //confirmador
-            bool es_confirmador = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], info_a_procesar, "confirmar_mensaje_para_cliente");
+            grupos[0] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], info_a_procesar, "CONFIRMADORES","confirmar_mensaje_para_cliente");
             //tesorero
-            bool es_tesorero = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], info_a_procesar, "confirmar_comicion_para_vendedor");
 
-            if (es_confirmador == false && es_tesorero == false)
+            grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], info_a_procesar, "TESOREROS", "confirmar_comicion_para_vendedor");
+
+            //administradores
+            grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], info_a_procesar, "ADMNINISTRADORES","VENTAS_DEL_DIA");
+
+            //compradores
+            grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], info_a_procesar, "COMPRAS", "PREDICCION_COMPRA");
+
+            bool es_un_grupo_con_funcion = false;
+            for (int i = 0; i < grupos.Length; i++)
+            {
+                if (grupos[i] == true)
+                {
+                    es_un_grupo_con_funcion = true;
+                    break;
+                }
+            }
+
+
+            if (es_un_grupo_con_funcion == false)
             {
 
 
@@ -239,15 +288,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
 
         //fin_procesos------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
 
 
         //estos actuan juntos------------------------------------------------------------------------------------
@@ -359,9 +399,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         }
 
 
-
-
-
         private void buscar_nombre_y_dar_click(IWebDriver manejadores, WebDriverWait esperar, string nombre_o_numero)
         {
             Actions action = new Actions(manejadores);
@@ -407,7 +444,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             string[] caracter_separacion_usuarios = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto_usuarios);
             string[] caracter_separacion_mensajes = vf_GG.GG_funcion_caracter_separacion_funciones_especificas(caracter_separacion_objeto_mensages);
             string[] supervisores = op_arr.convierte_objeto_a_arreglo(nombre_contacto, caracter_separacion_usuarios[0]);
-            string[] mensage_espliteados = op_arr.convierte_objeto_a_arreglo(mensage, caracter_separacion_mensajes[0]);
+            
             bool encontro_al_supervisor = false;
             for (int k = 0; k < supervisores.Length; k++)
             {
@@ -427,7 +464,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         for (int l = G_donde_inicia_la_tabla; l < Tex_base.GG_base_arreglo_de_arreglos[indice_supervisor].Length; l++)
                         {
                             buscar_nombre_y_dar_click(manejadores, esperar, Tex_base.GG_base_arreglo_de_arreglos[indice_supervisor][l]);
-                            mandar_mensage(esperar, mensage_espliteados[k]);
+                            mandar_mensage(esperar, mensage);
                         }
 
                     }
@@ -436,7 +473,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 if (supervisores[k] == "usuario_actual")
                 {
                     encontro_al_supervisor = true;
-                    mandar_mensage(esperar, mensage_espliteados[k]);
+                    mandar_mensage(esperar, mensage);
                 }
 
                 if (encontro_al_supervisor == false)
@@ -444,7 +481,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     if (nombre_contacto is string)
                     {
                         buscar_nombre_y_dar_click(manejadores, esperar, (string)nombre_contacto);
-                        mandar_mensage(esperar, mensage_espliteados[k]);
+                        mandar_mensage(esperar, mensage);
                     }
 
                 }
@@ -481,10 +518,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
-
-
-
-
         private string[][] extraer_info_de_archivos_de_configuracion_chatbot(string[] direcciones)
         {
 
@@ -498,12 +531,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             return info_a_retornar;
         }
 
-
-
-
         private void regresr_respuesta_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, string texto_recibidos_arreglo)
         {
 
+            
             mandar_mensage_usuarios(manejadores, esperar, G_contactos_lista_para_mandar_informacion[5, 1], "ia_" + nombre_Del_que_envio_el_mensage + "\n" + texto_recibidos_arreglo + "\n--------------------------------------------------------------------");
             Actions action = new Actions(manejadores);
             action.SendKeys(Keys.Escape).Perform();
@@ -574,39 +605,59 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         }
 
 
-        private bool funciones_extra_por_grupo(IWebDriver manejadores, WebDriverWait esperar, string nombre, string grupos_que_tienen_el_permiso, string info_a_procesar, string funcion_a_hacer, object caracter_separacion_grupos = null)
+        private bool funciones_extra_por_grupo(IWebDriver manejadores, WebDriverWait esperar, string nombre, string grupos_que_tienen_el_permiso, string info_a_procesar, string modelo,string funcion_a_hacer, object caracter_separacion_grupos = null)
         {
             bool si_tiene_permiso = permisos(nombre, grupos_que_tienen_el_permiso, caracter_separacion_grupos);
 
             if (si_tiene_permiso)
             {
                 int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_dir_arch_conf_extra[1, 0]));
-                bool encontro_folio = false;
+                
                 
 
-                string[] res_folio = calculos_folios(info_a_procesar);
-
                 
 
-                switch (funcion_a_hacer)
+                if (modelo == "CONFIRMADORES")
                 {
-                    case "confirmar_mensaje_para_cliente":
-
+                    if (funcion_a_hacer == "confirmar_mensaje_para_cliente")
+                    {
+                        bool encontro_folio = false;
+                        string[] res_folio = calculos_folios(info_a_procesar);
                         mandar_mensajes_deacuerdo_del_resul_calculo_folio(manejadores, esperar, res_folio);
-
-                        break;
-
-
-                    case "confirmar_comicion_para_vendedor":
-
-                        procesar_folio(manejadores, esperar, res_folio);
-
-                        break;
-
-
-                    default:
-                        break;
+                    }
                 }
+                else if (modelo == "TESOREROS")
+                {
+                    if (funcion_a_hacer == "confirmar_comicion_para_vendedor")
+                    {
+                        bool encontro_folio = false;
+                        string[] res_folio = calculos_folios(info_a_procesar);
+                        procesar_folio(manejadores, esperar, res_folio);
+                    }
+                }
+
+                else if (modelo == "ADMINISTRADORES")
+                {
+                    //"MODELO_ANALISIS_DATOS~PREDICCION_NECESIDADES_COMPRA"
+                    string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
+                    // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
+                    compras(temp, nombre);
+                }
+                else if (modelo == "COMPRAS")
+                {
+                    //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
+                    string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
+                    // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
+                    compras(temp, nombre);
+
+                }
+                else
+                {
+                    // Aquí podrías agregar una lógica por defecto si es necesario.
+                }
+
+
+
             }
 
             else
@@ -731,7 +782,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
             return resultado;
         }
-
+            
 
         public string buscar(string direccion_archivo, string cod_bar, string id_producto_string = "")
         {
@@ -1069,7 +1120,30 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
+        private void administracion(string[] datos_compras, string contacto)
+        {
+            if (datos_compras[0] == "PREDICCION_COMPRA")
+            {
+                
+                string pedido_PROCESAR = datos_compras[1] + G_caracter_separacion[2] + datos_compras[2] + G_caracter_separacion[2] + datos_compras[3] + G_caracter_separacion[2] + datos_compras[4] + G_caracter_separacion[2] + datos_compras[5];
+                enviar("ADMINISTRACION", "PREDICCION_COMPRA", "WS", "MODELO_ANALISIS_DATOS" + G_caracter_separacion_funciones_espesificas[0] + "PREDICCION_NECESIDADES_COMPRA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto);
+            }
+        }
 
+        private void compras(string[] datos_compras, string contacto)
+        {
+            if (datos_compras[0]== "COMP")
+            {
+                string pedido_PROCESAR = datos_compras[1] + G_caracter_separacion[2] + datos_compras[2] + G_caracter_separacion[2] + datos_compras[3] + G_caracter_separacion[2] + datos_compras[4] + G_caracter_separacion[2] + datos_compras[5] + G_caracter_separacion[0] + datos_compras[6] + G_caracter_separacion[0]+"SUC1";
+                enviar("COMPRAS", "COMPRA", "WS", "MODELO_COMPRAS" + G_caracter_separacion_funciones_espesificas[0] + "COMPRA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto);
+            }
+
+            else if (datos_compras[0]=="PREDICCION_COMPRA")
+            {
+                
+                enviar("ADMINISTRACION", "PREDICCION_COMPRA", "WS_RS", "MODELO_ANALISIS_DATOS" + G_caracter_separacion_funciones_espesificas[0] + "PREDICCION_NECESIDADES_COMPRA" + G_caracter_separacion_funciones_espesificas[1] + "", contacto);
+            }
+        }
 
 
         //fin de la clase-------------------------------------------------------------------------------

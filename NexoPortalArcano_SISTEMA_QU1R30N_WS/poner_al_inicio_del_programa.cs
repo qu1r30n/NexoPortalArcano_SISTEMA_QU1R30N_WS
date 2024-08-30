@@ -32,13 +32,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
                 
                 /*1*/ "config\\chatbot\\info_para_comandos_chatbot\\00_paginaweb.txt~info_para_comandos~http://web.whatsapp.com/",
                 /*2*/ "config\\chatbot\\info_para_comandos_chatbot\\01_ya_entrado_en_la_mensajeria.txt~info_para_comandos~side",
-                /*3*/ "config\\chatbot\\info_para_comandos_chatbot\\02_chequeo_no_leidos.txt~info_para_comandos~//span[contains(@aria-label, 'No leídos') or contains(@aria-label, '4 mensaje no leído') or contains(@aria-label, '3 mensaje no leído') or contains(@aria-label, '2 mensaje no leído') or contains(@aria-label, '1 mensaje no leído')]",
-                /*4*/ "config\\chatbot\\info_para_comandos_chatbot\\03_clickeo.txt~info_para_comandos~//ancestor::div[@class='_8nE1Y']",
-                /*5*/ "config\\chatbot\\info_para_comandos_chatbot\\04_lectura_del_mensage.txt~info_para_comandos~//div[contains(@class, 'message-in')]//span[contains(@class, '_11JPr')]",
-                /*6*/ "config\\chatbot\\info_para_comandos_chatbot\\05_reconocer_textbox_de_envio.txt~info_para_comandos~//*[@id='main']/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]",
+                /*3*/ "config\\chatbot\\info_para_comandos_chatbot\\02_chequeo_no_leidos.txt~info_para_comandos~//span[contains(@aria-label, 'mensajes no leídos') or contains(@aria-label, 'mensaje no leído')]",
+                /*4*/ "config\\chatbot\\info_para_comandos_chatbot\\03_clickeo.txt~info_para_comandos~//ancestor::div[@class='_ahlk']",
+                /*5*/ "config\\chatbot\\info_para_comandos_chatbot\\04_lectura_del_mensage.txt~info_para_comandos~//div[contains(@class, 'message-in')]//span[contains(@class, '_ao3e')]",
+                /*6*/ "config\\chatbot\\info_para_comandos_chatbot\\05_reconocer_textbox_de_envio.txt~info_para_comandos~//*[@id='main']/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]§//*[@id=\"side\"]/div[1]/div/div[2]/div[2]/div/div[1]/p",
                 /*7*/ "config\\chatbot\\info_para_comandos_chatbot\\06_buscar_nombre.txt~info_para_comandos~//span[contains(@title, '",
 
-                /*8*/ "config\\chatbot\\info_para_comandos_chatbot\\07_nombre_del_clikeado.txt~info_para_comandos~//header[@class='AmmtE']//div[@class='Mk0Bp _30scZ']§//*[@id='main']/header/div[2]/div[1]/div/span",
+                /*8*/ "config\\chatbot\\info_para_comandos_chatbot\\07_nombre_del_clikeado.txt~info_para_comandos~//header[@class='_amid']//div[@class='_aou8 _aj_h']§//header[@class='_amid _aqbz']//div[@class='_amig']",
                 
                 /*9*/ "config\\chatbot\\05_encargados.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Encargados",
                 /*10*/ "config\\chatbot\\06_supervisores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Supervisores",
@@ -56,6 +56,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
 
                 /*19*/ "config\\chatbot\\registros\\folios_a_checar\\folio_ventas.txt~folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedido2¬precio2|vendedor|num_celular_vendedor|repartidor|datos_comprador°datos_comprador|datos_extra1°dato_extra2~",
                 /*20*/ "config\\chatbot\\12_confirmadores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Confirmadores",
+                /*21*/ "config\\chatbot\\13_administradores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Administradores",
+                /*22*/ "config\\chatbot\\14_compradores.txt~nombre_o_numero_de_telefono_que_aparece_en_el_watsap~Compradores",
+
 
 
 
