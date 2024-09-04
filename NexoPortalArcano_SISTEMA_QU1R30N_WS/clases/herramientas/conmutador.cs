@@ -1134,7 +1134,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         {
             if (datos_compras[0]== "COMP")
             {
-                string pedido_PROCESAR = datos_compras[1] + G_caracter_separacion[2] + datos_compras[2] + G_caracter_separacion[2] + datos_compras[3] + G_caracter_separacion[2] + datos_compras[4] + G_caracter_separacion[2] + datos_compras[5] + G_caracter_separacion[0] + datos_compras[6] + G_caracter_separacion[0]+"SUC1";
+                string[] cantidad_de_productos = datos_compras[1].Split(G_caracter_usadas_por_usuario[1][0]);
+                string pedido_PROCESAR = "";
+                for (int i = 0; i < cantidad_de_productos.Length; i++)
+                {
+                    string[] info_espliteada = cantidad_de_productos[i].Split(G_caracter_usadas_por_usuario[2][0]);
+                    pedido_PROCESAR = op_tex.concatenacion_caracter_separacion(pedido_PROCESAR, info_espliteada[0] + G_caracter_separacion[2] + info_espliteada[1] + G_caracter_separacion[2] + info_espliteada[2] + G_caracter_separacion[2] + info_espliteada[3] + G_caracter_separacion[2] + info_espliteada[4], G_caracter_separacion[1]);
+                }
+                pedido_PROCESAR = pedido_PROCESAR + G_caracter_separacion[0] + datos_compras[2] + G_caracter_separacion[0] + "SUC1";
+
+
                 enviar("COMPRAS", "COMPRA", "WS", "MODELO_COMPRAS" + G_caracter_separacion_funciones_espesificas[0] + "COMPRA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto);
             }
 
