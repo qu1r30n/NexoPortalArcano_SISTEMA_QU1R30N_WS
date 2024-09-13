@@ -1,1 +1,10 @@
 folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedido2¬precio2|vendedor|num_celular_vendedor|repartidor|datos_comprador°datos_comprador|datos_extra1°dato_extra2
+165641W240909165641|240909165641|1:1:1:PECHUGA RELLENA' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+165641W240909165641|240909165641|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+171454240909171454|240909171454|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+1728414240909172841|240909172841|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+17393403240909173934|240909173934|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+175354240909175354|240909175354|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+180540Q240909180540|240909180540|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+1809127240909180912|240909180912|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+183929M240909183929|240909183929|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras

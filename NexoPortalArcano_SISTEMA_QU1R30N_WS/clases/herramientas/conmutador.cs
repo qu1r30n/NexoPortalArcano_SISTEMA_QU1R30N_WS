@@ -177,50 +177,53 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         private void mensajes(IWebDriver manejadores, WebDriverWait esperar, string contacto, string info_a_procesar)
         {
-            string[] pedidos = info_a_procesar.Split(new string[] { "\n" }, StringSplitOptions.None);
+            info_a_procesar.Replace("\n", G_caracter_separacion_funciones_espesificas[0]);
+            string[] pedidos = info_a_procesar.Split(G_caracter_separacion_funciones_espesificas[0][0]);
 
 
             string añomesdiahoraminseg = DateTime.Now.ToString("yyMMddHHmmss");
             string folio = generar_folio(añomesdiahoraminseg).ToUpper();
 
-            string contactos_a_enviar = "";
-            bool[] grupos =
+
+            string pedido_a_registrar = "";
+            bool hubo_pedido = false;
+            for (int i = 0; i < pedidos.Length; i++)
             {
-                false, //confirmador
-                false, //tesorero
-                false, //administrador
-                false, //comprador
-            };
-            //confirmador
-            grupos[0] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], info_a_procesar, "CONFIRMADORES","confirmar_mensaje_para_cliente");
-            //tesorero
 
-            grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], info_a_procesar, "TESOREROS", "confirmar_comicion_para_vendedor");
 
-            //administradores
-            grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], info_a_procesar, "ADMNINISTRADORES","VENTAS_DEL_DIA");
-
-            //compradores
-            grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], info_a_procesar, "COMPRAS", "PREDICCION_COMPRA");
-
-            bool es_un_grupo_con_funcion = false;
-            for (int i = 0; i < grupos.Length; i++)
-            {
-                if (grupos[i] == true)
+                string contactos_a_enviar = "";
+                bool[] grupos =
                 {
-                    es_un_grupo_con_funcion = true;
-                    break;
+                    false, //confirmador
+                    false, //tesorero
+                    false, //administrador
+                    false, //comprador
+                };
+                //confirmador
+                grupos[0] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], pedidos[i], "CONFIRMADORES", "confirmar_mensaje_para_cliente");
+                //tesorero
+
+                grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], pedidos[i], "TESOREROS", "confirmar_comicion_para_vendedor");
+
+                //administradores
+                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMNINISTRADORES", "VENTAS_DEL_DIA");
+
+                //compradores
+                grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], pedidos[i], "COMPRAS", "PREDICCION_COMPRA");
+
+                bool es_un_grupo_con_funcion = false;
+                for (int j = 0; j < grupos.Length; j++)
+                {
+                    if (grupos[j] == true)
+                    {
+                        es_un_grupo_con_funcion = true;
+                        break;
+                    }
                 }
-            }
 
-
-            if (es_un_grupo_con_funcion == false)
-            {
-
-
-                string pedido_a_registrar = "";
-                for (int i = 0; i < pedidos.Length; i++)
+                if (es_un_grupo_con_funcion == false)
                 {
+
                     string[] ultimo_mensaje_espliteado = pedidos[i].Split(G_caracter_usadas_por_usuario[0][0]);
 
 
@@ -235,7 +238,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                             Double cantidad_de_platillos = Convert.ToDouble(ultimo_mensaje_espliteado[1]);
                             string id_producto = "";
                             //tiene id_producto para busqueda rapida en el inventario
-                            if (ultimo_mensaje_espliteado.Length > 1) { id_producto = ultimo_mensaje_espliteado[2]; }
+                            if (ultimo_mensaje_espliteado.Length > 2) { id_producto = ultimo_mensaje_espliteado[2]; }
 
                             string[] res = buscar(G_direcciones[0], cod_bar_o_funcion, id_producto).Split(G_caracter_para_confirmacion_o_error[0][0]);
                             if (res[0] == "1")
@@ -243,6 +246,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                 string[] produc_esp = res[1].Split(G_caracter_separacion[0][0]);
 
                                 pedido_a_registrar = op_tex.concatenacion_caracter_separacion(pedido_a_registrar, cod_bar_o_funcion + G_caracter_usadas_por_usuario[0] + cantidad_de_platillos + G_caracter_usadas_por_usuario[0] + res[2] + G_caracter_usadas_por_usuario[0] + produc_esp[1] + " " + produc_esp[2] + "" + produc_esp[3], G_caracter_separacion[1]);
+                                hubo_pedido = true;
 
                             }
 
@@ -250,7 +254,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         else
                         {
                             pedido_a_registrar = op_tex.concatenacion_caracter_separacion(pedido_a_registrar, pedidos[i], G_caracter_separacion[1]);
+                            hubo_pedido = true;
                         }
+                        
                     }
 
                     else
@@ -258,7 +264,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                         int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_dir_arch_conf_extra[0, 0]));
 
-                        string mensage_bienvenida = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(Tex_base.GG_base_arreglo_de_arreglos[indice], Keys.Shift + Keys.Enter + Keys.Shift, 1, true);
+                        string mensage_bienvenida = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(Tex_base.GG_base_arreglo_de_arreglos[indice], Keys.Shift + Keys.Enter + Keys.Shift+"", 1, true);
                         acumulador_de_mensajes(contacto, mensage_bienvenida);
 
                     }
@@ -268,19 +274,21 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 }
 
 
-
-
-                string registro = registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
-
-                string info_mandar = pedido_a_registrar.Replace(G_caracter_separacion[1], "\n");
-                info_mandar = info_mandar + "\n" + contacto + G_caracter_separacion_funciones_espesificas[0] + folio;
-                info_mandar = info_mandar + G_caracter_separacion_funciones_espesificas[0] + info_mandar;
-                mandar_mensage_usuarios(manejadores, esperar, G_contactos_lista_para_mandar_informacion[6, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[6, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[8, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[8, 1], info_mandar);
-
-
             }
 
 
+            if (hubo_pedido)
+            {
+                string registro = registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
+                string info_mandar = pedido_a_registrar.Replace(G_caracter_separacion[1], "\n");
+                info_mandar = info_mandar + "\n" + contacto + G_caracter_separacion_funciones_espesificas[0] + folio;
+                //info_mandar = info_mandar + G_caracter_separacion_funciones_espesificas[0] + info_mandar;
+                string cont_a_mandar = G_contactos_lista_para_mandar_informacion[6, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[8, 1];
+                mandar_mensage_usuarios(manejadores, esperar, cont_a_mandar, info_mandar);
+            }
+            
+
+            mandar_mensages_acumulados(manejadores, esperar);
 
         }
 
@@ -511,6 +519,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
             var escribir_msg = esperar.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
             string texto_enviar = string.Join(Keys.Shift + Keys.Enter + Keys.Shift, texto_enviar_arreglo_string);
+            texto_enviar = texto_enviar.Replace(G_caracter_separacion_funciones_espesificas[0], "\n");
 
             escribir_msg.SendKeys(texto_enviar);
             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
