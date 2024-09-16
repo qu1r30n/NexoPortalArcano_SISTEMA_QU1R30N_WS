@@ -280,6 +280,66 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return GG_base_arreglo_de_arreglos[num_indice_de_direccion_int];
         }
 
+        public void eliminar_fila_PARA_MULTIPLES_PROGRAMAS(string direccion_archivo, int columna_a_comparar, string comparar, object caracter_separacion_objeto = null)
+        {
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            string dir_bandera = direccion_archivo.Replace(".txt", "_bandera.txt");
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera, true);
+            //------------------------------------------------------------------------------------------
+
+            StreamReader sr = new StreamReader(direccion_archivo);
+            string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
+            StreamWriter sw = new StreamWriter(dir_tem, true);
+            
+            
+            try
+            {
+
+                while (sr.Peek() >= 0)//verificamos si hay mas lineas a leer
+                {
+                    string linea = sr.ReadLine();//leemos linea y lo guardamos en linea
+                    if (linea != null)
+                    {
+
+                        string[] linea_espliteada = linea.Split(caracter_separacion[0][0]);
+                        if (linea_espliteada[columna_a_comparar] != comparar)
+                        {
+                            sw.WriteLine(linea);
+                        }
+                        
+
+                        
+                    }
+                    
+                }
+
+                
+
+                sr.Close();
+                sw.Close();
+
+                File.Delete(direccion_archivo);//borramos el archivo original
+                File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
+                
+                sw_bandera.Close();
+                File.Delete(dir_bandera);
+
+            }
+            catch (Exception error)
+            {
+                sr.Close();
+                sw.Close();
+                File.Delete(dir_tem);//borramos el archivo temporal
+                
+                sw_bandera.Close();
+                File.Delete(dir_bandera);
+            }
+            
+
+        }
+
         public string[] eliminar_fila(string direccion_archivo, int num_column_comp, string comparar, object caracter_separacion_objeto = null)
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);

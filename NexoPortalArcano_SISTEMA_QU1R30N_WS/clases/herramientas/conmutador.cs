@@ -99,7 +99,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         //procesos------------------------------------------------------------------
         public void conmutar_datos(IWebDriver manejadores, WebDriverWait esperar, string parametro)
         {
-            string[] res_espliteada = parametro.Split(G_caracter_para_transferencia_entre_archivos[0][0]);
+            string[] res_espliteada = parametro.Split(G_caracter_para_transferencia_entre_archivos[1][0]);
 
             // Implementa la lógica aquí
 
@@ -107,25 +107,25 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //procesos_usaras------------------------------------------------------------
 
 
-            if (res_espliteada[0] == "PREGUNTAS_WS")
+            if (res_espliteada[1] == "PREGUNTAS_WS")
             {
-                preguntas_ws(manejadores, esperar, res_espliteada[1]);
+                preguntas_ws(manejadores, esperar, res_espliteada[2]);
             }
 
-            else if (res_espliteada[0] == "WS")
+            else if (res_espliteada[1] == "WS")
             {
-                mandar_ws(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
+                mandar_ws(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
             }
 
-            else if (res_espliteada[0] == "WS_RS")
+            else if (res_espliteada[1] == "WS_RS")
             {
-                mandar_ws_rs(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
+                mandar_ws_rs(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
             }
 
 
-            else if (res_espliteada[0] == "MENSAJE")
+            else if (res_espliteada[1] == "MENSAJE")
             {
-                mensajes(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
+                mensajes(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
             }
 
 
@@ -361,12 +361,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         //------------------------------------------------------------------------------------------------
 
 
-        public void enviar(string modelo, string proceso, string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto = "")
+        public void enviar(string modelo, string proceso, string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto = "", string programa_enviar = "CLASE_QU1R30N")
         {
+            
             // en entrada son los mismos por que todos llegan a CLASE_QU1R30N 
-            //E_1_4_ws
-            int ID_WS = 1;
-            int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(ID_WS);//esta es de la ia//AQUI ENVIA
+            //ID_WS ES LA POSICION DELPOSICIONADOR
+            int POSICION_POSICIONADOR = 1;
+            int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(POSICION_POSICIONADOR);//esta es de la ia//AQUI ENVIA
             int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(4);//este es del ws
 
 
@@ -376,13 +377,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
 
 
-            string info_a_env = modelo + G_caracter_para_transferencia_entre_archivos[0] + proceso + G_caracter_para_transferencia_entre_archivos[0] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[0] + info + G_caracter_para_transferencia_entre_archivos[0] + contacto;
+            string info_a_env = programa_enviar + G_caracter_para_transferencia_entre_archivos[0] + var_fun_GG.GG_id_programa + G_caracter_para_transferencia_entre_archivos[1] + modelo + G_caracter_para_transferencia_entre_archivos[1] + proceso + G_caracter_para_transferencia_entre_archivos[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[1] + info + G_caracter_para_transferencia_entre_archivos[1] + contacto;
             
             if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[posicion_actual])
             {
                 
                 bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[posicion_adelante]], info_a_env);
-                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], ID_WS, (id_atras_actual_adelante_ia_1[posicion_atras]) + "");//id_atras_actual_adelante_ia_1[0] este lo ponemos en la posicion 0 por si estan igual lo ponga atras del que va a leer el ia
+                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], POSICION_POSICIONADOR, (id_atras_actual_adelante_ia_1[posicion_atras]) + "");//id_atras_actual_adelante_ia_1[0] este lo ponemos en la posicion 0 por si estan igual lo ponga atras del que va a leer el ia
             }
             else
             {
@@ -395,7 +396,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 else if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[posicion_atras])
                 {
                     bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[posicion_actual]], info_a_env);
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], ID_WS, (id_atras_actual_adelante_ia_1[posicion_adelante]) + "");//id_atras_actual_adelante_ia_1[0] este lo ponemos en la posicion 0 por si estan igual lo ponga atras del que va a leer el ia
+                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], POSICION_POSICIONADOR, (id_atras_actual_adelante_ia_1[posicion_adelante]) + "");//id_atras_actual_adelante_ia_1[0] este lo ponemos en la posicion 0 por si estan igual lo ponga atras del que va a leer el ia
                 }
                 else
                 {
@@ -606,7 +607,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
             for (int j = 0; j < lineas_del_mensaje.Length; j++)
             {
-                conmutar_datos(manejadores, esperar, "MENSAJE" + G_caracter_para_transferencia_entre_archivos[0] + lineas_del_mensaje[j] + G_caracter_para_transferencia_entre_archivos[0] + contacto);
+                conmutar_datos(manejadores, esperar, "MENSAJE" + G_caracter_para_transferencia_entre_archivos[1] + lineas_del_mensaje[j] + G_caracter_para_transferencia_entre_archivos[1] + contacto);
 
             }
 

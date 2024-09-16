@@ -208,7 +208,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string[] textos_recibidos_srting_arr = op_arr.convierte_objeto_a_arreglo(texto_recibidos_arreglo_objeto);
             string ultimo_mensaje = textos_recibidos_srting_arr[textos_recibidos_srting_arr.Length - 1].ToUpper();//ultimo mensaje lo pone en minusculas
 
-            con.conmutar_datos(manejadores, esperar, "MENSAJE" + G_caracter_para_transferencia_entre_archivos[0][0] + ultimo_mensaje + G_caracter_para_transferencia_entre_archivos[0][0] + nombre_Del_que_envio_el_mensage);
+            con.conmutar_datos(manejadores, esperar, "MENSAJE" + G_caracter_para_transferencia_entre_archivos[1][0] + ultimo_mensaje + G_caracter_para_transferencia_entre_archivos[1][0] + nombre_Del_que_envio_el_mensage);
 
             Actions action = new Actions(manejadores);
             action.SendKeys(Keys.Escape).Perform();
@@ -296,12 +296,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                     for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
                     {
-
-                        con.conmutar_datos(manejadores, esperar, respuestas_ia[i]);
+                        string[] id_programa_comparar = respuestas_ia[i].Split(G_caracter_para_transferencia_entre_archivos[0][0]);
+                        if (id_programa_comparar[0] == var_fun_GG.GG_id_programa)
+                        {
+                            con.conmutar_datos(manejadores, esperar, id_programa_comparar[1]);
+                        }
+                            
 
                     }
-
-                    bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
+                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
+                    //bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
             }
             else
@@ -311,10 +315,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 {
                     for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
                     {
-                        con.conmutar_datos(manejadores, esperar, respuestas_ia[i]);
+                        string[] id_programa_comparar = respuestas_ia[i].Split(G_caracter_para_transferencia_entre_archivos[0][0]);
+                        if (id_programa_comparar[0] == var_fun_GG.GG_id_programa)
+                        {
+                            con.conmutar_datos(manejadores, esperar, id_programa_comparar[1]);
+                        }
                     }
 
-                    bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
+                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
+                    //bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
                 //despues de leer
                 bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], posicion_lectura, id_atras_actual_adelante_2[2] + "");
