@@ -276,7 +276,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         {
             //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
 
-            string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[8]);
+            string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[2]);
 
 
 
@@ -294,7 +294,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                             
 
                     }
-                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[8], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
+                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[2], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
                     //bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
             
