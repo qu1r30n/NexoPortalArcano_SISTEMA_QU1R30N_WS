@@ -275,19 +275,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         private void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar)
         {
             //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
-            //S_2_5_ws
 
-            int posicion_lectura = 5;
+            string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[8]);
 
-            int[] id_atras_actual_adelante_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(2);//esta es de la ia
-            int[] id_atras_actual_adelante_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(posicion_lectura);//este es del ws//aqui lee el comando
-
-            string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]]);
-
-
-
-            if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1])
-            {
 
 
                 if (respuestas_ia.Length > 1)
@@ -304,30 +294,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                             
 
                     }
-                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
+                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[8], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
                     //bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
-            }
-            else
-            {
-
-                if (respuestas_ia.Length > 1)
-                {
-                    for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
-                    {
-                        string[] id_programa_comparar = respuestas_ia[i].Split(G_caracter_para_transferencia_entre_archivos[0][0]);
-                        if (id_programa_comparar[0] == var_fun_GG.GG_id_programa)
-                        {
-                            con.conmutar_datos(manejadores, esperar, id_programa_comparar[1]);
-                        }
-                    }
-
-                    bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
-                    //bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
-                }
-                //despues de leer
-                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], posicion_lectura, id_atras_actual_adelante_2[2] + "");
-            }
+            
 
 
         }

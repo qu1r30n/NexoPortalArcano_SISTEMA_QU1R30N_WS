@@ -363,48 +363,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         public void enviar(string modelo, string proceso, string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto = "", string programa_enviar = "CLASE_QU1R30N")
         {
+
             
-            // en entrada son los mismos por que todos llegan a CLASE_QU1R30N 
-            //ID_WS ES LA POSICION DELPOSICIONADOR
-            int POSICION_POSICIONADOR = 1;
-            int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(POSICION_POSICIONADOR);//esta es de la ia//AQUI ENVIA
-            int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(4);//este es del ws
-
-
-            int posicion_adelante = 2;
-            int posicion_actual = 1;
-            int posicion_atras = 0;
-
 
 
             string info_a_env = programa_enviar + G_caracter_para_transferencia_entre_archivos[0] + var_fun_GG.GG_id_programa + G_caracter_para_transferencia_entre_archivos[1] + modelo + G_caracter_para_transferencia_entre_archivos[1] + proceso + G_caracter_para_transferencia_entre_archivos[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[1] + info + G_caracter_para_transferencia_entre_archivos[1] + contacto;
-            
-            if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[posicion_actual])
-            {
-                
-                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[posicion_adelante]], info_a_env);
-                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], POSICION_POSICIONADOR, (id_atras_actual_adelante_ia_1[posicion_atras]) + "");//id_atras_actual_adelante_ia_1[0] este lo ponemos en la posicion 0 por si estan igual lo ponga atras del que va a leer el ia
-            }
-            else
-            {
-                if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[posicion_adelante])
-                {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[posicion_atras]], info_a_env);
-                }
 
 
-                else if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[posicion_atras])
-                {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[posicion_actual]], info_a_env);
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], POSICION_POSICIONADOR, (id_atras_actual_adelante_ia_1[posicion_adelante]) + "");//id_atras_actual_adelante_ia_1[0] este lo ponemos en la posicion 0 por si estan igual lo ponga atras del que va a leer el ia
-                }
-                else
-                {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[posicion_atras]], info_a_env);
-                }
+            bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[7], info_a_env);
 
-
-            }
         }
 
 
