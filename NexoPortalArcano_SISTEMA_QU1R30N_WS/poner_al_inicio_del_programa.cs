@@ -91,7 +91,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
             {
                 bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(chatbot.G_dir_arch_transferencia[i], "sin_informacion", leer_y_agrega_al_arreglo: false);
             }
-            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\xerox\\config\\inf\\bklkfjc\\9.txt", "sin_informacion", new string[] { "0", "1", "2", "6", "7", "8" }, leer_y_agrega_al_arreglo: false);
         }
     }
 }

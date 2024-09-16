@@ -50,9 +50,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         public string[] G_dir_arch_transferencia =
         {
-            /*0*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\xerox\\config\\inf\\bklkfjc\\banderas.txt",
-            /*1*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\1.txt",//preguntas
-            /*2*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\2.txt",//respuestas
+            /*0*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\XEROX\\CONFIG\\INF\\BKLKFJC\\BANDERAS.TXT",
+            /*1*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\XEROX\\CONFIG\\INF\\BKLKFJC\\1.TXT",//preguntas
+            /*2*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\XEROX\\CONFIG\\INF\\BKLKFJC\\2.TXT",//respuestas
         };
 
         string[] G_dir_arch_conf_chatbot =
@@ -74,7 +74,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         string[,] G_dir_arch_conf_extra =
         {
             /*0*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[17, 0],"MENSAJE DE BIENVENIDA" },
-            /*1*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[19,0] ,"folios_a_procesar" },//"config\\chatbot\egistros\\folios_a_checar\\folio_ventas.txt,"
+            /*1*/{ Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[19,0] ,"FOLIOS_A_PROCESAR" },//"config\\chatbot\egistros\\folios_a_checar\\folio_ventas.txt,"
         };
 
 

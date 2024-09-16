@@ -142,58 +142,65 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             // Crear un objeto StreamReader para leer el archivo
             StreamReader sr = new StreamReader(direccionArchivo);
-
-            // Si posString es null, se lee el archivo línea por línea y se agrega cada línea a "linea"
-            if (posString == null)
+            try
             {
-                while ((palabra = sr.ReadLine()) != null)
+                // Si posString es null, se lee el archivo línea por línea y se agrega cada línea a "linea"
+                if (posString == null)
                 {
-                    if (palabra != "")
+                    while ((palabra = sr.ReadLine()) != null)
                     {
-                        linea = op_arr.agregar_registro_del_array(linea, palabra);
-                    }
-                }
-            }
-            // Si posString no es null, se extraen las columnas especificadas y se agregan a "resultado"
-            else
-            {
-                posSplit = posString.Split(caracter_separacion[0][0]);
-                posiciones = new int[posSplit.Length];
-
-                // Convertir las posiciones de las columnas de string a int
-                for (int i = 0; i < posiciones.Length; i++)
-                {
-                    posiciones[i] = Convert.ToInt32(posSplit[i]);
-                }
-
-                // Leer el archivo línea por línea y procesar según las posiciones especificadas
-                for (int i = 0; (palabra = sr.ReadLine()) != null; i++)
-                {
-                    string[] splLinea = palabra.Split(caracter_separacion[0][0]);
-
-                    palabra = "";
-                    for (int j = 0; j < posiciones.Length; j++)
-                    {
-                        if (j < posiciones.Length - 1)
+                        if (palabra != "")
                         {
-                            palabra = palabra + splLinea[posiciones[j]] + caracter_separacion[0];
-                        }
-                        else
-                        {
-                            palabra = palabra + splLinea[posiciones[j]];
+                            linea = op_arr.agregar_registro_del_array(linea, palabra);
                         }
                     }
+                }
+                // Si posString no es null, se extraen las columnas especificadas y se agregan a "resultado"
+                else
+                {
+                    posSplit = posString.Split(caracter_separacion[0][0]);
+                    posiciones = new int[posSplit.Length];
 
-                    // Agregar la palabra procesada al arreglo "resultado"
-                    resultado = op_arr.agregar_registro_del_array(resultado, palabra);
+                    // Convertir las posiciones de las columnas de string a int
+                    for (int i = 0; i < posiciones.Length; i++)
+                    {
+                        posiciones[i] = Convert.ToInt32(posSplit[i]);
+                    }
+
+                    // Leer el archivo línea por línea y procesar según las posiciones especificadas
+                    for (int i = 0; (palabra = sr.ReadLine()) != null; i++)
+                    {
+                        string[] splLinea = palabra.Split(caracter_separacion[0][0]);
+
+                        palabra = "";
+                        for (int j = 0; j < posiciones.Length; j++)
+                        {
+                            if (j < posiciones.Length - 1)
+                            {
+                                palabra = palabra + splLinea[posiciones[j]] + caracter_separacion[0];
+                            }
+                            else
+                            {
+                                palabra = palabra + splLinea[posiciones[j]];
+                            }
+                        }
+
+                        // Agregar la palabra procesada al arreglo "resultado"
+                        resultado = op_arr.agregar_registro_del_array(resultado, palabra);
+                    }
+
                 }
 
+                // Cerrar el StreamReader ya que se ha completado el procesamiento
+                sr.Close();
+
+
             }
-
-            // Cerrar el StreamReader ya que se ha completado el procesamiento
-            sr.Close();
-
-
+            catch
+            {
+                sr.Close();
+            }
+            
             if (linea != null)
             {
 
@@ -217,14 +224,24 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             {
                 return null;
             }
+
         }
 
 
         public string[] Agregar(string direccion_archivos, string agregando)
         {
             StreamWriter sw = new StreamWriter(direccion_archivos, true);
-            sw.WriteLine(agregando);
-            sw.Close();
+            try
+            {
+                sw.WriteLine(agregando);
+                sw.Close();
+            }
+            catch
+            {
+                
+                sw.Close();
+
+            }
 
             string num_indice_de_direccion = sacar_indice_del_arreglo_de_direccion(direccion_archivos);
 
@@ -242,8 +259,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public void Agregar_a_archivo_sin_arreglo(string direccion_archivos, string agregando)
         {
             StreamWriter sw = new StreamWriter(direccion_archivos, true);
-            sw.WriteLine(agregando);
-            sw.Close();
+            try
+            {
+                
+                sw.WriteLine(agregando);
+                sw.Close();
+
+            }
+            catch (Exception)
+            {
+
+                sw.Close();
+            }
 
         }
 
@@ -285,12 +312,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
-            string dir_bandera = direccion_archivo.Replace(".txt", "_bandera.txt");
+            string dir_bandera = direccion_archivo.Replace(".TXT", "_BANDERA.TXT");
             StreamWriter sw_bandera = new StreamWriter(dir_bandera, true);
             //------------------------------------------------------------------------------------------
 
             StreamReader sr = new StreamReader(direccion_archivo);
-            string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
+            string dir_tem = direccion_archivo.Replace(".TXT", "_TEM.TXT");
             StreamWriter sw = new StreamWriter(dir_tem, true);
             
             
@@ -324,7 +351,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
                 
                 sw_bandera.Close();
-                File.Delete(dir_bandera);
+                
 
             }
             catch (Exception error)
@@ -334,7 +361,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 File.Delete(dir_tem);//borramos el archivo temporal
                 
                 sw_bandera.Close();
-                File.Delete(dir_bandera);
+                
             }
             
 
@@ -421,16 +448,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     sw.WriteLine(arreglo[i]);
                 }
                 exito_o_fallo = "1" + caracter_separacion[0] + "exito";
+                sw.Close();
             }
             catch (Exception e)
             {
 
                 exito_o_fallo = "2" + caracter_separacion[0] + "fallo" + caracter_separacion[0] + e;
-
+                sw.Close();
             }
 
 
-            sw.Close();
             File.Delete(direccion_archivo);//borramos el archivo original
             File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
 
