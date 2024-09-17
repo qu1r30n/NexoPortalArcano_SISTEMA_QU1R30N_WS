@@ -316,7 +316,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string[] nueva_info_arch = bas.Leer(G_dir_arch_transferencia[0]);
             if (vieja_info_arch[0] == var_fun_GG.GG_id_programa)
             {
-                bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[0], nueva_info_arch[0]);
+                if (nueva_info_arch != null)
+                {
+                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[0], nueva_info_arch[0]);
+                }
+                    
             }
             
         }

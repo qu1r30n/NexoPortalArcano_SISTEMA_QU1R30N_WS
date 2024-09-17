@@ -3,15 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\nexoportalarcano_sistema_qu1r30n_ws\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|solutionrelative:nexoportalarcano_sistema_qu1r30n_ws\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\nexoportalarcano_sistema_qu1r30n_ws\\clases\\chatbot_clase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|solutionrelative:nexoportalarcano_sistema_qu1r30n_ws\\clases\\chatbot_clase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|c:\\users\\qu1r30n\\documents\\github\\nexoportalarcano_sistema_qu1r30n_ws\\nexoportalarcano_sistema_qu1r30n_ws\\clases\\herramientas\\tex_base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|c:\\users\\qu1r30n\\documents\\github\\nexoportalarcano_sistema_qu1r30n_ws\\nexoportalarcano_sistema_qu1r30n_ws\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|solutionrelative:nexoportalarcano_sistema_qu1r30n_ws\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\nexoportalarcano_sistema_qu1r30n_ws\\clases\\herramientas\\tex_base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{55CC0617-9147-46A9-9EF0-E9B63C0B1878}|NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS.csproj|solutionrelative:nexoportalarcano_sistema_qu1r30n_ws\\clases\\herramientas\\tex_base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\herramientas\\Tex_base.cs",
               "ToolTip": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\herramientas\\Tex_base.cs",
               "RelativeToolTip": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\herramientas\\Tex_base.cs",
-              "ViewState": "AQIAACEBAAAAAAAAAAAcwDABAAAMAAAA",
+              "ViewState": "AQIAAMABAAAAAAAAAAAcwP8BAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-15T14:45:15.11Z",
               "EditorCaption": ""
@@ -65,33 +65,33 @@
               "RelativeDocumentMoniker": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\Form1.cs",
               "ToolTip": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\Form1.cs",
               "RelativeToolTip": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\Form1.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAADgvxMAAAATAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAADgvx8AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-10T19:23:18.269Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "chatbot_clase.cs",
               "DocumentMoniker": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
               "RelativeDocumentMoniker": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
               "ToolTip": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
               "RelativeToolTip": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\clases\\chatbot_clase.cs",
-              "ViewState": "AQIAACsBAAAAAAAAAAAewDwBAAAMAAAA",
+              "ViewState": "AQIAACgBAAAAAAAAAAAcwDsBAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-27T22:49:09.225Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "poner_al_inicio_del_programa.cs",
               "DocumentMoniker": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\poner_al_inicio_del_programa.cs",
               "RelativeDocumentMoniker": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\poner_al_inicio_del_programa.cs",
               "ToolTip": "C:\\Users\\QU1R30N\\Documents\\GitHub\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\NexoPortalArcano_SISTEMA_QU1R30N_WS\\poner_al_inicio_del_programa.cs",
               "RelativeToolTip": "NexoPortalArcano_SISTEMA_QU1R30N_WS\\poner_al_inicio_del_programa.cs",
-              "ViewState": "AQIAAF8AAAAAAAAAAAAcwGUAAAARAAAA",
+              "ViewState": "AQIAAF8AAAAAAAAAAAAcwG4AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-28T19:14:06.904Z",
               "EditorCaption": ""
