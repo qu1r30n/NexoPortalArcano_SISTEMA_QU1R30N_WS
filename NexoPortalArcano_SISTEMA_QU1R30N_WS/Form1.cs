@@ -25,5 +25,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
             chatbot_clase ch_bot = new chatbot_clase();
             ch_bot.configuracion_de_inicio();
         }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            chatbot_clase ch_bot = new chatbot_clase();
+            ch_bot.quitar_id_prog_del_archivo();
+        }
     }
 }

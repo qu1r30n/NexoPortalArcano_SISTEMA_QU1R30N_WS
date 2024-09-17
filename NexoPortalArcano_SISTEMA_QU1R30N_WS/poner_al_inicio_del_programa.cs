@@ -16,6 +16,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
         public string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         public string[] G_separador_para_funciones_espesificas_ = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
 
+        int G_donde_inicia_tabla = var_fun_GG.GG_indice_donde_comensar;
+
 
 
         public void inicio()
@@ -87,10 +89,25 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
             bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\respondiendo_a_una_pregunta.txt", "0_puede_enviar_mensaje_1_espera_a_que_se_desocupe_ia", new string[] { "0" }, leer_y_agrega_al_arreglo: false);
 
             //entrada_salida_y_pedido
-            for (int i = 0; i < chatbot.G_dir_arch_transferencia.Length; i++)
+            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(chatbot.G_dir_arch_transferencia[0], var_fun_GG.GG_id_programa, new string[] { var_fun_GG.GG_id_programa }, leer_y_agrega_al_arreglo: false);
+            for (int i = G_donde_inicia_tabla; i < chatbot.G_dir_arch_transferencia.Length; i++)
             {
                 bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(chatbot.G_dir_arch_transferencia[i], "sin_informacion", leer_y_agrega_al_arreglo: false);
             }
+            string[] inf_arc = bas.Leer(chatbot.G_dir_arch_transferencia[0]);
+            if (inf_arc == null)
+            {
+                bas.Agregar_sino_existe(chatbot.G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa, var_fun_GG.GG_id_programa + "\n" + var_fun_GG.GG_id_programa);
+            }
+            else if (inf_arc.Length == 1 && inf_arc[0] == "") 
+            {
+                bas.Agregar_sino_existe(chatbot.G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa, var_fun_GG.GG_id_programa + "\n" + var_fun_GG.GG_id_programa);
+            }
+            else
+            {
+                bas.Agregar_sino_existe(chatbot.G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa, var_fun_GG.GG_id_programa);
+            }
+            
         }
     }
 }

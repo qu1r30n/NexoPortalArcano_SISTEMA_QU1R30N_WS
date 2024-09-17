@@ -11,6 +11,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 {
     class Tex_base
     {
+        string G_direccion_base_archivos_bandera = "BANDERAS_ARCH\\";
+
 
         static public string[][] GG_base_arreglo_de_arreglos = null;
 
@@ -30,6 +32,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         */
         public string[] GG_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         public string[] GG_separador_para_funciones_espesificas_ = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
+        string[] G_caracter_para_confirmacion_o_error = var_fun_GG.GG_caracter_para_confirmacion_o_error;
 
         static public string GG_año_mes_dia_para_registros_ = DateTime.Now.ToString("yyyyMMdd");
         
@@ -40,6 +43,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
        Próstata también el nombre de la clase para saber de qué clase se está sacando las funciones -------------------------
        */
         operaciones_arreglos op_arr = new operaciones_arreglos();
+        
 
         //fin Aquí poner las funciones de las otras clases Si te vas a llevar esta clase solamente --------------------------------
 
@@ -112,7 +116,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 if (leer_y_agrega_al_arreglo)
                 {
                     GG_dir_bd_y_valor_inicial_bidimencional = op_arr.agregar_registro_del_array_bidimensional(GG_dir_bd_y_valor_inicial_bidimencional, direccion_archivo + caracter_separacion_fun_esp[0] + valor_inicial, caracter_separacion_fun_esp);
-                    GG_base_arreglo_de_arreglos = op_arr.agregar_arreglo_a_arreglo_de_arreglos(GG_base_arreglo_de_arreglos, Leer_inicial(direccion_archivo));
+                    GG_base_arreglo_de_arreglos = op_arr.agregar_arreglo_a_arreglo_de_arreglos(GG_base_arreglo_de_arreglos, Leer(direccion_archivo));
                     return direccion_archivo + GG_caracter_separacion[0] + "leido";
                 }
             }
@@ -126,7 +130,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         // Método para leer un archivo de texto y devolver un array de strings
 
-        public string[] Leer_inicial(string direccionArchivo, string posString = null, object caracter_separacion_objeto = null, int iniciar_desde_que_fila = 0)
+        public string[] Leer(string direccionArchivo, string posString = null, object caracter_separacion_objeto = null, int iniciar_desde_que_fila = 0)
         {
 
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
@@ -274,46 +278,22 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         }
 
-        public string[] Editar_o_incr_espesifico_si_no_esta_agrega_linea(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_editar, string editar_columna, string edit_0_o_increm_1 = null, string linea_a_agregar_si_no_lo_encuentra = null, object caracter_separacion_objeto = null)
-        {
-            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
 
-            int num_indice_de_direccion_int = Convert.ToInt32(sacar_indice_del_arreglo_de_direccion(direccion_archivo));
+        
 
-
-            bool se_encontro = false;
-            for (int i = G_donde_inicia_la_tabla; i < GG_base_arreglo_de_arreglos[num_indice_de_direccion_int].Length; i++)
-            {
-                string[] columnas = GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i].Split(caracter_separacion[0][0]);
-
-                if (columnas[num_column_comp] == comparar)
-                {
-                    se_encontro = true;
-                    GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i] = op_arr.editar_incr_string_funcion_recursiva(GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i], numero_columnas_editar, editar_columna, edit_0_o_increm_1);
-                    
-                    cambiar_archivo_con_arreglo(direccion_archivo, GG_base_arreglo_de_arreglos[num_indice_de_direccion_int]);
-                    break;
-                }
-            }
-            if (se_encontro==false)
-            {
-                if (linea_a_agregar_si_no_lo_encuentra != null)
-                {
-                    Agregar(direccion_archivo, linea_a_agregar_si_no_lo_encuentra);
-                }
-                
-            }
-            return GG_base_arreglo_de_arreglos[num_indice_de_direccion_int];
-        }
 
         public void eliminar_fila_PARA_MULTIPLES_PROGRAMAS(string direccion_archivo, int columna_a_comparar, string comparar, object caracter_separacion_objeto = null)
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
-            string dir_bandera = direccion_archivo.Replace(".TXT", "_BANDERA.TXT");
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera, true);
+            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
             //------------------------------------------------------------------------------------------
 
             StreamReader sr = new StreamReader(direccion_archivo);
@@ -432,9 +412,211 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return num_indice_de_direccion;
         }
 
-        public string cambiar_archivo_con_arreglo(string direccion_archivo, string[] arreglo, object caracter_separacion_objeto = null)
+
+
+
+        public string Agregar_sino_existe
+            (string direccion_archivo_a_checar, int num_column_comp, string comparar, string texto_a_agregar_si_no_esta = "", object caracter_separacion_obj = null)
+        {
+
+            operaciones_textos op_tex = new operaciones_textos();
+
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo_a_checar);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] +  dir_sep[1] + "." + dir_sep[2];
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            //------------------------------------------------------------------------------------------
+
+            string info_a_retornar = "";
+
+            try
+            {
+                string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
+                
+
+                string direccion_archivo = direccion_archivo_a_checar;
+                string resultado_archivo = sacar_indice_del_arreglo_de_direccion(direccion_archivo);
+                
+                if (resultado_archivo == null)
+                {
+                    resultado_archivo = "-1";
+                }
+                string[] res_esp_archivo = resultado_archivo.Split(G_caracter_para_confirmacion_o_error[0][0]);
+
+                //encontro o no archivo
+                if (Convert.ToInt32(res_esp_archivo[0]) > 0)//si res es mayor a 0 la operacioon fue exitosa si no hubo un error
+                {
+                    //encontro archivo y direccion en la lista
+                    if (res_esp_archivo[0] == "1")
+                    {
+
+                        int num_indice_de_direccion_int = Convert.ToInt32(res_esp_archivo[1]);
+                        bool encotro_info = false;
+
+                        for (int i = G_donde_inicia_la_tabla; i < GG_base_arreglo_de_arreglos[num_indice_de_direccion_int].Length; i++)
+                        {
+
+                            string resul_busqueda = op_tex.busqueda_con_YY_profunda_texto(GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i], "" + num_column_comp, comparar);
+                            string[] res_esp = resul_busqueda.Split(G_caracter_para_confirmacion_o_error[0][0]);
+                            //encontro la informacion?
+                            if (Convert.ToInt32(res_esp[0]) > 0)
+                            {
+                                if (res_esp[0] == "1")
+                                {
+                                    info_a_retornar = "-4" + G_caracter_para_confirmacion_o_error[0] + "la informacion ya existe";
+                                    encotro_info = true;
+                                    break;
+                                }
+                            }
+
+
+                        }
+                        //no encontro la info
+                        if (encotro_info == false)
+                        {
+                            if (texto_a_agregar_si_no_esta != "")
+                            {
+                                Agregar(direccion_archivo, texto_a_agregar_si_no_esta);
+                                info_a_retornar = "1" + G_caracter_para_confirmacion_o_error[0] + "agrego_la_informacion";
+                            }
+                            else
+                            {
+                                info_a_retornar = "-3" + G_caracter_para_confirmacion_o_error[0] + "no encontro el dato y no se puede agregar por que la variable texto_a_agregar_si_no_esta esta vacia";
+                            }
+
+                        }
+                    }
+
+                }
+
+                else
+                {
+                    //no encontro archivo
+                    if (res_esp_archivo[0] == "0")
+                    {
+                        info_a_retornar = "0" + G_caracter_para_confirmacion_o_error[0] + "no se encontro el archivo";
+                    }
+                    //solo encontro archivo y no esta en la lista
+                    if (res_esp_archivo[0] == "-1")
+                    {
+                        bool esta = false;
+
+                        string[] info_archivo = Leer(direccion_archivo);
+                        if (info_archivo==null)
+                        {
+                            info_archivo = new string[] { "" };
+                        }
+                        for (int i = G_donde_inicia_la_tabla; i < info_archivo.Length; i++)
+                        {
+                            string[] columnas = info_archivo[i].Split(caracter_separacion[0][0]);
+
+                            if (columnas[num_column_comp] == comparar)
+                            {
+
+
+                               //cambiar_archivo_con_arreglo(direccion_archivo, info_archivo);
+                                info_a_retornar = "2" + G_caracter_para_confirmacion_o_error[0] + "se_agrego_al_archivo";
+                                esta = true;
+                                break;
+                            }
+                        }
+                        if (esta == false)
+                        {
+                            Agregar_a_archivo_sin_arreglo(direccion_archivo, texto_a_agregar_si_no_esta);
+                        }
+
+                    }
+
+                }
+                sw_bandera.Close();
+            }
+            catch 
+            {
+
+                sw_bandera.Close();
+            }
+
+            
+
+            return info_a_retornar;
+        }
+
+
+        public string[] Editar_o_incr_espesifico_si_no_esta_agrega_linea(string direccion_archivo, int num_column_comp, string comparar, string numero_columnas_editar, string editar_columna, string edit_0_o_increm_1 = null, string linea_a_agregar_si_no_lo_encuentra = null, object caracter_separacion_objeto = null)
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+
+
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            //------------------------------------------------------------------------------------------
+
+            int num_indice_de_direccion_int = Convert.ToInt32(sacar_indice_del_arreglo_de_direccion(direccion_archivo));
+            try
+            {
+                
+
+
+                bool se_encontro = false;
+                for (int i = G_donde_inicia_la_tabla; i < GG_base_arreglo_de_arreglos[num_indice_de_direccion_int].Length; i++)
+                {
+                    string[] columnas = GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i].Split(caracter_separacion[0][0]);
+
+                    if (columnas[num_column_comp] == comparar)
+                    {
+                        se_encontro = true;
+                        GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i] = op_arr.editar_incr_string_funcion_recursiva(GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i], numero_columnas_editar, editar_columna, edit_0_o_increm_1);
+
+                        cambiar_archivo_con_arreglo(direccion_archivo, GG_base_arreglo_de_arreglos[num_indice_de_direccion_int]);
+                        break;
+                    }
+                }
+                if (se_encontro == false)
+                {
+                    if (linea_a_agregar_si_no_lo_encuentra != null)
+                    {
+                        Agregar(direccion_archivo, linea_a_agregar_si_no_lo_encuentra);
+                    }
+
+                }
+
+                sw_bandera.Close();
+            }
+            catch 
+            {
+                sw_bandera.Close();
+                
+            }
+
+
+            
+            return GG_base_arreglo_de_arreglos[num_indice_de_direccion_int];
+        }
+
+
+        public string cambiar_archivo_con_arreglo(string direccion_archivo, string[] arreglo, object caracter_separacion_objeto = null, object stream_reader_o_write = null)
+        {
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+
+
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            dir_bandera = dir_bandera + direccion_archivo.Replace(".TXT", "_BANDERA_CAA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            //------------------------------------------------------------------------------------------
+
+        
 
 
             string exito_o_fallo = "";
@@ -449,12 +631,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 }
                 exito_o_fallo = "1" + caracter_separacion[0] + "exito";
                 sw.Close();
+
+                sw_bandera.Close();
             }
             catch (Exception e)
             {
 
                 exito_o_fallo = "2" + caracter_separacion[0] + "fallo" + caracter_separacion[0] + e;
                 sw.Close();
+
+                sw_bandera.Close();
             }
 
 
@@ -466,6 +652,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public string si_existe_suma_sino_agega_extra__SIN_ARREGLO(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true, string valor_inicial_si_crea_archivo = null, string[] filas_iniciales_si_crea_archivo = null)
         {
+
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            //------------------------------------------------------------------------------------------
+
+
+
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo,valor_inicial_si_crea_archivo,filas_iniciales_si_crea_archivo,leer_y_agrega_al_arreglo:false);
             bool bandera = false;
             StreamReader sr = new StreamReader(direccion_archivo);
@@ -522,12 +720,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
 
+                
                 if (bandera == false)
                 {
                     bandera = false;
                     Agregar(direccion_archivo, texto_a_agregar);
                 }
 
+                sw_bandera.Close();
 
             }
             catch (Exception error)
@@ -536,12 +736,25 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sw.Close();
                 exito_o_fallo = null;
                 File.Delete(dir_tem);//borramos el archivo temporal
+
+                sw_bandera.Close();
             }
             return exito_o_fallo;
         }
 
         public string Editar_fila_espesifica_SIN_ARREGLO_GG(string direccion_archivo, int num_fila, string editar_info)
         {
+
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            //------------------------------------------------------------------------------------------
+
+
 
 
             StreamReader sr = new StreamReader(direccion_archivo);
@@ -577,7 +790,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sw.Close();
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
-
+                
+                sw_bandera.Close();
             }
             catch (Exception error)
             {
@@ -585,8 +799,37 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sw.Close();
                 exito_o_fallo = "2)error:" + error;
                 File.Delete(dir_tem);//borramos el archivo original
+                
+                sw_bandera.Close();
             }
             return exito_o_fallo;
+        }
+
+
+        public string[] extraer_separado_carpetas_nombreArchivo_extencion(string direccion_archivo)
+        {
+            operaciones_textos op_tex = new operaciones_textos();
+            string[] arreglo_retornar = new string[3];
+
+
+            string[] direccion_esp = direccion_archivo.Split('\\');
+            string[] nom_ext_esp = direccion_esp[direccion_esp.Length - 1].Split('.');
+            if (nom_ext_esp.Length > 1)
+            {
+                string carpetas = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(direccion_archivo, '\\', 1);
+                string nombre = nom_ext_esp[0];
+                string extencion = nom_ext_esp[1];
+                arreglo_retornar[0] = carpetas;
+                arreglo_retornar[1] = nombre;
+                arreglo_retornar[2] = extencion;
+            }
+            else
+            {
+
+            }
+
+
+            return arreglo_retornar;
         }
 
     }

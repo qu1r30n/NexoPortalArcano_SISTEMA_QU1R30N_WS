@@ -516,7 +516,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         private int[] checar_numero_de_direccion_de_archivo_atras_actual_adelante(int posicion_bandera)
         {
-            string[] banderas = bas.Leer_inicial(G_dir_arch_transferencia[0]);
+            string[] banderas = bas.Leer(G_dir_arch_transferencia[0]);
 
 
 

@@ -8,13 +8,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         Tex_base bas = new Tex_base();
         public string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         public string[] G_separador_para_funciones_espesificas_ = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
+        public string[] G_caracter_para_confirmacion_o_error = var_fun_GG.GG_caracter_para_confirmacion_o_error;
 
         int G_donde_inicia_la_tabla = var_fun_GG.GG_indice_donde_comensar;
-        var_fun_GG var_GG = new var_fun_GG();
+
+        var_fun_GG vf_GG = new var_fun_GG();
 
         public string joineada_paraesida_y_quitador_de_extremos_del_string(object arreglo_objeto, object caracter_separacion_objeto = null, int restar_cuantas_ultimas_o_primeras_celdas = 0, bool restar_primera_celda = false)
         {
-            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
             string[] arreglo = null;
 
             if (arreglo_objeto is string)
@@ -95,7 +97,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public string joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(object arreglo_objeto, object caracter_separacion_objeto = null, int restar_cuantas_ultimas_o_primeras_celdas = 0, bool restar_primera_celda = false)
         {
-            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
             string[] arreglo = null;
 
             if (arreglo_objeto is string)
@@ -179,7 +181,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public string Trimend_paresido(string texto, object caracter_separacion_objeto = null)
         {
-            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
             string texto_editado = "";
             string[] texto_spliteado = texto.Split(caracter_separacion[0][0]);
@@ -221,7 +223,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public string concatenacion_filas_de_un_archivo(string direccion_archivo, bool poner_num_fila = false, object caracter_separacion_obj = null)
         {
 
-            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
 
             int indice_mensage_bienvenida = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(direccion_archivo));
             string mensaje_de_bienvenida_a_enviar = "";
@@ -241,7 +243,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public string concatenacion_filas_de_un_arreglo(string[] arreglo, bool poner_num_fila = false,object caracter_separacion_obj=null)
         {
 
-            string[] caracter_separacion=var_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
+            string[] caracter_separacion=vf_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
 
             string mensaje_de_bienvenida_a_enviar = "";
             for (int i = G_donde_inicia_la_tabla; i < arreglo.Length; i++)
@@ -292,7 +294,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public string concatenacion_caracter_separacion(string tex_a_cambiar, string tex_a_agregar, object caracter_separacion_objeto = null)
         {
-            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
             if (tex_a_cambiar != "" && tex_a_cambiar != null)
             {
@@ -315,14 +317,45 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         }
 
+        public string busqueda_profunda_string(string texto, string columnas_a_recorrer, string comparar___, string columnas_a_retornar = null, object caracter_separacion_objeto = null)
+        {
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+
+            string[] arr_col_rec = null;
+            //caracter_separacion[0][0] el primer [0] es la celda y el segundo [0] es el caracter para no usar convert.tochar
+            arr_col_rec = columnas_a_recorrer.Split(caracter_separacion[0][0]);
+
+            string tem_linea = texto;
+            string[] espliteado = null;
+            int j = 0;
+            do
+            {
+
+                espliteado = tem_linea.Split(caracter_separacion[j][0]);
+                //caracter_separacion[j][0] el primer [j] es la celda y el segundo [0] es el caracter para no usar convert.tochar
+                tem_linea = espliteado[Convert.ToInt32(arr_col_rec[j])];
+
+                j++;
+            } while (j < arr_col_rec.Length);
+
+
+            //comparacion--------------------------------------------------------------------------
+            if (tem_linea == comparar___)
+            {
+                return "1" + G_caracter_para_confirmacion_o_error[0] + texto;
+            }
+
+
+            return "0" + G_caracter_para_confirmacion_o_error[0] + "no se_encontro";
+        }
 
         public string busqueda_con_YY_profunda_texto(string texto, string columnas_a_recorrer, string comparaciones, object caracter_separacion_objeto = null, object caracter_separacion_para_busqueda_multiple_profuda_obj = null)
         {
             operaciones_arreglos op_arr = new operaciones_arreglos();
             //editar_busqueda_multiple_edicion_profunda_arreglo(texto, "2|1|1~2|1|0", "5~9", "2|1|1~1~2|1|0", "10~10~10","1~1~0");
-            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
-            string[] caracter_separacion_para_busqueda_multiple_profuda = var_GG.GG_funcion_caracter_separacion_funciones_especificas(caracter_separacion_para_busqueda_multiple_profuda_obj);
+            string[] caracter_separacion_para_busqueda_multiple_profuda = vf_GG.GG_funcion_caracter_separacion_funciones_especificas(caracter_separacion_para_busqueda_multiple_profuda_obj);
 
             //caracter_separacion[0][0] el primer [0] es la celda y el segundo [0] es el caracter para no usar convert.tochar
             string[] arr_comparaciones_a_rec = columnas_a_recorrer.Split(caracter_separacion_para_busqueda_multiple_profuda[0][0]);

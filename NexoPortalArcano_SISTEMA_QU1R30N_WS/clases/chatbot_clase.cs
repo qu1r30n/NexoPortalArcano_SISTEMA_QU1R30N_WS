@@ -265,11 +265,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         private void datos_a_procesar_y_borrar(IWebDriver manejadores, WebDriverWait esperar)
         {
-            //y en salida_cambia_por_que la clase_QU1R30N responde a cualquiera de los 2 
-
-            string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[2]);
 
 
+            string[] usuarios_lectura = bas.Leer(G_dir_arch_transferencia[0]);
+
+            if (usuarios_lectura[0] == var_fun_GG.GG_id_programa || usuarios_lectura[0] == "")
+            {
+
+                string[] respuestas_ia = bas.Leer(G_dir_arch_transferencia[2]);
 
                 if (respuestas_ia.Length > 1)
                 {
@@ -278,25 +281,43 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
                     {
                         string[] id_programa_comparar = respuestas_ia[i].Split(G_caracter_para_transferencia_entre_archivos[0][0]);
-                        if (id_programa_comparar[0] == var_fun_GG.GG_id_programa)
+                        if (usuarios_lectura[0] == var_fun_GG.GG_id_programa || usuarios_lectura[0] == "")
                         {
                             con.conmutar_datos(manejadores, esperar, id_programa_comparar[1]);
                         }
-                            
+
 
                     }
                     bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[2], 0, var_fun_GG.GG_id_programa, G_caracter_para_transferencia_entre_archivos[0]);
                     //bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
                 }
-            
+
+                cambiar_id_programa_al_siguiente(usuarios_lectura);
+            }
 
 
+        }
+
+        public void cambiar_id_programa_al_siguiente(string[] usuarios)
+        {
+            for (int i = G_donde_inicia_la_tabla; i < usuarios.Length; i++)
+            {
+                if (usuarios[i] == var_fun_GG.GG_id_programa)
+                {
+
+                }
+            }
+        }
+
+        public void quitar_id_prog_del_archivo()
+        {
+            bas.eliminar_fila_PARA_MULTIPLES_PROGRAMAS(G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa);
         }
 
 
         private int[] checar_numero_de_direccion_de_archivo_atras_actual_adelante(int posicion_bandera)
         {
-            string[] banderas = bas.Leer_inicial(G_dir_arch_transferencia[0]);
+            string[] banderas = bas.Leer(G_dir_arch_transferencia[0]);
 
 
 
