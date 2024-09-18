@@ -33,6 +33,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public string[] GG_caracter_separacion = var_fun_GG.GG_caracter_separacion;
         public string[] GG_separador_para_funciones_espesificas_ = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
         string[] G_caracter_para_confirmacion_o_error = var_fun_GG.GG_caracter_para_confirmacion_o_error;
+        public string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
 
         static public string GG_año_mes_dia_para_registros_ = DateTime.Now.ToString("yyyyMMdd");
         
@@ -831,6 +832,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             return arreglo_retornar;
         }
+
+        private string G_direccion_reg_modifiacion_archivo = "C:\\XEROX\\CONFIG\\REG_" + DateTime.Now.ToString("yyyyMMdd");
+        public void actualisacion_archivo_para_multiples_programas()
+        {
+
+        }
+
+
+
 
     }
 }

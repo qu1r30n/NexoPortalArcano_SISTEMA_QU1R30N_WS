@@ -300,13 +300,31 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public void cambiar_id_programa_al_siguiente(string[] usuarios)
         {
-            for (int i = G_donde_inicia_la_tabla; i < usuarios.Length; i++)
-            {
-                if (usuarios[i] == var_fun_GG.GG_id_programa)
-                {
 
+            if (usuarios[0] == var_fun_GG.GG_id_programa)
+            {
+                int id_nuevo = 0;
+                for (int i = G_donde_inicia_la_tabla; i < usuarios.Length; i++)
+                {
+                    if (usuarios[0] == var_fun_GG.GG_id_programa)
+                    {
+                        if (i >= (usuarios.Length - 1))
+                        {
+                            id_nuevo = 0;
+                            break;
+                        }
+                        else
+                        {
+                            id_nuevo = i + 1;
+                            break;
+                        }
+                    }
                 }
+
+                bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 0, usuarios[id_nuevo]);
+
             }
+
         }
 
         public void quitar_id_prog_del_archivo()
