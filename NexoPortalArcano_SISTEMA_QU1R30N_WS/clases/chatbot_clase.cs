@@ -52,9 +52,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public string[] G_dir_arch_transferencia =
         {
-            /*0*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\XEROX\\CONFIG\\INF\\BKLKFJC\\BANDERAS.TXT",
-            /*1*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\XEROX\\CONFIG\\INF\\BKLKFJC\\1.TXT",//PREGUNTAS
-            /*2*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\XEROX\\CONFIG\\INF\\BKLKFJC\\2.TXT",//RESPUESTAS
+            /*0*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\BANDERAS.TXT",
+            /*1*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\1.TXT",//PREGUNTAS
+            /*2*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\2.TXT",//RESPUESTAS
             
         };
 

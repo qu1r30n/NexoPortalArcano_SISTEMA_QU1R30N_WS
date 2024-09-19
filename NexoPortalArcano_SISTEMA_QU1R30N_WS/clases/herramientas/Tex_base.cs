@@ -294,7 +294,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
             dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch { }
+            }
             //------------------------------------------------------------------------------------------
 
             StreamReader sr = new StreamReader(direccion_archivo);
@@ -428,7 +439,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
             dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch { }
+            }
             //------------------------------------------------------------------------------------------
 
             string info_a_retornar = "";
@@ -557,7 +579,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
             dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+            
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch { }
+            }
             //------------------------------------------------------------------------------------------
 
             int num_indice_de_direccion_int = Convert.ToInt32(sacar_indice_del_arreglo_de_direccion(direccion_archivo));
@@ -614,10 +647,21 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
             dir_bandera = dir_bandera + direccion_archivo.Replace(".TXT", "_BANDERA_CAA.TXT");
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch { }
+            }
             //------------------------------------------------------------------------------------------
 
-        
+
 
 
             string exito_o_fallo = "";
@@ -660,7 +704,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
             dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch { }
+            }
             //------------------------------------------------------------------------------------------
 
 
@@ -668,7 +723,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo,valor_inicial_si_crea_archivo,filas_iniciales_si_crea_archivo,leer_y_agrega_al_arreglo:false);
             bool bandera = false;
             StreamReader sr = new StreamReader(direccion_archivo);
-            string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
+            string dir_tem = direccion_archivo.Replace(".TXT", "_TEM.TXT");
             StreamWriter sw = new StreamWriter(dir_tem, true);
             string exito_o_fallo=null;
             int num_column_comp = 0;
@@ -748,18 +803,31 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
             dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
-            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
+            string dir_bandera = dir_sep[0] + dir_sep[1] + "." + dir_sep[2];
             //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
             dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
-            StreamWriter sw_bandera = new StreamWriter(dir_bandera);
+
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch{}
+            }
+            
+            
             //------------------------------------------------------------------------------------------
 
 
 
 
             StreamReader sr = new StreamReader(direccion_archivo);
-            string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
+            string dir_tem = direccion_archivo.Replace(".TXT", "_TEM.TXT");
             StreamWriter sw = new StreamWriter(dir_tem, true);
             string exito_o_fallo;
 
@@ -833,10 +901,22 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return arreglo_retornar;
         }
 
+        
+        
+        
         private string G_direccion_reg_modifiacion_archivo = "C:\\XEROX\\CONFIG\\REG_" + DateTime.Now.ToString("yyyyMMdd");
+        private int posicion_registro=-1;
         public void actualisacion_archivo_para_multiples_programas()
         {
+            string[] info_archivo = Leer(G_direccion_reg_modifiacion_archivo);
+            if (posicion_registro == -1)
+            {
+                posicion_registro = info_archivo.Length-1;
+            }
 
+            
+
+            
         }
 
 
