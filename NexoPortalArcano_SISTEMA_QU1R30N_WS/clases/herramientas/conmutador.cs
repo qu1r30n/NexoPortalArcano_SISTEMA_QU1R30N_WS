@@ -97,25 +97,25 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //procesos_usaras------------------------------------------------------------
 
 
-            if (res_espliteada[1] == "PREGUNTAS_WS")
+            if (res_espliteada[0] == "PREGUNTAS_WS")
             {
-                preguntas_ws(manejadores, esperar, res_espliteada[2]);
+                preguntas_ws(manejadores, esperar, res_espliteada[1]);
             }
 
-            else if (res_espliteada[1] == "WS")
+            else if (res_espliteada[0] == "WS")
             {
-                mandar_ws(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
+                mandar_ws(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
             }
 
-            else if (res_espliteada[1] == "WS_RS")
+            else if (res_espliteada[0] == "WS_RS")
             {
-                mandar_ws_rs(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
+                mandar_ws_rs(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
             }
 
 
-            else if (res_espliteada[1] == "MENSAJE")
+            else if (res_espliteada[0] == "MENSAJE")
             {
-                mensajes(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
+                mensajes(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
             }
 
 

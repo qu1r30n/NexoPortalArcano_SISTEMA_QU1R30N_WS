@@ -145,6 +145,29 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             string palabra = null;
 
+
+            //-----------------------------------------------------------------------------------------------
+            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccionArchivo);
+            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
+            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
+            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
+            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+
+            StreamWriter sw_bandera = null;
+            bool esta_libre = false;
+            while (esta_libre == false)
+            {
+                try
+                {
+                    sw_bandera = new StreamWriter(dir_bandera);
+                    esta_libre = true;
+                }
+                catch { }
+            }
+            //------------------------------------------------------------------------------------------
+
+
             // Crear un objeto StreamReader para leer el archivo
             StreamReader sr = new StreamReader(direccionArchivo);
             try
@@ -199,11 +222,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 // Cerrar el StreamReader ya que se ha completado el procesamiento
                 sr.Close();
 
+                sw_bandera.Close();
 
             }
             catch
             {
                 sr.Close();
+                sw_bandera.Close();
             }
             
             if (linea != null)
@@ -220,6 +245,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         arreglo_a_retornar[k - iniciar_desde_que_fila] = "" + linea[k];
                     }
 
+                    sw_bandera.Close();
                     // Devolver el resultado
                     return arreglo_a_retornar;
                 }
@@ -227,6 +253,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             }
             else
             {
+                sw_bandera.Close();
                 return null;
             }
 
@@ -288,6 +315,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
+            //-----------------------------------------------------------------------------------------------
             string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
             dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
             string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
@@ -914,8 +942,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 posicion_registro = info_archivo.Length-1;
             }
 
-            
+            for (int i = posicion_registro+1; i < info_archivo.Length; i++)
+            {
 
+            }
             
         }
 
