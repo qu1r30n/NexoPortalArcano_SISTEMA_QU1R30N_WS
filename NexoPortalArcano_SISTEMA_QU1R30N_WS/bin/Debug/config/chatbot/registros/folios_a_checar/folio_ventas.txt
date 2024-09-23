@@ -8,3 +8,5 @@ folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedi
 180540Q240909180540|240909180540|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
 1809127240909180912|240909180912|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
 183929M240909183929|240909183929|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+141656J9240921141656|240921141656|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+143742240921143742|240921143742|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras

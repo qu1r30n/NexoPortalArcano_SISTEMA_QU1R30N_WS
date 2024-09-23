@@ -97,14 +97,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //procesos_usaras------------------------------------------------------------
 
 
-            if (res_espliteada[0] == "PREGUNTAS_WS")
+            if (res_espliteada[1] == "PREGUNTAS_WS")
             {
-                preguntas_ws(manejadores, esperar, res_espliteada[1]);
+                preguntas_ws(manejadores, esperar, res_espliteada[2]);
             }
 
-            else if (res_espliteada[0] == "WS")
+            else if (res_espliteada[1] == "WS")
             {
-                mandar_ws(manejadores, esperar, res_espliteada[2], res_espliteada[1]);
+                mandar_ws(manejadores, esperar, res_espliteada[3], res_espliteada[2]);
             }
 
             else if (res_espliteada[0] == "WS_RS")
@@ -207,6 +207,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     if (grupos[j] == true)
                     {
                         es_un_grupo_con_funcion = true;
+
                         break;
                     }
                 }
@@ -984,7 +985,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         mensaje_repartidor
                         );
 
-
+                    for (int i = G_donde_inicia_la_tabla; i < contacto.Length; i++)
+                    {
+                        mandar_mensage_usuarios(manejadores, esperar, contacto[i], "ya esta en proceso su pedido");
+                    }
+                    
                 }
             }
 
@@ -1031,6 +1036,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                             
                             for (int j = 0; j < clasificacion.Length; j++)
                             {
+                                //cod_mod__01------------------------
                                 if (clasificacion[j] == "SIMUL")
                                 {
                                     ventas_para_comicion = ventas_para_comicion + Convert.ToDouble(total_producto);
@@ -1067,9 +1073,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                     string[] total_a_pagar = resultado_de_folio[resultado_de_folio.Length - 1].Split(G_caracter_usadas_por_usuario[0][0]);
 
-
                     //procesar venta
                     enviar("PUNTO_VENTA", "VENTA", "WS", "MODELO_VENTAS" + G_caracter_separacion_funciones_espesificas[0] + "VENTA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto[1]);
+
+                    //cod_mod__01.1-------------------------------------------------
                     //comicion
                     enviar("PUNTO_VENTA", "COMICION_UNIFICADA_VENTA", "WS", "MODELO_MUL" + G_caracter_separacion_funciones_espesificas[0] + "COMICION_VENTA_BUSQUEDA_POR_TELEFONO" + G_caracter_separacion_funciones_espesificas[1] + contacto[1] + G_caracter_separacion[2] + ventas_para_comicion, contacto[1]);
 

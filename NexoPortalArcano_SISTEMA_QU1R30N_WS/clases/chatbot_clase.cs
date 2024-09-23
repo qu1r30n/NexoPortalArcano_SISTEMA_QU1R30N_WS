@@ -173,6 +173,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                             datos_a_procesar_y_borrar(manejadores, esperar);
 
+                            bas.actualisacion_archivo_para_multiples_programas();
+
 
                             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
                             return false;
