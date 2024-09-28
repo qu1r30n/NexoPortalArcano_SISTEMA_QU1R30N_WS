@@ -58,9 +58,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             
         };
 
-        
-        
-        
+
+
+
 
         public void configuracion_de_inicio()
         {
@@ -102,11 +102,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         elementoSide = manej.FindElement(By.Id(G_info_de_configuracion_chatbot[1][1]));
                         ya_entro = true;
                     }
-                    catch 
+                    catch
                     {
 
                     }
-                    
+
                 }
                 return elementoSide;
             });
@@ -122,7 +122,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string elementos = G_info_de_configuracion_chatbot[2][1];
             string elementos_clase = elementos + G_info_de_configuracion_chatbot[3][1];
             //extaer inventario-----------------------------------------------------------------------------------------
-            con.enviar("PRODUCTOS", "EXTRAER_INVENTARIO","PREGUNTAS_WS","");
+            con.enviar_a_serv("PREGUNTAS_WS", "MODELO_PRODUCTOS_E_INVENTARIO~EXTRAER_INVENTARIO_STRING§","");
             //------------------------------------------------------------------------------------------
 
             while (true)
@@ -130,19 +130,19 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 try
                 {
 
-                    
+
                     //checa si estan los elementos  esto sustitulle al // esperar.Until(manej => manej.FindElement(By.XPath(elementos)));//busca el elemento del no leido
                     //porque siempre marcaba error
                     bool elementoEncontrado = false;
                     elementoEncontrado = esperar.Until(manej =>
                     {
-                        
+
                         var cuantos_elementos = manej.FindElements(By.XPath(elementos));
 
                         if (cuantos_elementos.Count > 0)
                         {
-                            
-                            
+
+
                             //clickea
                             try
                             {
@@ -152,8 +152,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                                 //bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\espondiendo_a_una_pregunta.txt", 1, "1");
                                 modelo_para_mandar_mensage_archivo_ia(manejadores, esperar, nom_del_click, textosDelMensaje);
-
-
 
 
                             }
@@ -167,9 +165,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                             return true;
                         }
-                        
+
                         else
-                        {   
+                        {
 
                             datos_a_procesar_y_borrar(manejadores, esperar);
 
@@ -197,7 +195,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         private void modelo_para_mandar_mensage_archivo_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, object texto_recibidos_arreglo_objeto)
         {
-            
+
             string[] textos_recibidos_srting_arr = op_arr.convierte_objeto_a_arreglo(texto_recibidos_arreglo_objeto);
             string ultimo_mensaje = textos_recibidos_srting_arr[textos_recibidos_srting_arr.Length - 1].ToUpper();//ultimo mensaje lo pone en minusculas
 
@@ -207,7 +205,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             action.SendKeys(Keys.Escape).Perform();
 
 
-            
+
         }
 
 
@@ -300,7 +298,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         }
 
-        
+
         public void cambiar_id_programa_al_siguiente()
         {
             string[] usuarios = bas.Leer(G_dir_arch_transferencia[0]);
@@ -330,7 +328,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_dir_arch_transferencia[0], 0, usuarios[id_nuevo]);
                 }
             }
-        
+
         }
 
         public void quitar_id_prog_del_archivo()
@@ -344,9 +342,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 {
                     bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[0], nueva_info_arch[0]);
                 }
-                    
+
             }
-            
+
         }
 
 
@@ -391,6 +389,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return arr_devolver;
 
         }
+
 
 
 

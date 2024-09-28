@@ -90,6 +90,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
 
             //entrada_salida_y_pedido
             bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(chatbot.G_dir_arch_transferencia[0], var_fun_GG.GG_id_programa, new string[] { var_fun_GG.GG_id_programa }, leer_y_agrega_al_arreglo: false);
+            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(var_fun_GG.GG_direccion_control_errores_try, "quita_el_numero_para_checar_si_se_siclo", new string[] { "1" });
             for (int i = G_donde_inicia_tabla; i < chatbot.G_dir_arch_transferencia.Length; i++)
             {
                 bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(chatbot.G_dir_arch_transferencia[i], "sin_informacion", leer_y_agrega_al_arreglo: false);

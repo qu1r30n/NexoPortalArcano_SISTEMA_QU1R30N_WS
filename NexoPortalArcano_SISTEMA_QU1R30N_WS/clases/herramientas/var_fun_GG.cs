@@ -24,6 +24,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         static public string GG_id_programa = "NEXOPORTALARCANO";
 
+        static public string GG_direccion_control_errores_try = "config\\chatbot\\errores_try\\control_errore.txt";
 
         //funciones---------------------------------------------------------------------------------------------------------
 

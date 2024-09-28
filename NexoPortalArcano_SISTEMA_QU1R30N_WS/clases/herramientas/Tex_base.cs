@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 
 using System.IO;
+using System.Windows.Forms;
 
 namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 {
@@ -36,7 +37,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
 
         static public string GG_año_mes_dia_para_registros_ = DateTime.Now.ToString("yyyyMMdd");
-        
+
 
 
         /*Aquí poner las funciones de las otras clases Si te vas a llevar esta clase solamente --------------------------------
@@ -44,7 +45,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
        Próstata también el nombre de la clase para saber de qué clase se está sacando las funciones -------------------------
        */
         operaciones_arreglos op_arr = new operaciones_arreglos();
-        
+
 
         //fin Aquí poner las funciones de las otras clases Si te vas a llevar esta clase solamente --------------------------------
 
@@ -169,7 +170,23 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             */
 
             // Crear un objeto StreamReader para leer el archivo
-            StreamReader sr = new StreamReader(direccionArchivo);
+            StreamReader sr = null;
+            while (sr == null) 
+            {
+
+                
+                try
+                {
+                    sr = new StreamReader(direccionArchivo);
+                    
+                }
+                catch (Exception e)
+                {
+                    string[] checador = Leer(var_fun_GG.GG_direccion_control_errores_try);
+                    chequeo_error_try(direccionArchivo, e, checador[1]);
+                }
+            }
+            
             try
             {
                 // Si posString es null, se lee el archivo línea por línea y se agrega cada línea a "linea"
@@ -230,7 +247,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sr.Close();
                 //sw_bandera.Close();
             }
-            
+
             if (linea != null)
             {
 
@@ -270,7 +287,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             }
             catch
             {
-                
+
                 sw.Close();
 
             }
@@ -293,7 +310,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             StreamWriter sw = new StreamWriter(direccion_archivos, true);
             try
             {
-                
+
                 sw.WriteLine(agregando);
                 sw.Close();
 
@@ -308,40 +325,36 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
 
 
-        
+
 
 
         public void eliminar_fila_PARA_MULTIPLES_PROGRAMAS(string direccion_archivo, int columna_a_comparar, string comparar, object caracter_separacion_objeto = null)
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
-            /*
-            //-----------------------------------------------------------------------------------------------
-            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
-            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
-            string dir_bandera = dir_sep[0] + "\\" + dir_sep[1] + "." + dir_sep[2];
-            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
-            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
-            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
             
-            StreamWriter sw_bandera = null;
-            bool esta_libre = false;
-            while (esta_libre == false)
+            StreamReader sr = null;
+            while (sr == null) 
             {
+
+
                 try
                 {
-                    sw_bandera = new StreamWriter(dir_bandera);
-                    esta_libre = true;
+                    sr = new StreamReader(direccion_archivo);
+                    
                 }
-                catch { }
+                catch (Exception e)
+                {
+
+                    string[] checador = Leer(var_fun_GG.GG_direccion_control_errores_try);
+                    chequeo_error_try(direccion_archivo, e, checador[1]);
+                }
             }
-            //------------------------------------------------------------------------------------------
-            */
-            StreamReader sr = new StreamReader(direccion_archivo);
+
             string dir_tem = direccion_archivo.Replace(".TXT", "_TEM.TXT");
             StreamWriter sw = new StreamWriter(dir_tem, true);
-            
-            
+
+
             try
             {
 
@@ -356,23 +369,23 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         {
                             sw.WriteLine(linea);
                         }
-                        
 
-                        
+
+
                     }
-                    
+
                 }
 
-                
+
 
                 sr.Close();
                 sw.Close();
 
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
+
                 
-                //sw_bandera.Close();
-                
+
 
             }
             catch (Exception error)
@@ -380,11 +393,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sr.Close();
                 sw.Close();
                 File.Delete(dir_tem);//borramos el archivo temporal
+
                 
-                //sw_bandera.Close();
-                
+
             }
-            
+
 
         }
 
@@ -462,17 +475,17 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             operaciones_textos op_tex = new operaciones_textos();
 
-            
+
             string info_a_retornar = "";
 
             try
             {
                 string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
-                
+
 
                 string direccion_archivo = direccion_archivo_a_checar;
                 string resultado_archivo = sacar_indice_del_arreglo_de_direccion(direccion_archivo);
-                
+
                 if (resultado_archivo == null)
                 {
                     resultado_archivo = "-1";
@@ -538,7 +551,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         bool esta = false;
 
                         string[] info_archivo = Leer(direccion_archivo);
-                        if (info_archivo==null)
+                        if (info_archivo == null)
                         {
                             info_archivo = new string[] { "" };
                         }
@@ -550,7 +563,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                             {
 
 
-                               //cambiar_archivo_con_arreglo(direccion_archivo, info_archivo);
+                                //cambiar_archivo_con_arreglo(direccion_archivo, info_archivo);
                                 info_a_retornar = "2" + G_caracter_para_confirmacion_o_error[0] + "se_agrego_al_archivo";
                                 esta = true;
                                 break;
@@ -564,15 +577,15 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     }
 
                 }
-                
+
             }
-            catch 
+            catch
             {
 
-                
+
             }
 
-            
+
 
             return info_a_retornar;
         }
@@ -607,7 +620,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             int num_indice_de_direccion_int = Convert.ToInt32(sacar_indice_del_arreglo_de_direccion(direccion_archivo));
             try
             {
-                
+
 
 
                 bool se_encontro = false;
@@ -635,14 +648,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
                 //sw_bandera.Close();
             }
-            catch 
+            catch
             {
                 //sw_bandera.Close();
-                
+
             }
 
 
-            
+
             return GG_base_arreglo_de_arreglos[num_indice_de_direccion_int];
         }
 
@@ -732,12 +745,27 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             */
 
-            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo,valor_inicial_si_crea_archivo,filas_iniciales_si_crea_archivo,leer_y_agrega_al_arreglo:false);
+            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo, valor_inicial_si_crea_archivo, filas_iniciales_si_crea_archivo, leer_y_agrega_al_arreglo: false);
             bool bandera = false;
-            StreamReader sr = new StreamReader(direccion_archivo);
+            StreamReader sr = null;
+            while (sr == null)
+            {
+
+
+                try
+                {
+                    sr = new StreamReader(direccion_archivo);
+
+                }
+                catch (Exception e)
+                {
+                    string[] checador = Leer(var_fun_GG.GG_direccion_control_errores_try);
+                    chequeo_error_try(direccion_archivo, e, checador[1]);
+                }
+            }
             string dir_tem = direccion_archivo.Replace(".TXT", "_TEM.TXT");
             StreamWriter sw = new StreamWriter(dir_tem, true);
-            string exito_o_fallo=null;
+            string exito_o_fallo = null;
             int num_column_comp = 0;
 
             try
@@ -788,7 +816,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
 
-                
+
                 if (bandera == false)
                 {
                     bandera = false;
@@ -813,32 +841,29 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public string Editar_fila_espesifica_SIN_ARREGLO_GG(string direccion_archivo, int num_fila, string editar_info)
         {
 
-            string[] dir_sep = extraer_separado_carpetas_nombreArchivo_extencion(direccion_archivo);
-            dir_sep[0] = dir_sep[0] + "\\" + G_direccion_base_archivos_bandera;
-            string dir_bandera = dir_sep[0] + dir_sep[1] + "." + dir_sep[2];
-            //este archivo bandera es para que no se agarre el archivo otro programa antes de sustituirlo
-            dir_bandera = dir_bandera.Replace(".TXT", "_BANDERA.TXT");
-            Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(dir_bandera, leer_y_agrega_al_arreglo: false);
+            
 
-            StreamWriter sw_bandera = null;
-            bool esta_libre = false;
-            while (esta_libre == false)
-            {
-                try
-                {
-                    sw_bandera = new StreamWriter(dir_bandera);
-                    esta_libre = true;
-                }
-                catch{}
-            }
-            
-            
             //------------------------------------------------------------------------------------------
 
 
 
 
-            StreamReader sr = new StreamReader(direccion_archivo);
+            StreamReader sr = null;
+            while (sr == null)
+            {
+
+
+                try
+                {
+                    sr = new StreamReader(direccion_archivo);
+
+                }
+                catch (Exception e)
+                {
+                    string[] checador = Leer(var_fun_GG.GG_direccion_control_errores_try);
+                    chequeo_error_try(direccion_archivo, e, checador[1]);
+                }
+            }
             string dir_tem = direccion_archivo.Replace(".TXT", "_TEM.TXT");
             StreamWriter sw = new StreamWriter(dir_tem, true);
             string exito_o_fallo;
@@ -871,8 +896,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sw.Close();
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
+
                 
-                sw_bandera.Close();
             }
             catch (Exception error)
             {
@@ -880,8 +905,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sw.Close();
                 exito_o_fallo = "2)error:" + error;
                 File.Delete(dir_tem);//borramos el archivo original
-                
-                sw_bandera.Close();
+
             }
             return exito_o_fallo;
         }
@@ -913,11 +937,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return arreglo_retornar;
         }
 
-        
-        
-        
+
+
+
         private string G_direccion_reg_modifiacion_archivo = "C:\\XEROX\\CONFIG\\REG\\REG_" + DateTime.Now.ToString("yyyyMMdd");
-        private int posicion_registro=-1;
+        private int posicion_registro = -1;
         public void actualisacion_archivo_para_multiples_programas()
         {
             string[] info_archivo = Leer(G_direccion_reg_modifiacion_archivo);
@@ -927,10 +951,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 {
                     posicion_registro = info_archivo.Length - 1;
                 }
-                
+
             }
 
-            if (info_archivo!=null)
+            if (info_archivo != null)
             {
                 for (int i = posicion_registro + 1; i < info_archivo.Length; i++)
                 {
@@ -941,18 +965,34 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     {
                         GG_base_arreglo_de_arreglos[Convert.ToInt32(indice_arreglo)] = Leer(datos_para_actualisacion[1]);
                     }
-                    
-                    
+
+
 
 
                 }
             }
-            
-            
+
+
         }
 
 
+        public void chequeo_error_try(string direccionArchivo, Exception e, string numero_chequeo)
+        {
+            DialogResult result = MessageBox.Show(e.Message, e.Message + "\nError quieres crear el archivo sie es el error \"No\" para volver a intentar \"cancelar\" para cerrar el programa", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
 
+            if (result == DialogResult.Yes)
+            {
+                Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccionArchivo, "sin informacion");
+            }
+            else if (result == DialogResult.No)
+            {
+
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                Environment.Exit(0);
+            }
+        }
 
     }
 }

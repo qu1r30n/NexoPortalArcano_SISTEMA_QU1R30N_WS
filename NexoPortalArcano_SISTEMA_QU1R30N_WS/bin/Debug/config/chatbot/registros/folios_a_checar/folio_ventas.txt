@@ -10,3 +10,24 @@ folio_venta|añomesdiahoraminutosegundo|total|operacion|producto1¬precio1°pedi
 183929M240909183929|240909183929|1:1:1:PECHUGA RELLENA' 0NOSE°2:1:2:BISTEC ASADO' 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
 141656J9240921141656|240921141656|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
 143742240921143742|240921143742|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+160845AF240925160845|240925160845|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+174625H240925174625|240925174625|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+200113U240925200113|240925200113|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+200450B30240925200450|240925200450|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+231343YY240925231343|240925231343|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+232938KV240925232938|240925232938|1:1:1:PECHUGA RELLENA 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+234647240925234647|240925234647|1:1:1:PECHUGA RELLENA 0NOSE°2:1:2:BISTEC ASADO 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+011126240926011126|240926011126|1:1:1:PECHUGA RELLENA 0NOSE°2:1:2:BISTEC ASADO 0NOSE|venta|Uso|id_repartidor|datos_comprador|datos_extras
+025933PL240926025933|240926025933|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+031112D240926031112|240926031112|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+031421W240926031421|240926031421|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+031839RIG240926031839|240926031839|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+100338VFL240926100338|240926100338|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+102126K240926102126|240926102126|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+085345W240927085345|240927085345|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+0920139V240927092013|240927092013|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+0923519EV240927092351|240927092351|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+120606W5O240928120606|240928120606|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+1523107240928152310|240928152310|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+170409X240928170409|240928170409|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
+1713059R240928171305|240928171305|1:1:1:PECHUGA RELLENA 0NOSE c/u$70 $70°2:1:2:BISTEC ASADO 0NOSE c/u$70 $70|venta|Uso|id_repartidor|datos_comprador|datos_extras
