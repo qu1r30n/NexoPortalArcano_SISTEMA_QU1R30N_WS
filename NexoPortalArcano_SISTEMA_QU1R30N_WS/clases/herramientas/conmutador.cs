@@ -141,15 +141,20 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         private void mandar_ws(IWebDriver manejadores, WebDriverWait esperar, string proceso, string info_a_procesar, string contacto)
         {
             chatbot_clase ch_b = new chatbot_clase();
-            string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
 
-            if (inf_esp[0] == "1")
+
+            if (proceso == "VENTA")
             {
-                regresr_respuesta_ia(manejadores, esperar, contacto, "solicitud exitosa");
-            }
-            else
-            {
-                regresr_respuesta_ia(manejadores, esperar, contacto, "error");
+                string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
+
+                if (inf_esp[0] == "1")
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "solicitud exitosa");
+                }
+                else
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "error");
+                }
             }
         }
 
@@ -1122,7 +1127,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                     //cod_mod__01.1-------------------------------------------------
                     //comicion
-                    enviar_a_serv("WS", "MODELO_MUL" + G_caracter_separacion_funciones_espesificas[0] + "COMICION_VENTA_BUSQUEDA_POR_TELEFONO" + G_caracter_separacion_funciones_espesificas[1] + contacto[1] + G_caracter_separacion[2] + ventas_para_comicion, contacto[1]);
+                    //enviar_a_serv("WS", "MODELO_MUL" + G_caracter_separacion_funciones_espesificas[0] + "COMICION_VENTA_BUSQUEDA_POR_TELEFONO" + G_caracter_separacion_funciones_espesificas[1] + contacto[1] + G_caracter_separacion[2] + ventas_para_comicion, contacto[1]);
 
                 }
 
