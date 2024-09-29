@@ -25,6 +25,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         string[] G_caracter_para_transferencia_entre_archivos = var_fun_GG.GG_caracter_para_transferencia_entre_archivos;
         string[] G_caracter_usadas_por_usuario = var_fun_GG.GG_caracter_usadas_por_usuario;
 
+        string[] G_caracter_para_usar_como_enter_y_nuevo_mensaje = var_fun_GG.GG_caracter_para_usar_como_enter_y_nuevo_mensaje;
+
+
         operaciones_arreglos op_arr = new operaciones_arreglos();
         operaciones_textos op_tex = new operaciones_textos();
         var_fun_GG vf_GG = new var_fun_GG();
@@ -149,20 +152,43 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 if (inf_esp[0] == "1")
                 {
-                    regresr_respuesta_ia(manejadores, esperar, contacto, "solicitud exitosa");
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "proceso exitoso");
                 }
                 else
                 {
                     regresr_respuesta_ia(manejadores, esperar, contacto, "error");
                 }
             }
+
+            if (proceso == "COMPRA")
+            {
+                string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
+
+                if (inf_esp[0] == "1")
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "proceso exitoso");
+                }
+                else
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "error");
+                }
+            }
+
         }
 
         private void mandar_ws_rs(IWebDriver manejadores, WebDriverWait esperar, string proceso, string info_a_procesar, string contacto)
         {
             chatbot_clase ch_b = new chatbot_clase();
 
-            regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
+            if (proceso == "PREDICCION_NECESIDADES_COMPRA")
+            {
+                regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
+            }
+            else if(proceso=="RECORDATORIO")
+            {
+                regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
+            }
+            
 
         }
 
@@ -288,23 +314,23 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 {
                     string registro = registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
                     string info_mandar_sin_procesar = pedido_a_registrar.Replace(G_caracter_separacion[1], "\n");
-                    string info_mandar = info_mandar_sin_procesar + "\n" + total_pedidos + "\n" + contacto + G_caracter_separacion_funciones_espesificas[0] + folio;
+                    string info_mandar = info_mandar_sin_procesar + "\n" + total_pedidos + "\n" + contacto + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + folio;
                     //info_mandar = info_mandar + G_caracter_separacion_funciones_espesificas[0] + info_mandar;
                     string cont_a_mandar = G_contactos_lista_para_mandar_informacion[6, 1] + G_caracter_separacion[1] + G_contactos_lista_para_mandar_informacion[8, 1];
                     string hora_de_recordatorio = ModificarFechaYHora(entrega_programada);
-                    mandar_mensage_usuarios(manejadores, esperar, cont_a_mandar, "entraga para las:" + entrega_programada + "\n" + info_mandar + G_caracter_separacion_funciones_espesificas[0] + "se te recordara " + hora_de_recordatorio);
+                    mandar_mensage_usuarios(manejadores, esperar, cont_a_mandar, "entraga para las:" + entrega_programada + "\n" + info_mandar + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + "se te recordara " + hora_de_recordatorio);
 
                     
-                    string info_recorar = info_mandar_sin_procesar.Replace("\n", G_caracter_separacion[1]);
+                    string info_recorar = info_mandar_sin_procesar.Replace("\n", G_caracter_para_usar_como_enter_y_nuevo_mensaje[1]);
                     enviar_a_serv("WS_RS", 
                         "MODELO_FUNCIONES_DIVERSAS" 
                         + G_caracter_separacion_funciones_espesificas[0] + "RECORDATORIO" 
                         + G_caracter_separacion_funciones_espesificas[1] + 
                         info_recorar 
-                        + G_caracter_separacion[1] + total_pedidos 
-                        + G_caracter_separacion[1] + contacto 
-                        + G_caracter_separacion[1] + entrega_programada 
-                        + G_caracter_separacion[1] + folio 
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + total_pedidos 
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + contacto 
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + entrega_programada 
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + folio 
                         + G_caracter_separacion[0] + entrega_programada 
                         + G_caracter_separacion[0] + cont_a_mandar 
                         + G_caracter_separacion[0] + var_fun_GG.GG_id_programa
@@ -499,8 +525,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         for (int i = 0; i < contactos.Length; i++)
                         {
                             buscar_nombre_y_dar_click(manejadores, esperar, contactos[i]);
-                            string mensage_tem = mensage.Replace(G_caracter_separacion[1], "\n");
-                            mandar_mensage(esperar, mensage_tem);
+                            mandar_mensage(esperar, mensage);
                         }
                         
                     }
@@ -531,8 +556,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             //var escribir_msg = G_esperar2.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
 
             var escribir_msg = esperar.Until(manej => manej.FindElement(By.XPath(lugar_a_escribir)));
+
+
             string texto_enviar = string.Join(Keys.Shift + Keys.Enter + Keys.Shift, texto_enviar_arreglo_string);
-            texto_enviar = texto_enviar.Replace(G_caracter_separacion_funciones_espesificas[0], "\n");
+
+            texto_enviar = texto_enviar.Replace(G_caracter_para_usar_como_enter_y_nuevo_mensaje[1], Keys.Shift + Keys.Enter + Keys.Shift);
+            texto_enviar = texto_enviar.Replace(G_caracter_para_usar_como_enter_y_nuevo_mensaje[0], "\n");
+
 
             escribir_msg.SendKeys(texto_enviar);
             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
