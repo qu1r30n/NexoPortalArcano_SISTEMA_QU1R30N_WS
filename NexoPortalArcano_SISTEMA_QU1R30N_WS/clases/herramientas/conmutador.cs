@@ -194,8 +194,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         private void mensajes(IWebDriver manejadores, WebDriverWait esperar, string info_a_procesar, string contacto)
         {
-            info_a_procesar.Replace("\n", G_caracter_separacion_funciones_espesificas[0]);
-            string[] pedidos = info_a_procesar.Split(G_caracter_separacion_funciones_espesificas[0][0]);
+            info_a_procesar.Replace("\n", G_caracter_para_usar_como_enter_y_nuevo_mensaje[1]);
+            string[] pedidos = info_a_procesar.Split(G_caracter_para_usar_como_enter_y_nuevo_mensaje[1][0]);
 
 
             string añomesdiahoraminseg = DateTime.Now.ToString("yyMMddHHmmss");
@@ -218,6 +218,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     false, //administrador
                     false, //comprador
                 };
+
+
                 //confirmador
                 grupos[0] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], pedidos[i], "CONFIRMADORES", "confirmar_mensaje_para_cliente");
                 //tesorero
@@ -657,7 +659,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         }
 
 
-        private bool funciones_extra_por_grupo(IWebDriver manejadores, WebDriverWait esperar, string nombre, string grupos_que_tienen_el_permiso, string info_a_procesar, string modelo, string funcion_a_hacer, object caracter_separacion_grupos = null)
+        private bool funciones_extra_por_grupo(IWebDriver manejadores, WebDriverWait esperar, string nombre, string grupos_que_tienen_el_permiso, string info_a_procesar, string modelo, object caracter_separacion_grupos = null)
         {
             bool si_tiene_permiso = permisos(nombre, grupos_que_tienen_el_permiso, caracter_separacion_grupos);
 
@@ -665,14 +667,23 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             {
                 int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_dir_arch_conf_extra[1, 0]));
 
-
+                string[] funcion_info = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
 
 
 
                 if (modelo == "CONFIRMADORES")
                 {
-                    if (funcion_a_hacer == "confirmar_mensaje_para_cliente")
+                    //tiene los :  para saber si es una funcion especifica
+                    if (funcion_info.Length > 1)
                     {
+                        if (funcion_info[0] == "otra_operacion_de_confirmadores")
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        //confirmacion del folio
                         bool encontro_folio = false;
                         string[] res_folio = calculos_folios(info_a_procesar);
                         mandar_mensajes_deacuerdo_del_resul_calculo_folio(manejadores, esperar, res_folio);
@@ -680,8 +691,17 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 }
                 else if (modelo == "TESOREROS")
                 {
-                    if (funcion_a_hacer == "confirmar_comicion_para_vendedor")
+                    //tiene los :  para saber si es una funcion especifica
+                    if (funcion_info.Length > 1)
                     {
+                        if (funcion_info[0] == "otra_operacion_de_tesoreros")
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        //procesado del folio y comiciones
                         bool encontro_folio = false;
                         string[] res_folio = calculos_folios(info_a_procesar);
                         procesar_folio(manejadores, esperar, res_folio);
@@ -690,19 +710,46 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 else if (modelo == "ADMINISTRADORES")
                 {
-                    //"MODELO_ANALISIS_DATOS~PREDICCION_NECESIDADES_COMPRA"
-                    string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
-                    // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
-                    compras(temp, nombre);
+                    //tiene los :  para saber si es una funcion especifica
+                    if (funcion_info.Length > 1)
+                    {
+                        if (funcion_info[0] == "empleados")
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        if (funcion_info[0] == "VENTAS_DEL_DIA")
+                        {
+                            //"MODELO_ANALISIS_DATOS~PREDICCION_NECESIDADES_COMPRA"
+                            string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
+                            // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
+                            compras(temp, nombre);
+                        }
+                    }
                 }
                 else if (modelo == "COMPRAS")
                 {
-                    //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
-                    string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
-                    // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
-                    compras(temp, nombre);
-
+                    //tiene los :  para saber si es una funcion especifica
+                    if (funcion_info.Length > 1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        if (funcion_info[0] == "PREDICCION_COMPRA")
+                        {
+                            //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
+                            string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
+                            // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
+                            compras(temp, nombre);
+                        }
+                    }
                 }
+
+
+
                 else
                 {
                     // Aquí podrías agregar una lógica por defecto si es necesario.
