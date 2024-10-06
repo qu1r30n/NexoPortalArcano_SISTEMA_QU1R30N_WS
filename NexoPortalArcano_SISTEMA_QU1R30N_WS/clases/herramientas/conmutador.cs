@@ -160,7 +160,35 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 }
             }
 
-            if (proceso == "COMPRA")
+            else if (proceso == "COMPRA")
+            {
+                string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
+
+                if (inf_esp[0] == "1")
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "proceso exitoso");
+                }
+                else
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "error");
+                }
+            }
+
+            else if (proceso == "TRABAJO_EVENTUAL")
+            {
+                string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
+
+                if (inf_esp[0] == "1")
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "proceso exitoso");
+                }
+                else
+                {
+                    regresr_respuesta_ia(manejadores, esperar, contacto, "error");
+                }
+            }
+
+            else if (proceso == "TRABAJO_DIAS")
             {
                 string[] inf_esp = info_a_procesar.Split(var_fun_GG.GG_caracter_para_confirmacion_o_error[0][0]);
 
@@ -188,7 +216,14 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             {
                 regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
             }
-            
+            else if (proceso == "TRABAJO_EVENTUAL")
+            {
+                regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
+            }
+            else if (proceso == "TRABAJO_DIAS")
+            {
+                regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
+            }
 
         }
 
@@ -227,7 +262,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], pedidos[i], "TESOREROS", "confirmar_comicion_para_vendedor");
 
                 //administradores
-                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMNINISTRADORES", "VENTAS_DEL_DIA");
+                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMINISTRADORES", "VENTAS_DEL_DIA");
 
                 //compradores
                 grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], pedidos[i], "COMPRAS", "PREDICCION_COMPRA");
@@ -669,7 +704,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 string[] funcion_info = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
 
-
+                
 
                 if (modelo == "CONFIRMADORES")
                 {
@@ -689,6 +724,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         mandar_mensajes_deacuerdo_del_resul_calculo_folio(manejadores, esperar, res_folio);
                     }
                 }
+
                 else if (modelo == "TESOREROS")
                 {
                     //tiene los :  para saber si es una funcion especifica
@@ -713,19 +749,23 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     //tiene los :  para saber si es una funcion especifica
                     if (funcion_info.Length > 1)
                     {
-                        if (funcion_info[0] == "empleados")
+                        if (funcion_info[0] == "EMP_TRAB_EVENTUAL")
                         {
-
+                            emp_trab_even(funcion_info[1], funcion_info[2], nombre);
+                        }
+                        else if (funcion_info[0] == "EMP_TRAB_DIAS")
+                        {
+                            emp_trab_dias(funcion_info[1], funcion_info[2], funcion_info[3], nombre);
                         }
                     }
                     else
                     {
-                        if (funcion_info[0] == "VENTAS_DEL_DIA")
+                        if (funcion_info[0] == "PREDICCION_COMPRA")
                         {
                             //"MODELO_ANALISIS_DATOS~PREDICCION_NECESIDADES_COMPRA"
-                            string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
+                            
                             // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
-                            compras(temp, nombre);
+                            prediccion_compras(funcion_info, nombre);
                         }
                     }
                 }
@@ -734,17 +774,28 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     //tiene los :  para saber si es una funcion especifica
                     if (funcion_info.Length > 1)
                     {
-                        
+                        if (funcion_info[0] == "otro")
+                        {
+                            
+                        }
+                        else
+                        {
+                            //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
+                            
+                            // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
+                            compras(funcion_info, nombre);
+                        }
                     }
                     else
                     {
                         if (funcion_info[0] == "PREDICCION_COMPRA")
                         {
                             //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
-                            string[] temp = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
+                            
                             // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
-                            compras(temp, nombre);
+                            prediccion_compras(funcion_info, nombre);
                         }
+
                     }
                 }
 
@@ -1222,43 +1273,50 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
-        private void administracion(string[] datos_compras, string contacto)
-        {
-            if (datos_compras[0] == "PREDICCION_COMPRA")
-            {
+        //funciones usadas por el conmutador-------------------------------------------------------
 
-                string pedido_PROCESAR = datos_compras[1] + G_caracter_separacion[2] + datos_compras[2] + G_caracter_separacion[2] + datos_compras[3] + G_caracter_separacion[2] + datos_compras[4] + G_caracter_separacion[2] + datos_compras[5];
-                enviar_a_serv("WS", "MODELO_ANALISIS_DATOS" + G_caracter_separacion_funciones_espesificas[0] + "PREDICCION_NECESIDADES_COMPRA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto);
-            }
+
+        
+        private void prediccion_compras(string[] datos_compras, string contacto)
+        {
+            enviar_a_serv("WS_RS", "MODELO_ANALISIS_DATOS" + G_caracter_separacion_funciones_espesificas[0] + "PREDICCION_NECESIDADES_COMPRA" + G_caracter_separacion_funciones_espesificas[1] + "", contacto);
         }
 
         private void compras(string[] datos_compras, string contacto)
         {
-            if (datos_compras[0] == "COMP")
+
+            string[] cantidad_de_productos = datos_compras[1].Split(G_caracter_usadas_por_usuario[1][0]);
+            string pedido_PROCESAR = "";
+            for (int i = 0; i < cantidad_de_productos.Length; i++)
             {
-                string[] cantidad_de_productos = datos_compras[1].Split(G_caracter_usadas_por_usuario[1][0]);
-                string pedido_PROCESAR = "";
-                for (int i = 0; i < cantidad_de_productos.Length; i++)
-                {
-                    string[] info_espliteada = cantidad_de_productos[i].Split(G_caracter_usadas_por_usuario[2][0]);
-                    pedido_PROCESAR = op_tex.concatenacion_caracter_separacion(pedido_PROCESAR, info_espliteada[0] + G_caracter_separacion[2] + info_espliteada[1] + G_caracter_separacion[2] + info_espliteada[2] + G_caracter_separacion[2] + info_espliteada[3] + G_caracter_separacion[2] + info_espliteada[4], G_caracter_separacion[1]);
-                }
-                pedido_PROCESAR = pedido_PROCESAR + G_caracter_separacion[0] + datos_compras[2] + G_caracter_separacion[0] + "SUC1";
-
-
-                enviar_a_serv("WS", "MODELO_COMPRAS" + G_caracter_separacion_funciones_espesificas[0] + "COMPRA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto);
+                string[] info_espliteada = cantidad_de_productos[i].Split(G_caracter_usadas_por_usuario[2][0]);
+                pedido_PROCESAR = op_tex.concatenacion_caracter_separacion(pedido_PROCESAR, info_espliteada[0] + G_caracter_separacion[2] + info_espliteada[1] + G_caracter_separacion[2] + info_espliteada[2] + G_caracter_separacion[2] + info_espliteada[3] + G_caracter_separacion[2] + info_espliteada[4], G_caracter_separacion[1]);
             }
+            pedido_PROCESAR = pedido_PROCESAR + G_caracter_separacion[0] + datos_compras[2] + G_caracter_separacion[0] + "SUC1";
 
-            else if (datos_compras[0] == "PREDICCION_COMPRA")
-            {
 
-                enviar_a_serv("WS_RS", "MODELO_ANALISIS_DATOS" + G_caracter_separacion_funciones_espesificas[0] + "PREDICCION_NECESIDADES_COMPRA" + G_caracter_separacion_funciones_espesificas[1] + "", contacto);
-            }
+            enviar_a_serv("WS", "MODELO_COMPRAS" + G_caracter_separacion_funciones_espesificas[0] + "COMPRA" + G_caracter_separacion_funciones_espesificas[1] + pedido_PROCESAR, contacto);
+
+        }
+
+
+        private void emp_trab_even(string id_trabajador,string trabajo_a_hacer_trab, string contacto_envio_peticion)
+        {
+
+            enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "TRABAJO_EVENTUAL" + G_caracter_separacion_funciones_espesificas[1] + id_trabajador + G_caracter_separacion[1] + trabajo_a_hacer_trab + G_caracter_separacion[1] + "" + G_caracter_separacion[1] + var_fun_GG.GG_id_programa, contacto_envio_peticion);
+
+        }
+
+        private void emp_trab_dias(string id_trabajador, string trabajo_a_hacer_trab, string dia_lun_mie_vier, string contacto_envio_peticion)
+        {
+
+            enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "TRABAJO_DIAS" + G_caracter_separacion_funciones_espesificas[1] + id_trabajador + G_caracter_separacion[1] + trabajo_a_hacer_trab + G_caracter_separacion[1] + dia_lun_mie_vier + G_caracter_separacion[1] + var_fun_GG.GG_id_programa, contacto_envio_peticion);
+
         }
 
 
 
-
+        //---------------------------------------------------------------------------------------
         // Método no estático que retorna un string
         // Método con valores predeterminados en los parámetros
         public string ModificarFechaYHora(string fechayhora, string cantidad_sumar_o_restar = "40", string tipo_medida_yyyyMMddhhmm = "mm", bool restar_false_sumar_true = false)
