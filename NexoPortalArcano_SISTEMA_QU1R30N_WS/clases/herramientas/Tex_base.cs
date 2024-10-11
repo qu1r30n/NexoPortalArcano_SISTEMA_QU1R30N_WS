@@ -324,10 +324,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         }
 
 
-
-
-
-
         public void eliminar_fila_PARA_MULTIPLES_PROGRAMAS(string direccion_archivo, int columna_a_comparar, string comparar, object caracter_separacion_objeto = null)
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
@@ -465,9 +461,6 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             }
             return num_indice_de_direccion;
         }
-
-
-
 
         public string Agregar_sino_existe
             (string direccion_archivo_a_checar, int num_column_comp, string comparar, string texto_a_agregar_si_no_esta = "", object caracter_separacion_obj = null)

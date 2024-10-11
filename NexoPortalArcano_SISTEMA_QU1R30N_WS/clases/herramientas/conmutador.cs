@@ -757,6 +757,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         {
                             emp_trab_dias(funcion_info[1], funcion_info[2], funcion_info[3], nombre);
                         }
+                        else if (funcion_info[0] == "REG_EMP")
+                        {
+                            Registro_empleado(funcion_info[1], nombre);
+                        }
+
                     }
                     else
                     {
@@ -1314,6 +1319,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
+        private void Registro_empleado(string datos_empleado,string contacto)
+        {
+            datos_empleado = datos_empleado.Replace(G_caracter_usadas_por_usuario[2], G_caracter_separacion[2]);
+            enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "REGISTRO_APRENDIS" + G_caracter_separacion_funciones_espesificas[1] + datos_empleado, contacto);
+
+        }
 
 
         //---------------------------------------------------------------------------------------
