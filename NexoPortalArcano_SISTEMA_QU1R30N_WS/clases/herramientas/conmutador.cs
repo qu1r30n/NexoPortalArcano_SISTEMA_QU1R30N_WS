@@ -262,7 +262,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], pedidos[i], "TESOREROS", "confirmar_comicion_para_vendedor");
 
                 //administradores
-                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMINISTRADORES", "VENTAS_DEL_DIA");
+                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMINISTRADORES");
+                //administradores
+                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMINISTRADORES");
 
                 //compradores
                 grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], pedidos[i], "COMPRAS", "PREDICCION_COMPRA");
@@ -465,7 +467,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         public void enviar_a_serv(string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto , string programa_enviar = "CLASE_QU1R30N")
         {
-
+            for (int i = 0; i < G_caracter_usadas_por_usuario.Length; i++)
+            {
+                info = info.Replace(G_caracter_usadas_por_usuario[i], G_caracter_separacion[i]);
+            }
 
 
 
@@ -753,7 +758,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         {
                             emp_trab_even(funcion_info[1], funcion_info[2], nombre);
                         }
-                        else if (funcion_info[0] == "EMP_TRAB_DIAS")
+                        else if (funcion_info[0] == "EMP_TRAB_DIA")
                         {
                             emp_trab_dias(funcion_info[1], funcion_info[2], funcion_info[3], nombre);
                         }
@@ -1312,10 +1317,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
-        private void emp_trab_dias(string id_trabajador, string trabajo_a_hacer_trab, string dia_lun_mie_vier, string contacto_envio_peticion)
+        private void emp_trab_dias(string dia_lun_mie_vier, string id_trabajador, string trabajo_a_hacer_trab, string contacto_envio_peticion)
         {
 
-            enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "TRABAJO_DIAS" + G_caracter_separacion_funciones_espesificas[1] + id_trabajador + G_caracter_separacion[1] + trabajo_a_hacer_trab + G_caracter_separacion[1] + dia_lun_mie_vier + G_caracter_separacion[1] + var_fun_GG.GG_id_programa, contacto_envio_peticion);
+            enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "TRABAJO_AGREGAR_DIAS" + G_caracter_separacion_funciones_espesificas[1] + id_trabajador + G_caracter_separacion[1] + trabajo_a_hacer_trab + G_caracter_separacion[1] + dia_lun_mie_vier + G_caracter_separacion[1] + var_fun_GG.GG_id_programa, contacto_envio_peticion);
 
         }
 
