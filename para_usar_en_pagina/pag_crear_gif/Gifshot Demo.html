@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Gifshot Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="shortcut icon" href="https://yahoo.github.io/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="https://yahoo.github.io/favicon.ico" type="image/x-icon">
+
+        <!-- Third Party CSS Dependencies -->
+        <link rel="stylesheet" href="./Gifshot Demo_files/bootstrap.css">
+        <link rel="stylesheet" href="./Gifshot Demo_files/prism.css">
+        <link rel="stylesheet" href="./Gifshot Demo_files/select.css">
+
+        <!-- Custom CSS styles -->
+        <link rel="stylesheet" href="./Gifshot Demo_files/style.css">
+
+        <script>
+            (function () {
+                var PROD_HOST = 'yahoo.github.io';
+                var isProd = window.location.host === PROD_HOST
+                var isHttps = window.location.protocol === 'https:';
+                if (isProd && !isHttps) {
+                    window.location.protocol = 'https';
+                }
+            }());
+        </script>
+    </head>
+
+    <body>
+        <!-- fixed-title -->
+        <nav class="fixed-title text-center" role="navigation">
+          <span class="gifshot-header-text-container">
+            <a href="https://yahoo.github.io/gifshot/index.html" role="banner"><img class="gifshot-header-logo" src="./Gifshot Demo_files/gifshot.svg" alt="gifshot logo"></a>
+          </span>
+          <span class="options-button-group">
+            <a href="https://yahoo.github.io/gifshot/demo.html#" type="button" id="create-gif" class="btn btn-large btn-primary create-gif-button" role="button">Create GIF</a>
+            <a href="https://yahoo.github.io/gifshot/demo.html#" type="button" id="save-gif" class="btn btn-large btn-default save-gif-button hidden" role="button" download="gifshot-demo.gif">Save GIF</a>
+          </span>
+          <!-- main-header -->
+          <header class="main-navigation navbar demo-navigation">
+              <a href="https://yahoo.github.io/gifshot/index.html">HOME</a>
+              <a class="active" href="https://yahoo.github.io/gifshot/demo.html">DEMO</a>
+              <a href="https://github.com/yahoo/gifshot">CODE</a>
+              <a href="https://github.com/yahoo/gifshot#api-methods">DOCS</a>
+          </header>
+        </nav>
+      <!-- demo-section  -->
+      <section class="demo-section v-center">
+        <div>
+          <div class="row">
+            <div class="col-md-2 options-section">
+              <h3>Options</h3>
+              <form class="options-form" action="https://yahoo.github.io/gifshot/demo.html">
+                <div class="form-group">
+                  <label for="GIFSource">GIF Source</label>
+                  <div class="button custom-select">
+                    <select name="GIFSource" id="GIFSource" class="form-control">
+                      <option value="webcam">webcam</option>
+                      <option value="video">video</option>
+                      <option value="images">images</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="GIFType">GIF type</label>
+                  <div class="button custom-select">
+                    <select name="GIFType" id="GIFType" class="form-control">
+                      <option value="animated">Animated</option>
+                      <option value="snapshot">Snap Shot</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="gifWidth">GIF Width</label>
+                  <div class="input-group">
+                    <input name="gifWidth" id="gifWidth" class="form-control" value="200" size="5" type="number">
+                    <div class="input-group-addon">px</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="gifHeight">GIF Height</label>
+                  <div class="input-group">
+                    <input name="gifHeight" id="gifHeight" class="form-control" value="200" size="5" type="number">
+                    <div class="input-group-addon">px</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="filter">Filter</label>
+                  <div class="input-group">
+                    <input name="filter" id="filter" class="form-control" value="" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="interval">Interval</label>
+                  <div class="input-group">
+                    <input name="interval" id="interval" class="form-control" value=".1" step=".1" size="5" type="number">
+                    <div class="input-group-addon">secs</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="numFrames">Number of Frames</label>
+                  <input name="numFrames" id="numFrames" class="form-control" value="10" size="5" type="number">
+                </div>
+                <div class="form-group">
+                  <label for="frameDuration">Frame Duration</label>
+                  <input name="frameDuration" id="frameDuration" class="form-control" value="1" step="1" size="5" type="number">
+                </div>
+                <div class="form-group">
+                  <label for="gifText">GIF Text</label>
+                  <input name="gifText" id="gifText" class="form-control" value="" size="30" placeholder="Add text here...">
+                </div>
+                <div class="form-group">
+                  <label for="fontWeight">Font Weight</label>
+                  <div class="button custom-select">
+                    <select name="fontWeight" id="fontWeight" class="form-control">
+                      <option value="normal">normal</option>
+                      <option value="bold">bold</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="fontSize">Font Size</label>
+                  <div class="input-group">
+                    <input name="fontSize" id="fontSize" class="form-control" value="16" size="5" type="number">
+                    <div class="input-group-addon">px</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="fontFamily">Font Family</label>
+                  <div class="button custom-select">
+                    <select name="fontFamily" id="fontFamily" class="form-control">
+                      <option value="sans-serif">sans-serif</option>
+                      <option value="Arial">Arial</option>
+                      <option value="Calibri">Calibri</option>
+                      <option value="Times New Roman">Times New Roman</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="fontColor">Font Color</label>
+                  <input type="color" name="fontColor" id="fontColor" class="form-control" value="#FFFFFF" size="5">
+                </div>
+                <div class="form-group">
+                  <label for="textAlign">Text Align</label>
+                  <div class="button custom-select">
+                    <select name="textAlign" id="textAlign" class="form-control">
+                      <option value="center">center</option>
+                      <option value="left">left</option>
+                      <option value="right">right</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="textBaseline">Text Baseline</label>
+                  <div class="button custom-select">
+                    <select name="textBaseline" id="textBaseline" class="form-control">
+                      <option value="bottom">bottom</option>
+                      <option value="center">center</option>
+                      <option value="top">top</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="sampleInterval">Sample Interval</label>
+                  <input name="sampleInterval" id="sampleInterval" class="form-control" value="10" size="5" type="number">
+                </div>
+                <div class="form-group">
+                  <label for="numWorkers">Num Workers</label>
+                  <input name="numWorkers" id="numWorkers" class="form-control" value="2" size="5" type="number">
+                </div>
+              </form>
+            </div>
+            <div class="col-md-5 text-center code-section">
+              <section>
+                <h3>
+                  Code
+                </h3>
+                <pre class="  language-javascript">                  <code class="gifshot-code  language-javascript">
+gifshot<span class="token punctuation">.</span><span class="token function">createGIF<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+    gifWidth<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    gifHeight<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    interval<span class="token punctuation">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span>
+    numFrames<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    frameDuration<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    fontSize<span class="token punctuation">:</span> <span class="token string">'16px'</span><span class="token punctuation">,</span>
+    fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif'</span><span class="token punctuation">,</span>
+    fontColor<span class="token punctuation">:</span> <span class="token string">'#ffffff'</span><span class="token punctuation">,</span>
+    textAlign<span class="token punctuation">:</span> <span class="token string">'center'</span><span class="token punctuation">,</span>
+    textBaseline<span class="token punctuation">:</span> <span class="token string">'bottom'</span><span class="token punctuation">,</span>
+    sampleInterval<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+    numWorkers<span class="token punctuation">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>obj<span class="token punctuation">.</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> image <span class="token operator">=</span> obj<span class="token punctuation">.</span>image<span class="token punctuation">,</span> animatedImage <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement<span class="token punctuation">(</span></span><span class="token string">'img'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        animatedImage<span class="token punctuation">.</span>src <span class="token operator">=</span> image<span class="token punctuation">;</span>
+        document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild<span class="token punctuation">(</span></span>animatedImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code>
+                </pre>
+              </section>
+            </div>
+            <div class="col-md-5 text-center preview-section">
+              <h3>
+                Preview
+              </h3>
+              <section class="gifshot-image-preview-section"></section>
+              <div class="placeholder-div" style="height: 200px; width: 200px;">
+                <span class="placeholder-div-dimensions">200 x 200</span>
+              </div>
+              <progress max="1" value="0" class="gifshot-progress-bar hidden"></progress>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- footer  -->
+      <footer class="footer v-center">
+        <div class="container">
+          <h4>Made by <a href="http://sports.yahoo.com/">Yahoo Sports</a></h4>
+          <p style="margin: 0">
+            All code on this site is licensed under the
+            <a href="https://github.com/yahoo/gifshot/blob/master/LICENSE.txt">Yahoo MIT License</a> unless stated.
+          </p>
+        </div>
+      </footer>
+      <script src="./Gifshot Demo_files/gifshot.min.js.descarga"></script>
+      <script src="./Gifshot Demo_files/prism.min.js.descarga"></script>
+      <script src="./Gifshot Demo_files/esprima.min.js.descarga"></script>
+      <script src="./Gifshot Demo_files/escodegen.min.js.descarga"></script>
+      <script src="./Gifshot Demo_files/lodash.min.js.descarga"></script>
+      <script class="gifshot-code-template" type="text/template">
+        gifshot.<%- method %>({
+          <% _.forEach(selectedOptions, function(val, key) {
+            if(gifshot.defaultOptions[key] !== val) { %>
+              <%= key %>: <% if(_.isString(val)) { %>'<%= val %>' <% }
+              else if(_.isArray(val)) { %>
+                <%= JSON.stringify(val) %> <% }
+              else { %> <%= val %> <%} %>,
+            <% } %>
+          <% }); %>
+        }, function(obj) {
+          if(!obj.error) {
+            var image = obj.image,
+            animatedImage = document.createElement('img');
+            animatedImage.src = image;
+            document.body.appendChild(animatedImage);
+          }
+        });
+      </script>
+      <script src="./Gifshot Demo_files/demo.js.descarga"></script>
+    
+
+</body></html>
