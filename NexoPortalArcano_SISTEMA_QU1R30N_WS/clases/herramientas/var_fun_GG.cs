@@ -65,7 +65,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         }
 
-        
+
 
         public string[] GG_funcion_caracter_separacion_funciones_especificas(object caracter_separacion_objeto = null)
         {

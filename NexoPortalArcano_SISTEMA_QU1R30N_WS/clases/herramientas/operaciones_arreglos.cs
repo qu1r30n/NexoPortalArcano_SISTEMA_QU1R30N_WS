@@ -299,7 +299,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         niveles_de_profundidad = agregar_arreglo_a_arreglo_de_arreglos(niveles_de_profundidad, tem_linea.Split(caracter_separacion[0][0]));
                         tem_linea = niveles_de_profundidad[0][Convert.ToInt32(arr_col_rec[0])];
                     }
-                    
+
                     //comparacion--------------------------------------------------------------------------
                     chequeo_todas_las_comparaciones[l] = false;
                     if (tem_linea == arr_comparaciones[l])
@@ -367,7 +367,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         j++;
                     } while (j < arr_col_rec.Length);
 
-                    
+
                     //comparacion--------------------------------------------------------------------------
                     chequeo_todas_las_comparaciones[l] = false;
                     if (tem_linea == arr_comparaciones[l])
@@ -513,7 +513,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     j++;
                 } while (j < arr_col_rec.Length);
 
-                
+
                 //compa
                 //racion--------------------------------------------------------------------------
                 if (tem_linea == comparar)
@@ -558,7 +558,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                     j++;
                 } while (j < arr_col_rec.Length);
 
-                
+
                 //comparacion--------------------------------------------------------------------------
                 if (tem_linea == comparaciones)
                 {
@@ -715,7 +715,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         h++;
                     } while (h < col_rec_espliteado.Length);
 
-                    
+
                     //comparacion--------------------------------------------------------------------------
 
                     if (tem_linea == comparar_espliteado[j])
@@ -1049,7 +1049,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                                 cantidad_de_elementos[i, 1] = "1";
                                 if (cont == 0)
                                 {
-                                    cont = 1; 
+                                    cont = 1;
                                 }
                             }
                         }

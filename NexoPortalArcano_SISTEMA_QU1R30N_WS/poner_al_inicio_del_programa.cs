@@ -100,7 +100,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
             {
                 bas.Agregar_sino_existe(chatbot.G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa, var_fun_GG.GG_id_programa + "\n" + var_fun_GG.GG_id_programa);
             }
-            else if (inf_arc.Length == 1 && inf_arc[0] == "") 
+            else if (inf_arc.Length == 1 && inf_arc[0] == "")
             {
                 bas.Agregar_sino_existe(chatbot.G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa, var_fun_GG.GG_id_programa + "\n" + var_fun_GG.GG_id_programa);
             }
@@ -108,7 +108,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS
             {
                 bas.Agregar_sino_existe(chatbot.G_dir_arch_transferencia[0], 0, var_fun_GG.GG_id_programa, var_fun_GG.GG_id_programa);
             }
-            
+
         }
     }
 }

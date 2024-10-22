@@ -138,7 +138,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 int indice = Convert.ToInt32(bas.sacar_indice_del_arreglo_de_direccion(G_direcciones[0]));
                 Tex_base.GG_base_arreglo_de_arreglos[indice] = inf_esp;
             }
-            
+
         }
 
         private void mandar_ws(IWebDriver manejadores, WebDriverWait esperar, string proceso, string info_a_procesar, string contacto)
@@ -212,7 +212,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
             {
                 regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
             }
-            else if(proceso=="RECORDATORIO")
+            else if (proceso == "RECORDATORIO")
             {
                 regresr_respuesta_ia(manejadores, esperar, contacto, info_a_procesar);
             }
@@ -323,7 +323,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                                 pedido_a_registrar = op_tex.concatenacion_caracter_separacion(pedido_a_registrar, pedidos[i], G_caracter_separacion[1]);
                                 hubo_pedido = true;
                             }
-                                
+
 
                         }
 
@@ -359,36 +359,36 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     string hora_de_recordatorio = ModificarFechaYHora(entrega_programada);
                     mandar_mensage_usuarios(manejadores, esperar, cont_a_mandar, "entraga para las:" + entrega_programada + "\n" + info_mandar + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + "se te recordara " + hora_de_recordatorio);
 
-                    
+
                     string info_recorar = info_mandar_sin_procesar.Replace("\n", G_caracter_para_usar_como_enter_y_nuevo_mensaje[1]);
-                    enviar_a_serv("WS_RS", 
-                        "MODELO_FUNCIONES_DIVERSAS" 
-                        + G_caracter_separacion_funciones_espesificas[0] + "RECORDATORIO" 
-                        + G_caracter_separacion_funciones_espesificas[1] + 
-                        info_recorar 
-                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + total_pedidos 
-                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + contacto 
-                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + entrega_programada 
-                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + folio 
-                        + G_caracter_separacion[0] + entrega_programada 
-                        + G_caracter_separacion[0] + cont_a_mandar 
+                    enviar_a_serv("WS_RS",
+                        "MODELO_FUNCIONES_DIVERSAS"
+                        + G_caracter_separacion_funciones_espesificas[0] + "RECORDATORIO"
+                        + G_caracter_separacion_funciones_espesificas[1] +
+                        info_recorar
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + total_pedidos
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + contacto
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[1] + entrega_programada
+                        + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + folio
+                        + G_caracter_separacion[0] + entrega_programada
+                        + G_caracter_separacion[0] + cont_a_mandar
                         + G_caracter_separacion[0] + var_fun_GG.GG_id_programa
-                        
+
                         , cont_a_mandar);
-                    
+
                 }
                 else
                 {
                     string registro = registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
                     string info_mandar = pedido_a_registrar.Replace(G_caracter_separacion[1], "\n");
-                    info_mandar = info_mandar + "\n" + contacto + G_caracter_separacion_funciones_espesificas[0] + folio;
+                    info_mandar = info_mandar + "\n" + contacto + G_caracter_para_usar_como_enter_y_nuevo_mensaje[0] + folio;
                     //info_mandar = info_mandar + G_caracter_separacion_funciones_espesificas[0] + info_mandar;
                     string cont_a_mandar = G_contactos_lista_para_mandar_informacion[6, 1] + G_caracter_separacion[0] + G_contactos_lista_para_mandar_informacion[8, 1];
 
-                    
+
                     mandar_mensage_usuarios(manejadores, esperar, cont_a_mandar, info_mandar);
                 }
-                
+
             }
 
 
@@ -465,7 +465,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         //------------------------------------------------------------------------------------------------
 
 
-        public void enviar_a_serv(string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto , string programa_enviar = "CLASE_QU1R30N")
+        public void enviar_a_serv(string folio_o_palbra_clave_a_del_que_lo_recibira, string info, string contacto, string programa_enviar = "CLASE_QU1R30N")
         {
             for (int i = 0; i < G_caracter_usadas_por_usuario.Length; i++)
             {
@@ -563,13 +563,13 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                 {
                     if (nombre_contacto is string)
                     {
-                        string[] contactos = op_arr.convierte_objeto_a_arreglo(nombre_contacto, caracter_separacion_usuarios[1]);
+                        string[] contactos = op_arr.convierte_objeto_a_arreglo(nombre_contacto, caracter_separacion_usuarios[0]);
                         for (int i = 0; i < contactos.Length; i++)
                         {
                             buscar_nombre_y_dar_click(manejadores, esperar, contactos[i]);
                             mandar_mensage(esperar, mensage);
                         }
-                        
+
                     }
 
                 }
@@ -709,7 +709,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 string[] funcion_info = info_a_procesar.Split(G_caracter_usadas_por_usuario[0][0]);
 
-                
+
 
                 if (modelo == "CONFIRMADORES")
                 {
@@ -718,7 +718,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     {
                         if (funcion_info[0] == "otra_operacion_de_confirmadores")
                         {
-                            
+
                         }
                     }
                     else
@@ -737,7 +737,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     {
                         if (funcion_info[0] == "otra_operacion_de_tesoreros")
                         {
-                            
+
                         }
                     }
                     else
@@ -773,7 +773,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         if (funcion_info[0] == "PREDICCION_COMPRA")
                         {
                             //"MODELO_ANALISIS_DATOS~PREDICCION_NECESIDADES_COMPRA"
-                            
+
                             // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
                             prediccion_compras(funcion_info, nombre);
                         }
@@ -786,12 +786,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     {
                         if (funcion_info[0] == "otro")
                         {
-                            
+
                         }
                         else
                         {
                             //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
-                            
+
                             // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
                             compras(funcion_info, nombre);
                         }
@@ -801,7 +801,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         if (funcion_info[0] == "PREDICCION_COMPRA")
                         {
                             //"MODELO_COMPRAS~COMPRA§" + "COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR¬1¬200¬1¬NOM_PRODUCTO_SI_NO_ESTA°COD_BAR1¬1¬200¬2¬NOM_PRODUCTO_SI_NO_ESTA|PROVEDOR1|SUC_9"
-                            
+
                             // Aquí podrías agregar la lógica correspondiente para "COMPRAS" si es necesario.
                             prediccion_compras(funcion_info, nombre);
                         }
@@ -1286,7 +1286,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         //funciones usadas por el conmutador-------------------------------------------------------
 
 
-        
+
         private void prediccion_compras(string[] datos_compras, string contacto)
         {
             enviar_a_serv("WS_RS", "MODELO_ANALISIS_DATOS" + G_caracter_separacion_funciones_espesificas[0] + "PREDICCION_NECESIDADES_COMPRA" + G_caracter_separacion_funciones_espesificas[1] + "", contacto);
@@ -1310,7 +1310,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
         }
 
 
-        private void emp_trab_even(string id_trabajador,string trabajo_a_hacer_trab, string contacto_envio_peticion)
+        private void emp_trab_even(string id_trabajador, string trabajo_a_hacer_trab, string contacto_envio_peticion)
         {
 
             enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "TRABAJO_EVENTUAL" + G_caracter_separacion_funciones_espesificas[1] + id_trabajador + G_caracter_separacion[1] + trabajo_a_hacer_trab + G_caracter_separacion[1] + "" + G_caracter_separacion[1] + var_fun_GG.GG_id_programa, contacto_envio_peticion);
@@ -1324,7 +1324,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
-        private void Registro_empleado(string datos_empleado,string contacto)
+        private void Registro_empleado(string datos_empleado, string contacto)
         {
             datos_empleado = datos_empleado.Replace(G_caracter_usadas_por_usuario[2], G_caracter_separacion[2]);
             enviar_a_serv("WS", "MODELO_APRENDICES_E" + G_caracter_separacion_funciones_espesificas[0] + "REGISTRO_APRENDIS" + G_caracter_separacion_funciones_espesificas[1] + datos_empleado, contacto);

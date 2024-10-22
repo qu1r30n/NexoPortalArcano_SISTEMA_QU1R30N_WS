@@ -71,10 +71,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         }
                     }
                 }
-                
+
 
             }
-            
+
             else
             {
                 int cantidad_celdas_a_retornar_del_arreglo = arreglo.Length - restar_cuantas_ultimas_o_primeras_celdas;
@@ -173,7 +173,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                         }
                     }
                 }
-                
+
             }
 
             return a_retornar;
@@ -240,10 +240,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             return mensaje_de_bienvenida_a_enviar;
         }
 
-        public string concatenacion_filas_de_un_arreglo(string[] arreglo, bool poner_num_fila = false,object caracter_separacion_obj=null)
+        public string concatenacion_filas_de_un_arreglo(string[] arreglo, bool poner_num_fila = false, object caracter_separacion_obj = null)
         {
 
-            string[] caracter_separacion=vf_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
+            string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_obj);
 
             string mensaje_de_bienvenida_a_enviar = "";
             for (int i = G_donde_inicia_la_tabla; i < arreglo.Length; i++)
@@ -361,70 +361,70 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string[] arr_comparaciones_a_rec = columnas_a_recorrer.Split(caracter_separacion_para_busqueda_multiple_profuda[0][0]);
             string[] arr_comparaciones = comparaciones.Split(caracter_separacion_para_busqueda_multiple_profuda[0][0]);
 
-            
 
 
-                bool[] chequeo_todas_las_comparaciones = new bool[arr_comparaciones_a_rec.Length];
 
-                string[][] niveles_de_profundidad = null;
-                for (int l = 0; l < arr_comparaciones_a_rec.Length; l++)
+            bool[] chequeo_todas_las_comparaciones = new bool[arr_comparaciones_a_rec.Length];
+
+            string[][] niveles_de_profundidad = null;
+            for (int l = 0; l < arr_comparaciones_a_rec.Length; l++)
+            {
+                string tem_linea = texto;
+                string[] arr_col_rec = arr_comparaciones_a_rec[l].Split(caracter_separacion[0][0]);
+
+
+
+                if (arr_col_rec.Length > 1)
                 {
-                    string tem_linea = texto;
-                    string[] arr_col_rec = arr_comparaciones_a_rec[l].Split(caracter_separacion[0][0]);
 
-
-
-                    if (arr_col_rec.Length > 1)
+                    string temp_opciones_comp = joineada_paraesida_y_quitador_de_extremos_del_string(arr_comparaciones_a_rec[l], restar_cuantas_ultimas_o_primeras_celdas: 1);
+                    string[] arr_info = op_arr.extraer_arreglo_dentro_de_un_string(tem_linea, temp_opciones_comp);
+                    for (int m = 0; m < arr_info.Length; m++)
                     {
-
-                        string temp_opciones_comp = joineada_paraesida_y_quitador_de_extremos_del_string(arr_comparaciones_a_rec[l], restar_cuantas_ultimas_o_primeras_celdas: 1);
-                        string[] arr_info = op_arr.extraer_arreglo_dentro_de_un_string(tem_linea, temp_opciones_comp);
-                        for (int m = 0; m < arr_info.Length; m++)
-                        {
-                            string[] elemento_espliteado = arr_info[m].Split(caracter_separacion[arr_col_rec.Length][0]);
-                            tem_linea = elemento_espliteado[Convert.ToInt32(arr_col_rec[arr_col_rec.Length - 1])];
-                        }
-
-                    }
-                    else
-                    {
-                        niveles_de_profundidad = op_arr.agregar_arreglo_a_arreglo_de_arreglos(niveles_de_profundidad, tem_linea.Split(caracter_separacion[0][0]));
-                        tem_linea = niveles_de_profundidad[0][Convert.ToInt32(arr_col_rec[0])];
-                    }
-                    
-                    //comparacion--------------------------------------------------------------------------
-                    chequeo_todas_las_comparaciones[l] = false;
-                    if (tem_linea == arr_comparaciones[l])
-                    {
-                        chequeo_todas_las_comparaciones[l] = true;
-
-
+                        string[] elemento_espliteado = arr_info[m].Split(caracter_separacion[arr_col_rec.Length][0]);
+                        tem_linea = elemento_espliteado[Convert.ToInt32(arr_col_rec[arr_col_rec.Length - 1])];
                     }
 
                 }
-                bool estan_todas_las_comparaciones = true;
-                for (int m = 0; m < chequeo_todas_las_comparaciones.Length; m++)
+                else
                 {
-                    if (chequeo_todas_las_comparaciones[m] == false)
-                    {
-                        estan_todas_las_comparaciones = false;
-                        break;
-                    }
+                    niveles_de_profundidad = op_arr.agregar_arreglo_a_arreglo_de_arreglos(niveles_de_profundidad, tem_linea.Split(caracter_separacion[0][0]));
+                    tem_linea = niveles_de_profundidad[0][Convert.ToInt32(arr_col_rec[0])];
                 }
-                if (estan_todas_las_comparaciones)
+
+                //comparacion--------------------------------------------------------------------------
+                chequeo_todas_las_comparaciones[l] = false;
+                if (tem_linea == arr_comparaciones[l])
                 {
+                    chequeo_todas_las_comparaciones[l] = true;
 
 
-                    return texto;
                 }
-            
+
+            }
+            bool estan_todas_las_comparaciones = true;
+            for (int m = 0; m < chequeo_todas_las_comparaciones.Length; m++)
+            {
+                if (chequeo_todas_las_comparaciones[m] == false)
+                {
+                    estan_todas_las_comparaciones = false;
+                    break;
+                }
+            }
+            if (estan_todas_las_comparaciones)
+            {
+
+
+                return texto;
+            }
+
 
 
             return null;
 
         }
 
-        
+
 
     }
 }

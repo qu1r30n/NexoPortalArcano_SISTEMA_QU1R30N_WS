@@ -171,22 +171,22 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
             // Crear un objeto StreamReader para leer el archivo
             StreamReader sr = null;
-            while (sr == null) 
+            while (sr == null)
             {
 
-                
+
                 try
                 {
                     sr = new StreamReader(direccionArchivo);
-                    
+
                 }
                 catch (Exception e)
                 {
                     string[] checador = Leer(var_fun_GG.GG_direccion_control_errores_try);
-                    chequeo_error_try(direccionArchivo, e, checador[1]);
+                    //chequeo_error_try(direccionArchivo, e, checador[1]);
                 }
             }
-            
+
             try
             {
                 // Si posString es null, se lee el archivo línea por línea y se agrega cada línea a "linea"
@@ -328,16 +328,16 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         {
             string[] caracter_separacion = vf_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
 
-            
+
             StreamReader sr = null;
-            while (sr == null) 
+            while (sr == null)
             {
 
 
                 try
                 {
                     sr = new StreamReader(direccion_archivo);
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -380,7 +380,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
 
-                
+
 
 
             }
@@ -390,7 +390,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 sw.Close();
                 File.Delete(dir_tem);//borramos el archivo temporal
 
-                
+
 
             }
 
@@ -834,7 +834,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
         public string Editar_fila_espesifica_SIN_ARREGLO_GG(string direccion_archivo, int num_fila, string editar_info)
         {
 
-            
+
 
             //------------------------------------------------------------------------------------------
 
@@ -890,7 +890,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                 File.Delete(direccion_archivo);//borramos el archivo original
                 File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
 
-                
+
             }
             catch (Exception error)
             {

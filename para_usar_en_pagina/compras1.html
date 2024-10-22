@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EL GREMIO by QU1R30N</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+  <header>
+    <h1>EL GREMIO by QU1R30N</h1>
+  </header>
+  <section>
+    
+    <div class="search-bar">
+      <input type="text" id="buscarProducto" placeholder="Buscar por ID">
+      <input type="text" id="buscarPorNombre" placeholder="Buscar por nombre">
+      <input type="text" id="buscarPorProvedor" placeholder="Buscar por proveedor">
+      <button id="obtenerUbicacionBtn">Obtener Ubicación</button>
+      <input type="text" id="ubicacion" placeholder="Ubicación">
+      <input type="text" id="ingresarCantidad" placeholder="Ingresar ID y presionar Enter para aumentar cantidad">
+  </div>
+  
+    <p id="precioTotal">Precio Total: $0.00</p>
+    
+    
+    
+    
+    
+    
+    <button id="cargarInventario">Cargar Inventario0</button>
+    
+
+
+
+
+
+    <table>
+      <tr>
+        <button onclick="procesarPedido(); copiarContenido();">Procesar</button>
+      </tr>
+      <tr>
+        
+        <td id="infoProducto">Información del Producto</td>
+        <td style="width: 250px;" id="contenido">Contenido</td>
+        
+      </tr>
+    </table>
+    
+    <div id="listaDeProductos" class="container"></div>
+    
+  </section>
+  <footer>
+    <p>&copy; 2024 EL GREMIO by QU1R30N</p>
+  </footer>
+  <script src="productos_compras.js?v=1"></script>
+  <script src="compras11.js"></script>
+</body>
+</html>

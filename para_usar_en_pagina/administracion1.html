@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Barra Lateral y Pestañas Desplazables</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="administracion.css">
+</head>
+<body>
+    <div class="container">
+         
+
+        <!-- Pestañas -->
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <div class="logo">EL GREMIO by QU1R30N</div>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#inventario">Inventario</a></li>
+                <li><a href="#predicciones">Predicciones</a></li>
+                <li><a href="#filtros">Filtros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <!-- Pestañas -->
+            <header class="tabs-header">
+                <div class="tabs-wrapper">
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="tab1">Tab 1</button>
+                        <button class="tab-button" data-tab="tab2">Tab 2</button>
+                        <button class="tab-button" data-tab="tab3">Tab 3</button>
+                        <button class="tab-button" data-tab="tab4">Tab 4</button>
+                        <button class="tab-button" data-tab="tab5">Tab 5</button>
+                        <button class="tab-button" data-tab="tab6">Tab 6</button>
+                        <!-- Agrega más pestañas según sea necesario -->
+                    </div>
+                </div>
+            </header>
+
+            <<div class="listbox-container">
+                
+                <select id="listbox" class="listbox" multiple>
+                    <option value="opcion1">Opción 1</option>
+                    <option value="opcion2">Opción 2</option>
+                    <option value="opcion3">Opción 3</option>
+                    <option value="opcion4">Opción 4</option>
+                    <option value="opcion5">Opción 5</option>
+                </select>
+                
+                <div class="buttons">
+                    
+                    <button id="boton_eliminar_seleccionado">Eliminar Seleccionado</button><br>
+                    <button id="boton_eliminar_todos">Eliminar Todos</button><br>
+                    <button id="boton_eliminar_ultimo">Eliminar Último</button><br>
+                    <button id="boton_copiar">Copiar Todos</button><br>
+                </div>
+                
+                
+                
+            </div>
+            <button id="boton_agregar">Agregar</button><br>
+
+            <!-- Sección de pestañas -->
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane active">
+                    <h3>Contenido de la Pestaña 1</h3>
+                    <iframe id="iframe1" src="index.html" width="100%" height="400px" style="border: none;"></iframe>
+                    
+                </div>
+
+
+                <div id="tab2" class="tab-pane">
+                    <h3>Contenido de la Pestaña 2</h3>
+                    <iframe id="iframe2" src="compras1.html" width="100%" height="400px" style="border: none;"></iframe>
+                    
+                </div>
+
+
+                <div id="tab3" class="tab-pane">
+                    <h3>Contenido de la Pestaña 3</h3>
+                    <iframe id="iframe3" src="inv.html" width="100%" height="400px" style="border: none;"></iframe>
+                    
+                </div>
+                <div id="tab4" class="tab-pane">
+                    <h3>Contenido de la Pestaña 4</h3>
+                    <p>Este es el contenido para la cuarta pestaña.</p>
+                </div>
+
+
+                <div id="tab5" class="tab-pane">
+                    <h3>Contenido de la Pestaña 5</h3>
+                    <p>Este es el contenido para la quinta pestaña.</p>
+                </div>
+
+
+                <div id="tab6" class="tab-pane">
+                    <h3>Contenido de la Pestaña 6</h3>
+                    <p>Este es el contenido para la sexta pestaña.</p>
+                </div>
+                <!-- Agrega más secciones según sea necesario -->
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="administracion.js"></script>
+</body>
+</html>
