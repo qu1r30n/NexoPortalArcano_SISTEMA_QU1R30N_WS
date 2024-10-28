@@ -122,6 +122,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
             string elementos = G_info_de_configuracion_chatbot[2][1];
             string elementos_clase = elementos + G_info_de_configuracion_chatbot[3][1];
             //extaer inventario-----------------------------------------------------------------------------------------
+            
             con.enviar_a_serv("PREGUNTAS_WS", "MODELO_PRODUCTOS_E_INVENTARIO~EXTRAER_INVENTARIO_STRING§", "");
             //------------------------------------------------------------------------------------------
 

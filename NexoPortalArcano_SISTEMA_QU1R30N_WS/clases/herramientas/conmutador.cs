@@ -256,18 +256,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
 
                 //confirmador
-                grupos[0] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], pedidos[i], "CONFIRMADORES", "confirmar_mensaje_para_cliente");
+                grupos[0] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[8, 1], pedidos[i], "CONFIRMADORES");
                 //tesorero
 
-                grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], pedidos[i], "TESOREROS", "confirmar_comicion_para_vendedor");
+                grupos[1] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[6, 1], pedidos[i], "TESOREROS");
 
-                //administradores
-                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMINISTRADORES");
                 //administradores
                 grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "ADMINISTRADORES");
 
                 //compradores
-                grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], pedidos[i], "COMPRAS", "PREDICCION_COMPRA");
+                grupos[3] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[10, 1], pedidos[i], "COMPRAS");
+
+                grupos[2] = funciones_extra_por_grupo(manejadores, esperar, contacto, G_contactos_lista_para_mandar_informacion[9, 1], pedidos[i], "SUPERVISORES");
 
                 bool es_un_grupo_con_funcion = false;
                 for (int j = 0; j < grupos.Length; j++)
@@ -766,7 +766,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         {
                             Registro_empleado(funcion_info[1], nombre);
                         }
-
+                        else if (funcion_info[0] == "PUB_FACE")
+                        {
+                            
+                            
+                            PUBLICAR_FACE(funcion_info[0], funcion_info[1], nombre);
+                        }
                     }
                     else
                     {
@@ -779,6 +784,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         }
                     }
                 }
+
                 else if (modelo == "COMPRAS")
                 {
                     //tiene los :  para saber si es una funcion especifica
@@ -809,6 +815,30 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     }
                 }
 
+
+                else if (modelo == "SUPERVISORES")
+                {
+                    //tiene los :  para saber si es una funcion especifica
+                    if (funcion_info.Length > 1)
+                    {
+                        if (funcion_info[0] == "otro")
+                        {
+
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        if (funcion_info[0] == "")
+                        {
+                            
+                        }
+
+                    }
+                }
 
 
                 else
@@ -1331,6 +1361,64 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
+        private void PUBLICAR_FACE(string tipo_publicacion,string info, string contacto)
+        {
+            string[] info_a_procesar= info.Split(G_caracter_usadas_por_usuario[1][0]);
+
+            string pageId = "";
+            string accessToken = "";
+
+            if (info_a_procesar[0] == "TEX")
+            {
+
+                string texto = info_a_procesar[1];
+
+                if (info_a_procesar.Length > 2)
+                {
+                    pageId = info_a_procesar[2];
+                    accessToken = info_a_procesar[3];
+
+                }
+
+                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
+                
+
+            }
+            else if (info_a_procesar[0] == "IMG")
+            {
+
+
+                string texto = info_a_procesar[1];
+                string direccion_archivo_a_publicar = info_a_procesar[2];
+
+                if (info_a_procesar.Length > 3)
+                {
+
+                    pageId = info_a_procesar[3];
+                    accessToken = info_a_procesar[4];
+                }
+                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + direccion_archivo_a_publicar + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
+
+            }
+            else if (info_a_procesar[0] == "VID")
+            {
+                string texto = info_a_procesar[1];
+                string direccion_archivo_a_publicar = info_a_procesar[2];
+                if (info_a_procesar.Length > 3)
+                {
+
+                    pageId = info_a_procesar[3];
+                    accessToken = info_a_procesar[4];
+                }
+                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + direccion_archivo_a_publicar + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
+
+            }
+            else
+            {
+
+            }
+
+        }
 
         //---------------------------------------------------------------------------------------
         // Método no estático que retorna un string
