@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Producto Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output-label {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Formulario de Producto Completo</h2>
+
+    <form id="productoForm">
+        <!-- Campos del formulario -->
+        <div class="form-group">
+            <label for="_0_COD_BAR">Código de Barras</label>
+            <input type="text" id="_0_COD_BAR" name="_0_COD_BAR" placeholder="Código de barras">
+        </div>
+        <div class="form-group">
+            <label for="_1_PROVEDOR">Proveedor</label>
+            <input type="text" id="_1_PROVEDOR" name="_1_PROVEDOR" placeholder="Nombre del proveedor">
+        </div>
+        <div class="form-group">
+            <label for="_2_PRECIO_COMPRA">Precio de Compra</label>
+            <input type="number" id="_2_PRECIO_COMPRA" name="_2_PRECIO_COMPRA" placeholder="0" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="_3_PRECIO_VENTA">Precio de Venta</label>
+            <input type="number" id="_3_PRECIO_VENTA" name="_3_PRECIO_VENTA" placeholder="0" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="_4_TIEMPO_FABRICACION">Tiempo de Fabricación</label>
+            <input type="number" id="_4_TIEMPO_FABRICACION" name="_4_TIEMPO_FABRICACION" placeholder="0" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="ubicacion">Ubicación GPS</label>
+            <input type="text" id="ubicacion" name="ubicacion" placeholder="Ubicación GPS">
+        </div>
+        
+        <!-- Botón para obtener y mostrar ubicación -->
+        <div class="form-group">
+            <button type="button" id="obtenerUbicacionBtn">Obtener y Mostrar Ubicación</button>
+        </div>
+
+        <button type="button" onclick="consolidarDatos()">Consolidar y Copiar al Portapapeles</button>
+    </form>
+
+    <div class="form-group">
+        <label class="output-label">Datos Consolidados:</label>
+        <textarea id="output" rows="10" readonly></textarea>
+    </div>
+</div>
+
+<script>
+// Función para obtener la ubicación
+async function obtenerUbicacion() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => resolve(`${position.coords.latitude},${position.coords.longitude}`),
+                error => reject('Error al obtener la ubicación')
+            );
+        } else {
+            reject('Geolocalización no soportada en este navegador');
+        }
+    });
+}
+
+// Función para obtener y mostrar la ubicación
+async function obtenerYMostrarUbicacion() {
+    try {
+        const ubicacion = await obtenerUbicacion();
+        document.getElementById("ubicacion").value = `${ubicacion}`;
+    } catch (error) {
+        document.getElementById("ubicacion").value = "Error al obtener la ubicación";
+    }
+}
+
+document.getElementById("obtenerUbicacionBtn").addEventListener("click", obtenerYMostrarUbicacion);
+
+function consolidarDatos() {
+    const gpsInput = document.getElementById('ubicacion');
+    
+    // Verificar si el campo de GPS está vacío
+    if (gpsInput.value.trim() === '') {
+        alert('El campo "Ubicación GPS" no debe estar vacío.');
+        return;
+    }
+
+    const form = document.getElementById('productoForm');
+    const output = document.getElementById('output');
+    let datosConsolidados = '';
+
+    for (let element of form.elements) {
+        if (element.tagName === "INPUT" && element.type !== "button") {
+            datosConsolidados += element.value + '&';
+        }
+    }
+
+    datosConsolidados = "INT_AGR_PRO:" + datosConsolidados;
+    output.value = datosConsolidados.slice(0, -1);
+    output.select();
+    document.execCommand('copy');
+    alert('Datos copiados al portapapeles');
+}
+</script>
+
+</body>
+</html>

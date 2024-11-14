@@ -291,7 +291,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     {
 
                         string cod_bar_o_funcion = ultimo_mensaje_espliteado[0];
-                        if (cod_bar_o_funcion != "UBI" && cod_bar_o_funcion != "EXT" && cod_bar_o_funcion != "CAN" && cod_bar_o_funcion != "REC")
+                        if (cod_bar_o_funcion != "UBI" && cod_bar_o_funcion != "EXT" && cod_bar_o_funcion != "CAN" && cod_bar_o_funcion != "REC" && cod_bar_o_funcion != "INTERMEDIARIO")
                         {
 
                             Double cantidad_de_platillos = Convert.ToDouble(ultimo_mensaje_espliteado[1]);
@@ -317,6 +317,18 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                             if (cod_bar_o_funcion == "REC")
                             {
                                 entrega_programada = ultimo_mensaje_espliteado[1];
+                            }
+                            else if (cod_bar_o_funcion == "INT_AGR_PRO")
+                            {
+                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~AGREGAR_PRODUCTO_SERVICIO§"+ ultimo_mensaje_espliteado[1], contacto);
+                            }
+                            else if (cod_bar_o_funcion == "INT_VENT")
+                            {
+                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~INVENTARIO_COMPLETO§" + ultimo_mensaje_espliteado[1], contacto);
+                            }
+                            else if (cod_bar_o_funcion == "INT_PRODUC_IMG")
+                            {
+                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~PONER_IMAGEN_A_PRODUCTO§" + ultimo_mensaje_espliteado[1], contacto);
                             }
                             else
                             {
@@ -377,6 +389,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         , cont_a_mandar);
 
                 }
+
                 else
                 {
                     string registro = registros_y_movimientos_a_confirmar(contacto, añomesdiahoraminseg, folio, pedido_a_registrar);
@@ -768,9 +781,8 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                         }
                         else if (funcion_info[0] == "PUB_FACE")
                         {
-                            
-                            
-                            PUBLICAR_FACE(funcion_info[0], funcion_info[1], nombre);
+
+                            PUBLICAR_FACE(funcion_info[1], nombre);
                         }
                     }
                     else
@@ -1361,12 +1373,12 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         }
 
-        private void PUBLICAR_FACE(string tipo_publicacion,string info, string contacto)
+        private void PUBLICAR_FACE(string info, string contacto)
         {
             string[] info_a_procesar= info.Split(G_caracter_usadas_por_usuario[1][0]);
 
-            string pageId = "";
-            string accessToken = "";
+            string pageId = "221020874422000";
+            string accessToken = "EAAEpN2qFii0BO7d1RaXLPx741Xif7ZCTPZBS9cZBbcoE26pfxZB4jgqIdyfEAcvS9rJu8gXJcRCZA3l9ZBAn4DtoXUYXC7pEq3rXmgZAteHnxDVphYKAFNfiKVIfADfXJLF4FhfBbiqWWBExX0hEsWC2SoIuh3Ey50W9lrdHEfeLxcZCmy0ut4PrdpNtYaIASRCl3g7GM5TlskKqqPkwZAmvpNjoZD";
 
             if (info_a_procesar[0] == "TEX")
             {
@@ -1380,7 +1392,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                 }
 
-                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
+                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + "" + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
                 
 
             }
@@ -1397,7 +1409,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     pageId = info_a_procesar[3];
                     accessToken = info_a_procesar[4];
                 }
-                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + direccion_archivo_a_publicar + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
+                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_IMAGEN_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + direccion_archivo_a_publicar + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
 
             }
             else if (info_a_procesar[0] == "VID")
@@ -1410,7 +1422,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                     pageId = info_a_procesar[3];
                     accessToken = info_a_procesar[4];
                 }
-                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_TEXTO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + direccion_archivo_a_publicar + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
+                enviar_a_serv("WS", "MODELO_PUB" + G_caracter_separacion_funciones_espesificas[0] + "PUBLICAR_VIDEO_FACEBOOK" + G_caracter_separacion_funciones_espesificas[1] + direccion_archivo_a_publicar + G_caracter_usadas_por_usuario[1] + texto + G_caracter_usadas_por_usuario[1] + pageId + G_caracter_usadas_por_usuario[1] + accessToken, contacto);
 
             }
             else
