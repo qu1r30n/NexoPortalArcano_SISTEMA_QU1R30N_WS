@@ -53,9 +53,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
         public string[] G_dir_arch_transferencia =
         {
-            /*0*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\BANDERAS.TXT",
-            /*1*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\1.TXT",//preguntas
-            /*2*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\2.TXT",//respuestas
+            /*0*/"C:\\XEROX\\CONFIG\\INF\\NEXOPORTALARCANO\\BANDERAS.TXT",
+            /*1*/"C:\\XEROX\\CONFIG\\INF\\NEXOPORTALARCANO\\1.TXT",//preguntas
+            /*2*/"C:\\XEROX\\CONFIG\\INF\\NEXOPORTALARCANO\\2.TXT",//respuestas
         };
 
         string[] G_dir_arch_conf_chatbot =
@@ -320,11 +320,11 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
                             }
                             else if (cod_bar_o_funcion == "INT_AGR_PRO")
                             {
-                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~AGREGAR_PRODUCTO_SERVICIO§"+ ultimo_mensaje_espliteado[1], contacto);
+                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~AGREGAR_PRODUCTO_SERVICIO§"+ ultimo_mensaje_espliteado[1] + G_caracter_usadas_por_usuario[2], contacto);
                             }
                             else if (cod_bar_o_funcion == "INT_VENT")
                             {
-                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~INVENTARIO_COMPLETO§" + ultimo_mensaje_espliteado[1], contacto);
+                                enviar_a_serv("PREGUNTAS_WS", "MODELO_INT_ACEN~INVENTARIO_COMPLETO§", contacto);
                             }
                             else if (cod_bar_o_funcion == "INT_PRODUC_IMG")
                             {
@@ -487,7 +487,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
 
 
-            string info_a_env = programa_enviar + G_caracter_para_transferencia_entre_archivos[0] + var_fun_GG.GG_id_programa + G_caracter_para_transferencia_entre_archivos[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[1] + info + G_caracter_para_transferencia_entre_archivos[1] + contacto;
+            string info_a_env = programa_enviar + G_caracter_para_transferencia_entre_archivos[0] + var_fun_GG.GG_id_programa + G_caracter_para_transferencia_entre_archivos[1] + info + G_caracter_para_transferencia_entre_archivos[1] + folio_o_palbra_clave_a_del_que_lo_recibira + G_caracter_para_transferencia_entre_archivos[2] + contacto;
 
 
             bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[1], info_a_env);
@@ -1307,7 +1307,10 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases.herramientas
 
                     //cod_mod__01.1-------------------------------------------------
                     //comicion
-                    //enviar_a_serv("WS", "MODELO_MUL" + G_caracter_separacion_funciones_espesificas[0] + "COMICION_VENTA_BUSQUEDA_POR_TELEFONO" + G_caracter_separacion_funciones_espesificas[1] + contacto[1] + G_caracter_separacion[2] + ventas_para_comicion, contacto[1]);
+                    enviar_a_serv("WS", "MODELO_MUL" + G_caracter_separacion_funciones_espesificas[0] + "COMICION_VENTA_BUSQUEDA_POR_TELEFONO" + G_caracter_separacion_funciones_espesificas[1] + contacto[1] + G_caracter_separacion[2] + ventas_para_comicion + G_caracter_separacion[2] + "clase1" + G_caracter_separacion[2] + 10 + G_caracter_separacion[3] + 5 + G_caracter_separacion[2] + 15, contacto[1]);
+                    
+
+
 
                 }
 

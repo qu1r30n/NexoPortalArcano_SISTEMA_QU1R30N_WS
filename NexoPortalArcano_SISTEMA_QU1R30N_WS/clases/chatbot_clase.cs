@@ -52,9 +52,9 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
 
         public string[] G_dir_arch_transferencia =
         {
-            /*0*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\BANDERAS.TXT",
-            /*1*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\1.TXT",//PREGUNTAS
-            /*2*/"C:\\XEROX\\CONFIG\\INF\\BKLKFJC\\2.TXT",//RESPUESTAS
+            /*0*/"C:\\XEROX\\CONFIG\\INF\\NEXOPORTALARCANO\\BANDERAS.TXT",
+            /*1*/"C:\\XEROX\\CONFIG\\INF\\NEXOPORTALARCANO\\1.TXT",//PREGUNTAS
+            /*2*/"C:\\XEROX\\CONFIG\\INF\\NEXOPORTALARCANO\\2.TXT",//RESPUESTAS
             
         };
 
@@ -174,7 +174,7 @@ namespace NexoPortalArcano_SISTEMA_QU1R30N_WS.clases
                             datos_a_procesar_y_borrar(manejadores, esperar);
 
                             bas.actualisacion_archivo_para_multiples_programas();
-
+                            
 
                             Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
                             return false;
